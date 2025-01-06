@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         index: _currentPage,
         children: const [
           HomeTab(),
-          GovernmentsTab(),
+          GovernrateTab(),
           FavoritesTab(),
           ProfileTab(),
         ],

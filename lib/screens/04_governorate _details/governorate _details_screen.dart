@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/governrate_model.dart';
+import 'widgets/landmark_card.dart';
 
 class GovernorateDetailsScreen extends StatelessWidget {
   final Governorate governorate;
@@ -11,8 +12,17 @@ class GovernorateDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(governorate.name),
       ),
-      body: const Center(
-        child: Text('Government Details Screen'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+        child: ListView.separated(
+          itemCount: governorate.landmarks.length,
+          itemBuilder: (context, index) {
+            return LandmarkCard(landmark: governorate.landmarks[index]);
+          },
+          separatorBuilder: (context, index) {
+            return Divider();
+          },
+        ),
       ),
     );
   }

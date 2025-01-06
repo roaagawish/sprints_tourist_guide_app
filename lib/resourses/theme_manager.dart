@@ -54,5 +54,11 @@ ThemeData getlightTheme() {
       shadowColor: ColorsManager.black,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
+
+    //divider theme
+    dividerTheme: const DividerThemeData(
+      color: ColorsManager.black,
+      thickness: 2,
+    ),
   );
 }

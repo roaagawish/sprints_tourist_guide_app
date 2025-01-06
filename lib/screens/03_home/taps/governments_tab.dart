@@ -3,8 +3,8 @@ import '../../../models/governrate_model.dart';
 import '../../../resourses/styles_manager.dart';
 import '../widgets/governrate_card.dart';
 
-class GovernmentsTab extends StatelessWidget {
-  const GovernmentsTab({super.key});
+class GovernrateTab extends StatelessWidget {
+  const GovernrateTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,11 @@ class GovernmentsTab extends StatelessWidget {
           ),
           Expanded(
             flex: 8,
-            child: ListView(
-              children: List.generate(governorates.length, (index) {
+            child: ListView.builder(
+              itemCount: governorates.length,
+              itemBuilder: (context, index) {
                 return GovernorateCard(governorate: governorates[index]);
-              }),
+              },
             ),
           ),
         ],
