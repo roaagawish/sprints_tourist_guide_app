@@ -22,7 +22,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.governmentDetailsRoute:
         return MaterialPageRoute(
-            builder: (_) => const GovernmentDetailsScreen());
+            builder: (_) => const GovernorateDetailsScreen());
       default:
         return unDefinedRoute();
     }

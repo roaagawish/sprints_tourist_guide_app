@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../models/governrate_model.dart';
 import '../../../resourses/colors_manager.dart';
+import '../../../resourses/routes_manager.dart';
 import '../../../resourses/styles_manager.dart';
 
 class GovernorateCard extends StatelessWidget {
@@ -30,7 +31,7 @@ class GovernorateCard extends StatelessWidget {
           contentPadding: EdgeInsets.all(16),
           leading: Icon(Icons.location_on, color: Colors.white),
           onTap: () {
-            // TODO Navigate to the governorate details screen
+            Navigator.of(context).pushNamed(Routes.governmentDetailsRoute);
           },
           title: Text(
             governorate.name,
