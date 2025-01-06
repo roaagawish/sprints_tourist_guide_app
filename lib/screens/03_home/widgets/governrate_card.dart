@@ -31,7 +31,10 @@ class GovernorateCard extends StatelessWidget {
           contentPadding: EdgeInsets.all(16),
           leading: Icon(Icons.location_on, color: Colors.white),
           onTap: () {
-            Navigator.of(context).pushNamed(Routes.governmentDetailsRoute);
+            Navigator.of(context).pushNamed(
+              Routes.governmentDetailsRoute,
+              arguments: governorate,
+            );
           },
           title: Text(
             governorate.name,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../models/governrate_model.dart';
 import '../screens/01_sign_up/sign_up_screen.dart';
 import '../screens/02_login/login_screen.dart';
 import '../screens/03_home/home_screen.dart';
-import '../screens/04_government_details/government_details_screen.dart';
+import '../screens/04_governorate _details/governorate _details_screen.dart';
 
 class Routes {
   static const String signUpRoute = "/";
@@ -21,8 +22,11 @@ class RouteGenerator {
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.governmentDetailsRoute:
+        Governorate governorate = settings.arguments as Governorate;
         return MaterialPageRoute(
-            builder: (_) => const GovernorateDetailsScreen());
+            builder: (_) => GovernorateDetailsScreen(
+                  governorate: governorate,
+                ));
       default:
         return unDefinedRoute();
     }
