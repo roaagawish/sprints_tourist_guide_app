@@ -18,6 +18,16 @@ class PopularPlacesHorizontalList extends StatelessWidget {
           governorate: 'Luxor',
           image: 'assets/png/luxor.png',
         ),
+        Place(
+          name: 'Luxor Temple',
+          governorate: 'Luxor',
+          image: 'assets/png/luxor.png',
+        ),
+        Place(
+          name: 'Luxor Temple',
+          governorate: 'Luxor',
+          image: 'assets/png/luxor.png',
+        ),
         // TODO Add more places as needed
       ];
 
@@ -25,6 +35,7 @@ class PopularPlacesHorizontalList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
       itemCount: places.length,
       itemBuilder: (context, index) {
         return Padding(
