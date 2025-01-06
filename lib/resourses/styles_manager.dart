@@ -24,6 +24,15 @@ abstract class Styles {
     );
   }
 
+  static TextStyle style18Medium() {
+    return const TextStyle(
+      fontFamily: FontConstants.fontMarhey,
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: ColorsManager.black,
+    );
+  }
+
   static TextStyle style14Medium() {
     return const TextStyle(
       fontFamily: FontConstants.fontMarhey,
