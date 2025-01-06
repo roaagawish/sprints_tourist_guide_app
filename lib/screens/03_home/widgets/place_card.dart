@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import '../../../models/place_model.dart';
 import '../../../resourses/styles_manager.dart';
 
-class PopularPlaceCard extends StatefulWidget {
+class PlaceCard extends StatefulWidget {
   final Place place;
 
-  const PopularPlaceCard({
+  const PlaceCard({
     super.key,
     required this.place,
   });
 
   @override
-  State<PopularPlaceCard> createState() => _PopularPlaceCardState();
+  State<PlaceCard> createState() => _PlaceCardState();
 }
 
-class _PopularPlaceCardState extends State<PopularPlaceCard> {
+class _PlaceCardState extends State<PlaceCard> {
   @override
   Widget build(BuildContext context) {
     return Card(

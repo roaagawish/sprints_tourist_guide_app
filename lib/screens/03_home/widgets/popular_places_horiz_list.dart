@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/place_model.dart';
-import 'popular_place_card.dart';
+import 'place_card.dart';
 
 class PopularPlacesHorizontalList extends StatelessWidget {
   const PopularPlacesHorizontalList({super.key});
@@ -31,7 +31,7 @@ class PopularPlacesHorizontalList extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16.0),
           child: SizedBox(
             width: 200,
-            child: PopularPlaceCard(
+            child: PlaceCard(
               place: places[index],
             ),
           ),
