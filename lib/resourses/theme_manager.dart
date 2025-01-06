@@ -45,5 +45,14 @@ ThemeData getlightTheme() {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),
     ),
+
+    // card theme
+    cardTheme: CardTheme(
+      elevation: 4,
+      clipBehavior: Clip.hardEdge,
+      color: ColorsManager.creamyBeige,
+      shadowColor: ColorsManager.black,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    ),
   );
 }
