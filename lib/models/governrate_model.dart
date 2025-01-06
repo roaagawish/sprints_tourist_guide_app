@@ -1,3 +1,5 @@
+import '../resourses/assets_manager.dart';
+
 class Landmark {
   final String name;
   final String image;
@@ -23,17 +25,17 @@ List<Governorate> getGovernorates() {
   return [
     Governorate(
       name: 'Cairo',
-      governorateImage: 'assets/png/cairo.png',
+      governorateImage: PngAssets.cairo,
       landmarks: [
         Landmark(
           name: 'The Great Pyramids',
-          image: 'assets/png/pyramids.png',
+          image: PngAssets.pyramids,
           description:
               'The Great Pyramids of Giza are the only remaining wonder of the ancient world.',
         ),
         Landmark(
           name: 'Egyptian Museum',
-          image: 'https://example.com/museum.jpg',
+          image: PngAssets.egyptianMuseum,
           description:
               'Home to the world\'s largest collection of ancient Egyptian antiquities.',
         ),
@@ -41,17 +43,17 @@ List<Governorate> getGovernorates() {
     ),
     Governorate(
       name: 'Luxor',
-      governorateImage: 'assets/png/luxor.png',
+      governorateImage: PngAssets.luxor,
       landmarks: [
         Landmark(
           name: 'Karnak Temple',
-          image: 'https://example.com/karnak.jpg',
+          image: PngAssets.karnakTemple,
           description:
               'The Karnak Temple Complex was the main place of worship in ancient Thebes.',
         ),
         Landmark(
           name: 'Valley of the Kings',
-          image: 'https://example.com/valley.jpg',
+          image: PngAssets.valleyOfTheKings,
           description:
               'A burial ground for pharaohs who ruled Egypt during the 18th to 20th dynasties.',
         ),
@@ -59,17 +61,17 @@ List<Governorate> getGovernorates() {
     ),
     Governorate(
       name: 'Alexandria',
-      governorateImage: 'assets/png/alexandria.png',
+      governorateImage: PngAssets.alexandria,
       landmarks: [
         Landmark(
           name: 'Bibliotheca Alexandrina',
-          image: 'https://example.com/library.jpg',
+          image: PngAssets.bibliothecaAlexandrina,
           description:
               'A modern library and cultural center, commemorating the ancient Library of Alexandria.',
         ),
         Landmark(
           name: 'Qaitbay Citadel',
-          image: 'https://example.com/citadel.jpg',
+          image: PngAssets.qaitbayCitadel,
           description:
               'A 15th-century defensive fortress built on the site of the ancient Lighthouse of Alexandria.',
         ),

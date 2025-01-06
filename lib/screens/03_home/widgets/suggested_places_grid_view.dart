@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/place_model.dart';
+import '../../../resourses/assets_manager.dart';
 import 'place_card.dart';
 
 class SuggestedPlacesGridView extends StatelessWidget {
@@ -10,24 +11,24 @@ class SuggestedPlacesGridView extends StatelessWidget {
         Place(
           name: 'Pyramids of Giza',
           governorate: 'Giza',
-          image: 'assets/png/pyramids.png',
+          image: PngAssets.pyramids,
           isFavorite: true,
         ),
         Place(
           name: 'Luxor Temple',
           governorate: 'Luxor',
-          image: 'assets/png/luxor.png',
+          image: PngAssets.luxor,
         ),
         Place(
           name: 'Pyramids of Giza',
           governorate: 'Giza',
-          image: 'assets/png/pyramids.png',
+          image: PngAssets.pyramids,
           isFavorite: true,
         ),
         Place(
           name: 'Luxor Temple',
           governorate: 'Luxor',
-          image: 'assets/png/luxor.png',
+          image: PngAssets.luxor,
         ),
         // TODO Add more places as needed
       ];
