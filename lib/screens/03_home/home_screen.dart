@@ -16,6 +16,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentPage = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentPage);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   List<BottomNavIconEntity> get _navigationItems => [
         BottomNavIconEntity(icon: Icons.home, label: 'Home'),
@@ -26,9 +39,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onTabTapped(int index) {
     if (_currentPage != index) {
-      setState(() {
-        _currentPage = index;
-      });
+      //if the user is on the first page and clicks on the last page, jump to the last page
+      //also just jump for going from the last page to the first page.
+      if ((_currentPage == 0 && index == _navigationItems.length - 1) ||
+          (_currentPage == _navigationItems.length - 1 && index == 0)) {
+        _pageController.jumpToPage(
+          index,
+        );
+      } else {
+        //otherwise animate to the page
+        _pageController.animateToPage(
+          index,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInQuad,
+        );
+      }
     }
   }
 
@@ -38,8 +63,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Tourist Guide'),
       ),
-      body: IndexedStack(
-        index: _currentPage,
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _currentPage = index;
+          });
+        },
         children: const [
           HomeTab(),
           GovernrateTab(),
