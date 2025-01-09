@@ -12,7 +12,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final LocalDataBase dataBase = LocalDataBase();
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();

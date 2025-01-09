@@ -33,12 +33,12 @@ class LocalDataBase {
     if (users.any((user) => (user.email == email && user.password == password))) {
       // check if the email is right
       if (users.any((user) => (user.email != email))) {
-        return "Wrong email";
+        return "Wrong email! Please Try Again.";
       } // check if the password is right 
       else if (users.any((user) => (user.password != password))) {
-        return "Wrong password";
+        return "Wrong password! Please Try Again.";
       }
-      return "User Loged in Successfully!";
+      return "Loged in Successfully!";
     } else {
       return "Account not found! Try registering first" ;
     }
