@@ -1,0 +1,23 @@
+{
+    "loginPageTitle": "Login",
+    "signUpPageTitle": "Sign Up",
+    "fullNameHint": "Enter your full name",
+    "emailHint": "Enter your email",
+    "passwordHint": "Enter your password",
+    "confirmPasswordHint": "Confirm your password",
+    "confirmPasswordValidationMessage": "Passwords do not match!",
+    "loginSuccessMessage": "You have logged in successfully",
+    "signUpSuccessMessage": "You have signed up successfully",
+    "loginValidationFailureMessage": "Input validation failed! Resolve errors and try again",
+    "signUpValidationFailureMessage": "Input validation failed! Resolve errors and try again",
+    "close": "Close",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "fullNameEmptyMessage": "Full name cannot be empty!",
+    "fullNameCapitalizedMessage": "Full name needs to be capitalized!",
+    "emailAddressEmptyMessage": "Email address may not be empty!",
+    "emailAddressInvalidMessage": "Please enter a valid email address!",
+    "passwordEmptyMessage": "Password may not be empty!",
+    "passwordTooShortMessage": "Password has to be at least 6 characters!",
+    "alreadyHaveAnAccount": "Already have an account?"
+}
