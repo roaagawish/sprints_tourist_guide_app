@@ -1,5 +1,6 @@
 const String pngPath = 'assets/png';
 const String svgPath = 'assets/svg';
+const String jsonPath = 'assets/json';
 
 class PngAssets {
   static const String alexandria = '$pngPath/alexandria.png';
@@ -14,6 +15,10 @@ class PngAssets {
   static const String valleyOfTheKings = '$pngPath/valley_of_the_kings.png';
 }
 
-class GlbAssets {
+class JsonAssets {
+  static const String empty = '$jsonPath/empty.json';
+}
+
+class SvgAssets {
   //static const String earth = '$svgPath/dummy.svg';
 }

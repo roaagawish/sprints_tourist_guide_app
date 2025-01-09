@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../models/bottom_nav_bar_entity.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/styles_manager.dart';
+import 'providers/place_provider.dart';
 import 'taps/favorites_tab.dart';
 import 'taps/governments_tab.dart';
 import 'taps/home_tab.dart';
@@ -59,37 +61,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tourist Guide'),
-      ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _currentPage = index;
-          });
-        },
-        children: const [
-          HomeTab(),
-          GovernrateTab(),
-          FavoritesTab(),
-          ProfileTab(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentPage,
-        onTap: onTabTapped,
-        selectedItemColor: ColorsManager.white,
-        unselectedItemColor: ColorsManager.black,
-        items: _navigationItems.map((e) {
-          return BottomNavigationBarItem(
-              icon: Icon(e.icon),
-              label: e.label,
-              backgroundColor: ColorsManager.darkGreen);
-        }).toList(),
-        selectedLabelStyle: Styles.style14Medium(),
-        unselectedLabelStyle: Styles.style12Medium(),
+    return ChangeNotifierProvider(
+      create: (_) => PlaceProvider(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Tourist Guide'),
+        ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
+          children: const [
+            HomeTab(),
+            GovernrateTab(),
+            FavoritesTab(),
+            ProfileTab(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentPage,
+          onTap: onTabTapped,
+          selectedItemColor: ColorsManager.white,
+          unselectedItemColor: ColorsManager.black,
+          items: _navigationItems.map((e) {
+            return BottomNavigationBarItem(
+                icon: Icon(e.icon),
+                label: e.label,
+                backgroundColor: ColorsManager.darkGreen);
+          }).toList(),
+          selectedLabelStyle: Styles.style14Medium(),
+          unselectedLabelStyle: Styles.style12Medium(),
+        ),
       ),
     );
   }
