@@ -21,7 +21,6 @@ class LocalDataBase {
     if (users.any((user) => user.email == email)) {
       return "This email is alerady registerd!";
     }
-
     // add user
     users.add(UserModel(name: name, email: email, password: password));
     return "User added Successfully!";
@@ -30,17 +29,15 @@ class LocalDataBase {
 // login to already registerd user
   static String Login({required String email, required String password}) {
     //check if user already exists
-    if (users.any((user) => (user.email == email && user.password == password))) {
-      // check if the email is right
-      if (users.any((user) => (user.email != email))) {
-        return "Wrong email! Please Try Again.";
-      } // check if the password is right 
-      else if (users.any((user) => (user.password != password))) {
-        return "Wrong password! Please Try Again.";
-      }
-      return "Loged in Successfully!";
-    } else {
-      return "Account not found! Try registering first" ;
-    }
-  }
+   for (var user in users) {
+      if (user.email == email) {
+         // check if the password is right 
+      if (user.password == password) {
+        return "Logged in Successfully!";
+      } else {
+      return "Wrong password! Please Try Again.";
+    } } }
+    // if the email doesnot match any of the database items
+    return "Account not found! Try registering first" ;
+}
 }

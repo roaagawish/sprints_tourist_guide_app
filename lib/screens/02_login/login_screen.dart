@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
+import '../../resourses/routes_manager.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -31,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passwordController.text,
     );
     switch (message) {
-      case "Wrong email! Please Try Again.":
       case "Wrong password! Please Try Again.":
       case "Account not found! Try registering first":
         Fluttertoast.showToast(
@@ -52,6 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
             backgroundColor: ColorsManager.oliveGreen,
             textColor: ColorsManager.white,
             fontSize: 16.0);
+             Navigator.of(context).pushReplacementNamed(
+              Routes.homeRoute,
+            );
         break;
       default:
     }

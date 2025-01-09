@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
+import '../../resourses/routes_manager.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -54,6 +55,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             backgroundColor: ColorsManager.oliveGreen,
             textColor: ColorsManager.white,
             fontSize: 16.0);
+              Navigator.of(context).pushNamed(
+              Routes.loginRoute,
+            );
         break;
       default:
     }
