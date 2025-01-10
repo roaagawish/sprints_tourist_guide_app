@@ -40,7 +40,7 @@ ThemeData getlightTheme() {
         //side: const BorderSide(color: ColorsManager.blue, width: 2),
         elevation: 0,
         foregroundColor: ColorsManager.white,
-        backgroundColor: ColorsManager.mediumBrown,
+        backgroundColor: ColorsManager.mediumGreen,
         textStyle: Styles.style20Bold(),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),

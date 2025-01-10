@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: getlightTheme(),
-      initialRoute: Routes.homeRoute, //TODO: change to any route
+      initialRoute: Routes.signUpRoute, //TODO: change to any route
       onGenerateRoute: RouteGenerator.getRoute,
     );
   }

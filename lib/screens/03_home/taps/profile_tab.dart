@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../models/user_model.dart';
 import '../../../resourses/styles_manager.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -14,6 +17,7 @@ class _ProfileTabState extends State<ProfileTab> {
   String fullName = '';
   String email = '';
   String password = '';
+  String phone = '';
 
   @override
   void initState() {
@@ -23,11 +27,34 @@ class _ProfileTabState extends State<ProfileTab> {
 
   Future<void> _loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      fullName = prefs.getString('fullName') ?? 'No Name Found';
-      email = prefs.getString('email') ?? 'No Email Found';
-      password = prefs.getString('password') ?? 'No Password Found';
-    });
+    // Get the current logged-in user's email
+    String? currentUserEmail = prefs.getString('currentUserEmail');
+ 
+    if (currentUserEmail != null) {
+      // Fetch the list of users and find the current user's data
+      String? usersData = prefs.getString('users');
+      if (usersData != null) {
+        List<dynamic> jsonUsers = json.decode(usersData);
+        List<UserModel> users =
+            jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
+
+        // Find the user with the current email
+        UserModel? currentUser = users.firstWhere(
+          (user) => user.email == currentUserEmail,
+          orElse: () => UserModel(
+              fullName: 'No Name Found',
+              email: 'No Email Found',
+              password: 'No Password Found'),
+        );
+
+        setState(() {
+          fullName = currentUser.fullName;
+          email = currentUser.email;
+          password = currentUser.password;
+          phone = currentUser.phone ?? 'No Phone Found';
+        });
+      }
+    }
   }
 
   @override
@@ -57,6 +84,11 @@ class _ProfileTabState extends State<ProfileTab> {
             buildInfoTile(
               'Full Name',
               fullName,
+              fontSize: screenWidth * 0.045,
+            ),
+              buildInfoTile(
+              'Phone Number',
+              phone,
               fontSize: screenWidth * 0.045,
             ),
             buildInfoTile(

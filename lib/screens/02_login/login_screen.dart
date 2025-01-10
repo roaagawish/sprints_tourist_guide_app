@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
+import '../../resourses/styles_manager.dart';
+import '../01_sign_up/widgets/flutter_toast.dart';
+import '../01_sign_up/widgets/text_form_field.dart';
 import 'widgets/locale_dropdown.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
-  final void Function(String languageCode, String? countryCode)? localeChangeCallback;
+  final void Function(String languageCode, String? countryCode)?
+      localeChangeCallback;
   final void Function()? signInSuccessfulCallback;
   const LoginScreen(
       {super.key, this.localeChangeCallback, this.signInSuccessfulCallback});
@@ -17,148 +20,152 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var _hidePassword = true;
   final _emailAddressController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(context.tr('loginPageTitle')),
+        backgroundColor: Colors.transparent,
         actions: [
-          LocaleDropdown(
-            // dropdown menu to set app locale
-            callback: widget.localeChangeCallback,
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: LocaleDropdown(
+              // dropdown menu to set app locale
+              callback: widget.localeChangeCallback,
+            ),
           ),
-          SizedBox(
-            // dummy padding box
-            width: 20,
-          )
         ],
       ),
       body: Center(
         child: Form(
             // the user input form
             key: _formKey,
-            child: Column(
-              children: <Widget>[
-                // Email field
-                TextFormField(
-                  validator: (String? emailAddress) {
-                    if (emailAddress == null || emailAddress.isEmpty) {
-                      return context.tr('emailAddressEmptyMessage');
-                    }
-                    var valid = emailAddress.contains('@');
-                    if (!valid) {
-                      return context.tr('emailAddressInvalidMessage');
-                    }
-                    return null;
-                  },
-                  controller: _emailAddressController,
-                  decoration: InputDecoration(
-                    hintText: context.tr('emailHint'),
-                  ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 40),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Welcome Back!',
+                        style: Styles.style24Bold().copyWith(fontSize: 35),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // Email field
+                    CustomTextFormField(
+                      validator: (String? emailAddress) {
+                        if (emailAddress == null || emailAddress.isEmpty) {
+                          return context.tr('emailAddressEmptyMessage');
+                        }
+                        var valid = emailAddress.contains('@');
+                        if (!valid) {
+                          return context.tr('emailAddressInvalidMessage');
+                        }
+                        return null;
+                      },
+                      controller: _emailAddressController,
+                      keyboardType: TextInputType.emailAddress,
+                      labelText: 'Email Address',
+                      prefixIcon: const Icon(Icons.alternate_email),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // Password field
+                    CustomTextFormField(
+                      isPasswordField: true,
+                      keyboardType: TextInputType.text,
+                      validator: (String? password) {
+                        if (password == null || password.isEmpty) {
+                          return context.tr('passwordEmptyMessage');
+                        }
+
+                        if (password.length < 6) {
+                          return context.tr('passwordTooShortMessage');
+                        }
+
+                        return null;
+                      },
+                      controller: _passwordController,
+                      labelText: "Password",
+                      //labelStyle: ,
+                      prefixIcon: const Icon(Icons.lock_open),
+                    ),
+
+                    SizedBox(
+                      height: 30,
+                    ),
+                    // Login button
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Login();
+                        }
+                      },
+                      child: Text(context.tr('Login')),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    // don't-have-an-account button
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          Routes.signUpRoute,
+                        );
+                      },
+                      child: Center(
+                        child: Text.rich(
+                          TextSpan(children: [
+                            TextSpan(
+                              text: 'Don\'t  Have an Account? ',
+                              style: Styles.style12Medium(),
+                            ),
+                            TextSpan(
+                              text: 'Register Now',
+                              style: Styles.style14Medium()
+                                  .copyWith(color: ColorsManager.darkGreen),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                // Password field
-                TextFormField(
-                  obscureText: _hidePassword,
-                  validator: (String? password) {
-                    if (password == null || password.isEmpty) {
-                      return context.tr('passwordEmptyMessage');
-                    }
-
-                    if (password.length < 6) {
-                      return context.tr('passwordTooShortMessage');
-                    }
-
-                    return null;
-                  },
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                      hintText: context.tr('passwordHint'),
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _hidePassword = !_hidePassword;
-                            });
-                          },
-                          icon: Icon(_hidePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility))),
-                ),
-                // Sign In button
-                ElevatedButton(
-                  onPressed: () {
-                    var validationResult = _formKey.currentState!.validate();
-                    if (!validationResult) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(context.tr('signInValidationFailureMessage'))),
-                      );
-                      return;
-                    }
-
-                    // place sign-in query here
-
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            content: Text(context.tr('signInSuccessMessage')),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    widget.signInSuccessfulCallback?.call();
-                                  },
-                                  child: Text(
-                                      context.tr('close'))),
-                            ],
-                          );
-                        });
-                  },
-                  child: Text(context.tr('login')),
-                ),
-              ],
+              ),
             )),
       ),
     );
   }
 
-    void Login() async{
+  void Login() async {
     String message = await LocalDataBase.Login(
-        email: _emailAddressController.text,
-        password: _passwordController.text,
+      email: _emailAddressController.text,
+      password: _passwordController.text,
     );
     switch (message) {
-      case "Wrong password! Please Try Again.":
-      case "Account not found! Try registering first":
-        Fluttertoast.showToast(
-            msg: message,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.TOP,
-            timeInSecForIosWeb: 20,
-            backgroundColor: ColorsManager.red,
-            textColor: ColorsManager.white,
-            fontSize: 16.0);
+      case "Wrong password! Please try again.":
+      case "Account not found! Try registering first.":
+        showToast(message, ColorsManager.red);
         break;
-      case "Loged in Successfully!":
-        Fluttertoast.showToast(
-            msg: message,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.TOP,
-            timeInSecForIosWeb: 20,
-            backgroundColor: ColorsManager.oliveGreen,
-            textColor: ColorsManager.white,
-            fontSize: 16.0);
-             Navigator.of(context).pushReplacementNamed(
-              Routes.homeRoute,
-            );
+      case "Logged in Successfully!":
+        showToast(message, ColorsManager.white);
+        Navigator.of(context).pushReplacementNamed(
+          Routes.homeRoute,
+        );
         break;
       default:
+        showToast( "An unexpected error occurred.",ColorsManager.softRed);
     }
   }
 }

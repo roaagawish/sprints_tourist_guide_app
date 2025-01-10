@@ -1,27 +1,32 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
+import '../../resourses/styles_manager.dart';
+import 'widgets/flutter_toast.dart';
 import 'widgets/locale_dropdown.dart';
+import 'widgets/text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
-  final void Function(String languageCode, String? coutnryCode)? localeChangeCallback;
+  final void Function(String languageCode, String? coutnryCode)?
+      localeChangeCallback;
   final void Function()? signUpSuccessfulCallback;
   final void Function()? alreadyHaveAnAccountCallback;
 
   const SignUpScreen(
-      {super.key, this.localeChangeCallback, this.signUpSuccessfulCallback, this.alreadyHaveAnAccountCallback});
+      {super.key,
+      this.localeChangeCallback,
+      this.signUpSuccessfulCallback,
+      this.alreadyHaveAnAccountCallback});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  var _hidePassword = true;
-  var _hideConfirmPassword = true;
   final _fullNameController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _emailAddressController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -31,192 +36,197 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(context.tr('signUpPageTitle')),
+        backgroundColor: Colors.transparent,
         actions: [
-          LocaleDropdown(
-            // dropdown menu to set app locale
-            callback: widget.localeChangeCallback,
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: LocaleDropdown(
+              // dropdown menu to set app locale
+              callback: widget.localeChangeCallback,
+            ),
           ),
-          SizedBox(
-            // dummy padding box
-            width: 20,
-          )
         ],
       ),
       body: Center(
         child: Form(
             // the user input form
             key: _formKey,
-            child: Column(
-              children: <Widget>[
-                // Full name field
-                TextFormField(
-                  validator: (String? fullName) {
-                    if (fullName == null || fullName.isEmpty) {
-                      return context.tr('fullNameEmptyMessage');
-                    }
-                    final regex = RegExp('^[A-Z]');
-                    if (!regex.hasMatch(fullName)) {
-                      return context.tr('fullNameCapitalizedMessage');
-                    }
-                    return null;
-                  },
-                  controller: _fullNameController,
-                  decoration: InputDecoration(
-                    hintText: context.tr('fullNameHint'),
-                  ),
-                ),
-                // Email field
-                TextFormField(
-                  validator: (String? emailAddress) {
-                    if (emailAddress == null || emailAddress.isEmpty) {
-                      return context.tr('emailAddressEmptyMessage');
-                    }
-                    var valid = emailAddress.contains('@');
-                    if (!valid) {
-                      return context.tr('emailAddressInvalidMessage');
-                    }
-                    return null;
-                  },
-                  controller: _emailAddressController,
-                  decoration: InputDecoration(
-                    hintText: context.tr('emailHint'),
-                  ),
-                ),
-                // Password field
-                TextFormField(
-                  obscureText: _hidePassword,
-                  validator: (String? password) {
-                    if (password == null || password.isEmpty) {
-                      return context.tr('passwordEmptyMessage');
-                    }
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 40),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Sign Up',
+                        style: Styles.style24Bold().copyWith(fontSize: 35),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // Full name field
+                    CustomTextFormField(
+                      validator: (String? fullName) {
+                        if (fullName == null || fullName.isEmpty) {
+                          return context.tr('fullNameEmptyMessage');
+                        }
+                        final regex = RegExp('^[A-Z]');
+                        if (!regex.hasMatch(fullName)) {
+                          return context.tr('fullNameCapitalizedMessage');
+                        }
+                        return null;
+                      },
+                      controller: _fullNameController,
+                      labelText: "Full Name",
+                      prefixIcon: const Icon(Icons.person),
+                      keyboardType: TextInputType.name,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // Phone Number field
+                    CustomTextFormField(
+                      controller: _phoneController,
+                      labelText: "Phone Number",
+                      prefixIcon: const Icon(Icons.phone),
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        // if (value != null && value.length < 11) {
+                        //   return " Phone Number must be 11 digit";
+                        // }
+                        // return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // Email field
+                    CustomTextFormField(
+                      validator: (String? emailAddress) {
+                        if (emailAddress == null || emailAddress.isEmpty) {
+                          return context.tr('emailAddressEmptyMessage');
+                        }
+                        var valid = emailAddress.contains('@');
+                        if (!valid) {
+                          return context.tr('emailAddressInvalidMessage');
+                        }
+                        return null;
+                      },
+                      controller: _emailAddressController,
+                      labelText: "Email Address",
+                      prefixIcon: const Icon(Icons.alternate_email),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // Password field
+                    CustomTextFormField(
+                      isPasswordField: true,
+                      keyboardType: TextInputType.text,
+                      validator: (String? password) {
+                        if (password == null || password.isEmpty) {
+                          return context.tr('passwordEmptyMessage');
+                        }
 
-                    if (password.length < 6) {
-                      return context.tr('passwordTooShortMessage');
-                    }
+                        if (password.length < 6) {
+                          return context.tr('passwordTooShortMessage');
+                        }
 
-                    return null;
-                  },
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                      hintText: context.tr('passwordHint'),
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _hidePassword = !_hidePassword;
-                            });
-                          },
-                          icon: Icon(_hidePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility))),
-                ),
-                // Confirm password field
-                TextFormField(
-                  obscureText: _hideConfirmPassword,
-                  validator: (value) {
-                    if (_passwordController.text != value) {
-                      return context.tr('confirmPasswordValidationMessage');
-                    }
-                    return null;
-                  },
-                  controller: _confirmPasswordController,
-                  decoration: InputDecoration(
-                      hintText:
-                          context.tr('confirmPasswordHint'),
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _hideConfirmPassword = !_hideConfirmPassword;
-                            });
-                          },
-                          icon: Icon(_hideConfirmPassword
-                              ? Icons.visibility_off
-                              : Icons.visibility))),
-                ),
-                // Sign Up button
-                ElevatedButton(
-                  onPressed: () {
-                    var validationResult = _formKey.currentState!.validate();
-                    if (!validationResult) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(context.tr('signUpValidationFailureMessage'))),
-                      );
-                      return;
-                    }
+                        return null;
+                      },
+                      controller: _passwordController,
 
-                    // place sign-up query here
-
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            content: Text(context.tr('signUpSuccessMessage')),
-                            actions: [
-                              TextButton(
-                                  onPressed: widget.signUpSuccessfulCallback,
-                                  child: Text(
-                                      context.tr('close'))),
-                            ],
-                          );
-                        });
-                  },
-                  child: Text(context.tr('signUp')),
+                      labelText: "Password",
+                      //labelStyle: ,
+                      prefixIcon: const Icon(Icons.lock_open),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // Confirm password field
+                    CustomTextFormField(
+                      isPasswordField: true,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (_passwordController.text != value) {
+                          return context.tr('confirmPasswordValidationMessage');
+                        }
+                        return null;
+                      },
+                      controller: _confirmPasswordController,
+                      labelText: "Confirm Password",
+                      prefixIcon: const Icon(Icons.lock_open),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    // Sign Up button
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          SignUp();
+                        }
+                      },
+                      child: Text(context.tr('signUp')),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    // already-have-an-account button
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(Routes.loginRoute);
+                      },
+                      child: Center(
+                        child: Text.rich(
+                          TextSpan(children: [
+                            TextSpan(
+                              text: 'Arealdy Have an Account? ',
+                              style: Styles.style12Medium(),
+                            ),
+                            TextSpan(
+                              text: 'Login In',
+                              style: Styles.style14Medium()
+                                  .copyWith(color: ColorsManager.darkGreen),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                // already-have-an-account button
-                ElevatedButton(
-                  onPressed: widget.alreadyHaveAnAccountCallback,
-                  child: Text(context.tr('alreadyHaveAnAccount')),
-                ),
-              ],
+              ),
             )),
       ),
     );
   }
 
-  void SignUp() async{
+  void SignUp() async {
     String message = await LocalDataBase.SignUp(
         fullName: _fullNameController.text,
         email: _emailAddressController.text,
         password: _passwordController.text,
-        //phone: _phoneController.text
-        );
+        phone: _phoneController.text);
 
     switch (message) {
-      case "This email is alerady registerd!":
-        Fluttertoast.showToast(
-            msg: message,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.TOP,
-            timeInSecForIosWeb: 20,
-            backgroundColor: ColorsManager.softRed,
-            textColor: ColorsManager.white,
-            fontSize: 16.0);
+      case "This email is already registered!":
+        showToast(message, ColorsManager.softRed);
         break;
-      case "User added Successfully!":
-        Fluttertoast.showToast(
-            msg: message,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.TOP,
-            timeInSecForIosWeb: 20,
-            backgroundColor: ColorsManager.oliveGreen,
-            textColor: ColorsManager.white,
-            fontSize: 16.0);
-              Navigator.of(context).pushNamed(
-              Routes.loginRoute,
-            );
+      case "User added successfully!":
+        showToast(message, ColorsManager.oliveGreen);
+        Navigator.of(context).pushNamed(
+          Routes.loginRoute,
+        );
         break;
       default:
-          Fluttertoast.showToast(
-      msg: "An unexpected error occurred.",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
-      timeInSecForIosWeb: 20,
-      backgroundColor: ColorsManager.softRed,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
+        showToast("An unexpected error occurred.", ColorsManager.softRed,
+        );
     }
   }
 }

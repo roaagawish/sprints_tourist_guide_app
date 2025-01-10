@@ -2,6 +2,8 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../../../resourses/colors_manager.dart';
+
 
 // dropdown menu to set locale
 class LocaleDropdown extends StatelessWidget {
@@ -23,7 +25,7 @@ class LocaleDropdown extends StatelessWidget {
       onChanged: (value) {
         callback?.call(value['languageCode'], value['countryCode']);
       },
-      icon: Icon(Icons.language),
+      icon: Icon(Icons.language , color: ColorsManager.darkGreen,),
     );
   }
 }

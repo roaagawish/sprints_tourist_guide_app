@@ -36,7 +36,7 @@ class UserModel {
 }
 
 class LocalDataBase {
-  static const String _userKey = 'user';
+  static const String _usersKey = 'users';
 
 // sign up and add new user to database
   static Future<String> SignUp(
@@ -45,21 +45,33 @@ class LocalDataBase {
       required String email,
       required String password}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    //check if user (email) is already exists
-    String? savedEmail = prefs.getString('email');
-    if (savedEmail == email) {
-      return "This email is alerady registerd!";
+  
+ // Get the existing users from SharedPreferences
+    String? usersData = prefs.getString(_usersKey);
+    List<UserModel> users = [];
+    if (usersData != null) {
+      List<dynamic> jsonUsers = json.decode(usersData);
+      users = jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
     }
-    // add new user and save it to shared preferrnces
-    UserModel newUser =
-        UserModel(fullName: fullName, email: email, password: password);
 
-    await prefs.setString('email', email);
-    await prefs.setString('password', password);
-    await prefs.setString(_userKey, json.encode(newUser.toJson()));
+    // Check if email already exists
+    if (users.any((user) => user.email == email)) {
+      return "This email is already registered!";
+    }
 
-    return "User added Successfully!";
+    // Add new user
+    UserModel newUser = UserModel(
+      fullName: fullName,
+      email: email,
+      password: password,
+      phone: phone,
+    );
+    users.add(newUser);
+
+    // Save updated user list
+    await prefs.setString(
+        _usersKey, json.encode(users.map((u) => u.toJson()).toList()));
+    return "User added successfully!";
   }
 
 // login to already registerd user
@@ -67,23 +79,30 @@ class LocalDataBase {
       {required String email, required String password}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    //retrieve user data from database
-    String? savedEmail = prefs.getString('email');
-    String? savedPassword = prefs.getString('password');
-    
+    // String? savedEmail = prefs.getString('email');
+    // String? savedPassword = prefs.getString('password');
 
-   //check if user already exists in database 
+    // Get the existing users from SharedPreferences
+    String? usersData = prefs.getString(_usersKey);
+    if (usersData != null) {
+      List<dynamic> jsonUsers = json.decode(usersData);
+      List<UserModel> users =
+          jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
 
-    if (savedEmail == email) {
-  
-      // check if the password is right
-      if (savedPassword == password) {
-        return "Logged in Successfully!";
-      } else {
-        return "Wrong password! Please Try Again.";
+      // Find user by email
+      for (var user in users) {
+        if (user.email == email) {
+          // Check if the password is correct
+          if (user.password == password) {
+            await prefs.setString('currentUserEmail', email);
+            return "Logged in Successfully!";
+          } else {
+            return "Wrong password! Please try again.";
+          }
+        }
       }
     }
-     return "Account not found! Try registering first";
-      
+    // If the email doesn't match any user in the database
+    return "Account not found! Try registering first.";
   }
 }
