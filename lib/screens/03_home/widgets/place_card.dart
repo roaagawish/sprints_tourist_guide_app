@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../models/place_model.dart';
 import '../../../resourses/styles_manager.dart';
+import '../providers/place_provider.dart';
 
-class PlaceCard extends StatefulWidget {
+class PlaceCard extends StatelessWidget {
   final Place place;
 
   const PlaceCard({
@@ -11,51 +13,50 @@ class PlaceCard extends StatefulWidget {
   });
 
   @override
-  State<PlaceCard> createState() => _PlaceCardState();
-}
-
-class _PlaceCardState extends State<PlaceCard> {
-  @override
   Widget build(BuildContext context) {
+    final placeProvider = Provider.of<PlaceProvider>(context);
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              Image.asset(
-                widget.place.image,
-                height: 140,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: IconButton(
-                  icon: Icon(
-                    widget.place.isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: widget.place.isFavorite ? Colors.red : Colors.white,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      widget.place.isFavorite = !widget.place.isFavorite;
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 4.0,
+          Expanded(
+            flex: 2,
+            child: Stack(
               children: [
-                Text(widget.place.name, style: Styles.style14Medium()),
-                Text(widget.place.governorate, style: Styles.style12Medium()),
+                Image.asset(
+                  place.image,
+                  height: double.infinity,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: IconButton(
+                    icon: Icon(
+                      place.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: place.isFavorite ? Colors.red : Colors.white,
+                    ),
+                    onPressed: () {
+                      placeProvider.toggleFavorite(place);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 4.0),
+                  child: Text(place.name, style: Styles.style14Medium()),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 4.0),
+                  child: Text(place.governorate, style: Styles.style12Medium()),
+                ),
               ],
             ),
           ),
