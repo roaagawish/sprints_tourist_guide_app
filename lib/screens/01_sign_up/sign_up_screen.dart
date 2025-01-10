@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
+import 'widgets/locale_dropdown.dart';
 
 class SignUpScreen extends StatefulWidget {
   final void Function(String languageCode, String? coutnryCode)? localeChangeCallback;
