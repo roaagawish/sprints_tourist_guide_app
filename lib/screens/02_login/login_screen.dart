@@ -3,8 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
-import 'widgets/locale_dropdown.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   final void Function(String languageCode, String? countryCode)? localeChangeCallback;

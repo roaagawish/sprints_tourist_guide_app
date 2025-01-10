@@ -70,12 +70,12 @@ class LocalDataBase {
     //retrieve user data from database
     String? savedEmail = prefs.getString('email');
     String? savedPassword = prefs.getString('password');
-    String? userData = prefs.getString(_userKey);
+    
 
    //check if user already exists in database 
 
     if (savedEmail == email) {
-      UserModel user = UserModel.fromJson(json.decode(userData!));
+  
       // check if the password is right
       if (savedPassword == password) {
         return "Logged in Successfully!";
