@@ -1,43 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../models/place_model.dart';
-import '../../../resourses/assets_manager.dart';
+import 'package:provider/provider.dart';
 import '../../../resourses/styles_manager.dart';
+import '../providers/place_provider.dart';
 import '../widgets/popular_places_horiz_list.dart';
 import '../widgets/places_grid_view.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
-
-  List<Place> get suggestedPlaces => [
-        Place(
-          name: 'Pyramids of Giza',
-          governorate: 'Giza',
-          image: PngAssets.pyramids,
-          isFavorite: true,
-        ),
-        Place(
-          name: 'Luxor Temple',
-          governorate: 'Luxor',
-          image: PngAssets.luxor,
-        ),
-        Place(
-          name: 'Pyramids of Giza',
-          governorate: 'Giza',
-          image: PngAssets.pyramids,
-          isFavorite: true,
-        ),
-        Place(
-          name: 'Pyramids of Giza',
-          governorate: 'Giza',
-          image: PngAssets.pyramids,
-          isFavorite: true,
-        ),
-
-        // TODO Add more places as needed
-      ];
-
   @override
   Widget build(BuildContext context) {
+    final placeProvider = Provider.of<PlaceProvider>(context);
     return Padding(
       padding: const EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
       child: Column(
@@ -61,7 +33,7 @@ class HomeTab extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: PlacesGridView(
-                places: suggestedPlaces,
+                places: placeProvider.suggestedPlaces,
               ),
             ),
           ),
