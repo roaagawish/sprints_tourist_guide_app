@@ -19,37 +19,44 @@ class PlaceCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              Image.asset(
-                place.image,
-                height: 140,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: IconButton(
-                  icon: Icon(
-                    place.isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: place.isFavorite ? Colors.red : Colors.white,
-                  ),
-                  onPressed: () {
-                    placeProvider.toggleFavorite(place);
-                  },
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 4.0,
+          Expanded(
+            flex: 2,
+            child: Stack(
               children: [
-                Text(place.name, style: Styles.style14Medium()),
-                Text(place.governorate, style: Styles.style12Medium()),
+                Image.asset(
+                  place.image,
+                  height: double.infinity,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: IconButton(
+                    icon: Icon(
+                      place.isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: place.isFavorite ? Colors.red : Colors.white,
+                    ),
+                    onPressed: () {
+                      placeProvider.toggleFavorite(place);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 4.0),
+                  child: Text(place.name, style: Styles.style14Medium()),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 4.0),
+                  child: Text(place.governorate, style: Styles.style12Medium()),
+                ),
               ],
             ),
           ),
