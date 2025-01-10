@@ -1,0 +1,23 @@
+{
+    "loginPageTitle": "تسجيل الدخول",
+    "signUpPageTitle": "تسجيل مستخدم",
+    "fullNameHint": "أدخل اسمك بالكامل",
+    "emailHint": "أدخل بريدك الإلكتروني",
+    "passwordHint": "أدخل كلمة السر",
+    "confirmPasswordHint": "أعد إدخال كلمة السر",
+    "confirmPasswordValidationMessage": "كلمة السر غير متطابقة!",
+    "loginSuccessMessage": "تم تسجيل الدخول بنجاح",
+    "signUpSuccessMessage": "تم التسجيل بنجاح",
+    "loginValidationFailureMessage": "فشل التحقق من الدخل! عالج الأخطاء وحاول مجدداً.",
+    "signUpValidationFailureMessage": "فشل التحقق من الدخل! عالج الأخطاء وحاول مجدداً.",
+    "close": "إغلاق",
+    "login": "تسجيل الدخول",
+    "signUp": "تسجيل",
+    "fullNameEmptyMessage": "اسم المستخدم فارغ!",
+    "fullNameCapitalizedMessage": "اسم المستخدم يجب أن يبدأ بحرف كبير!",
+    "emailAddressEmptyMessage": "البريد الإلكتروني فارغ!",
+    "emailAddressInvalidMessage": "البريد الإلكتروني غير صالح!",
+    "passwordEmptyMessage": "كلمة السر فارغة!",
+    "passwordTooShortMessage": "كلمة السر ينبغي أن تكون أطول من 6 حروف!",
+    "alreadyHaveAnAccount": "لديك حساب بالفعل؟"
+}

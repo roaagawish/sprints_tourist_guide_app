@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
+import 'widgets/locale_dropdown.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final void Function(String languageCode, String? countryCode)? localeChangeCallback;
+  final void Function()? signInSuccessfulCallback;
+  const LoginScreen(
+      {super.key, this.localeChangeCallback, this.signInSuccessfulCallback});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
-  final _emailController = TextEditingController();
+  var _hidePassword = true;
+  final _emailAddressController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     void Login() async{
     String message = await LocalDataBase.Login(
-        email: _emailController.text,
+        email: _emailAddressController.text,
         password: _passwordController.text,
     );
     switch (message) {
@@ -39,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
             timeInSecForIosWeb: 20,
-            backgroundColor: ColorsManager.softRed,
+            backgroundColor: ColorsManager.red,
             textColor: ColorsManager.white,
             fontSize: 16.0);
         break;
@@ -57,15 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
             );
         break;
       default:
-          Fluttertoast.showToast(
-      msg: "An unexpected error occurred.",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
-      timeInSecForIosWeb: 20,
-      backgroundColor: ColorsManager.softRed,
-      textColor: ColorsManager.white,
-      fontSize: 16.0,
-    );
     }
   }
 }
