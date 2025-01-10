@@ -26,8 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-    void Login() {
-    String message = LocalDataBase.Login(
+    void Login() async{
+    String message = await LocalDataBase.Login(
         email: _emailController.text,
         password: _passwordController.text,
     );
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
             timeInSecForIosWeb: 20,
-            backgroundColor: ColorsManager.red,
+            backgroundColor: ColorsManager.softRed,
             textColor: ColorsManager.white,
             fontSize: 16.0);
         break;
@@ -57,6 +57,15 @@ class _LoginScreenState extends State<LoginScreen> {
             );
         break;
       default:
+          Fluttertoast.showToast(
+      msg: "An unexpected error occurred.",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 20,
+      backgroundColor: ColorsManager.softRed,
+      textColor: ColorsManager.white,
+      fontSize: 16.0,
+    );
     }
   }
 }

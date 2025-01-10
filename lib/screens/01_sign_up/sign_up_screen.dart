@@ -28,9 +28,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void SignUp() {
-    String message = LocalDataBase.SignUp(
-        name: _nameController.text,
+  void SignUp() async{
+    String message = await LocalDataBase.SignUp(
+        fullName: _nameController.text,
         email: _emailController.text,
         password: _passwordController.text,
         phone: _phoneController.text);
@@ -42,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
             timeInSecForIosWeb: 20,
-            backgroundColor: ColorsManager.red,
+            backgroundColor: ColorsManager.softRed,
             textColor: ColorsManager.white,
             fontSize: 16.0);
         break;
@@ -60,6 +60,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
         break;
       default:
+          Fluttertoast.showToast(
+      msg: "An unexpected error occurred.",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 20,
+      backgroundColor: ColorsManager.softRed,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
     }
   }
 }
