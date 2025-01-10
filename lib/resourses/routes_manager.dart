@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../models/governrate_model.dart';
 import '../screens/01_sign_up/sign_up_screen.dart';
@@ -16,9 +17,16 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.signUpRoute:
-        return MaterialPageRoute(builder: (_) => const SignUpScreen());
+        return MaterialPageRoute(builder: (context) => SignUpScreen(
+          localeChangeCallback: (languageCode, countryCode) => context.setLocale(Locale(languageCode, countryCode)),
+          signUpSuccessfulCallback:() => Navigator.of(context).pushNamed(Routes.homeRoute),
+          alreadyHaveAnAccountCallback: () => Navigator.of(context).pushNamed(Routes.loginRoute),
+        ));
       case Routes.loginRoute:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(builder: (context) => LoginScreen(
+          localeChangeCallback: (languageCode, countryCode) => context.setLocale(Locale(languageCode, countryCode)),
+          signInSuccessfulCallback:() => Navigator.of(context).pushNamed(Routes.homeRoute),
+        ));
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.governmentDetailsRoute:

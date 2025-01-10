@@ -3,7 +3,7 @@ import 'widgets/locale_dropdown.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
-  final void Function(String? value)? localeChangeCallback;
+  final void Function(String languageCode, String? countryCode)? localeChangeCallback;
   final void Function()? signInSuccessfulCallback;
   const LoginScreen(
       {super.key, this.localeChangeCallback, this.signInSuccessfulCallback});
@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(context.tr('signInPageTitle')),
+        title: Text(context.tr('loginPageTitle')),
         actions: [
           LocaleDropdown(
             // dropdown menu to set app locale
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         });
                   },
-                  child: Text(context.tr('signIn')),
+                  child: Text(context.tr('login')),
                 ),
               ],
             )),

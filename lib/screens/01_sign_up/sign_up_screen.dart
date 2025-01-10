@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 // the sign-up page widget
 class SignUpScreen extends StatefulWidget {
-  final void Function(String? value)? localeChangeCallback;
+  final void Function(String languageCode, String? coutnryCode)? localeChangeCallback;
   final void Function()? signUpSuccessfulCallback;
   final void Function()? alreadyHaveAnAccountCallback;
 
