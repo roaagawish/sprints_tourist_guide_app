@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../../../resourses/assets_manager.dart';
@@ -13,8 +14,7 @@ class EmptyFavoriteList extends StatelessWidget {
       spacing: 30.0,
       children: [
         SizedBox(height: 30.0),
-        Text(
-          'You haven\'t added any favorite places yet!',
+        Text( tr("taps.emptyFav"),
           style: Styles.style14Medium(),
         ),
         Lottie.asset(

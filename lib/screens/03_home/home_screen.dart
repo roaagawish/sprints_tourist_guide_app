@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/bottom_nav_bar_entity.dart';
@@ -8,9 +9,13 @@ import 'taps/favorites_tab.dart';
 import 'taps/governments_tab.dart';
 import 'taps/home_tab.dart';
 import 'taps/profile_tab.dart';
+import '../02_login/widgets/locale_dropdown.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+    final void Function(String languageCode, String? coutnryCode)?
+      localeChangeCallback;
+  const HomeScreen({super.key , this.localeChangeCallback});
+  
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -33,10 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<BottomNavIconEntity> get _navigationItems => [
-        BottomNavIconEntity(icon: Icons.home, label: 'Home'),
-        BottomNavIconEntity(icon: Icons.public, label: 'Governments'),
-        BottomNavIconEntity(icon: Icons.favorite, label: 'Favorites'),
-        BottomNavIconEntity(icon: Icons.account_circle, label: 'Profile'),
+        BottomNavIconEntity(icon: Icons.home, label: tr("taps.homeLabel")),
+        BottomNavIconEntity(icon: Icons.public, label: tr("taps.governmentsLabel")),
+        BottomNavIconEntity(icon: Icons.favorite, label:tr("taps.favLabel")),
+        BottomNavIconEntity(icon: Icons.account_circle, label: tr("taps.profileLabel")),
       ];
 
   void onTabTapped(int index) {
@@ -65,7 +70,16 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (_) => PlaceProvider(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Tourist Guide'),
+          title: Text(tr("appBarTitle")),
+          actions: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: LocaleDropdown(
+              // dropdown menu to set app locale
+              callback: widget.localeChangeCallback,
+            ),
+          ),
+        ],
         ),
         body: PageView(
           controller: _pageController,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserModel {
@@ -56,7 +57,7 @@ class LocalDataBase {
 
     // Check if email already exists
     if (users.any((user) => user.email == email)) {
-      return "This email is already registered!";
+      return tr("signup.accountAlreadyRegisterd");
     }
 
     // Add new user
@@ -71,7 +72,7 @@ class LocalDataBase {
     // Save updated user list
     await prefs.setString(
         _usersKey, json.encode(users.map((u) => u.toJson()).toList()));
-    return "User added successfully!";
+    return tr("signup.userAddedSuccessfully");
   }
 
 // login to already registerd user
@@ -95,14 +96,14 @@ class LocalDataBase {
           // Check if the password is correct
           if (user.password == password) {
             await prefs.setString('currentUserEmail', email);
-            return "Logged in Successfully!";
+            return tr("login.loggedin");
           } else {
-            return "Wrong password! Please try again.";
+            return  tr("login.wrongPassword");
           }
         }
       }
     }
     // If the email doesn't match any user in the database
-    return "Account not found! Try registering first.";
+    return tr("login.accountNotFound");
   }
 }

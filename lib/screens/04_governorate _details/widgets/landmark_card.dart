@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../models/governrate_model.dart';
 import '../../../resourses/colors_manager.dart';
@@ -32,7 +33,7 @@ class LandmarkCard extends StatelessWidget {
               boxShadow: [BoxShadow(color: ColorsManager.black, blurRadius: 6)],
             ),
             child: Align(
-              alignment: Alignment.bottomLeft,
+             alignment:context.locale.languageCode == "ar" ? Alignment.bottomRight : Alignment.bottomLeft,
               child: Text(
                 landmark.name,
                 style: Styles.style24Bold().copyWith(

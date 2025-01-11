@@ -3,8 +3,10 @@ import '../../models/governrate_model.dart';
 import 'widgets/landmark_card.dart';
 
 class GovernorateDetailsScreen extends StatelessWidget {
+   final void Function(String languageCode, String? countryCode)?
+      localeChangeCallback;
   final Governorate governorate;
-  const GovernorateDetailsScreen({super.key, required this.governorate});
+  const GovernorateDetailsScreen({super.key, required this.governorate , this.localeChangeCallback,});
 
   @override
   Widget build(BuildContext context) {

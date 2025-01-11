@@ -4,9 +4,9 @@ import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
-import 'widgets/flutter_toast.dart';
-import 'widgets/locale_dropdown.dart';
-import 'widgets/text_form_field.dart';
+import '../02_login/widgets/flutter_toast.dart';
+import '../02_login/widgets/locale_dropdown.dart';
+import '../02_login/widgets/text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   final void Function(String languageCode, String? coutnryCode)?
@@ -60,9 +60,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: <Widget>[
                     SizedBox(height: 40),
                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Sign Up',
+                      alignment:context.locale.languageCode == "ar" ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Text(tr("signup.signUp"),
                         style: Styles.style24Bold().copyWith(fontSize: 35),
                       ),
                     ),
@@ -73,16 +72,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     CustomTextFormField(
                       validator: (String? fullName) {
                         if (fullName == null || fullName.isEmpty) {
-                          return context.tr('fullNameEmptyMessage');
+                          return tr("signup.fullNameEmptyMessage");
                         }
                         final regex = RegExp('^[A-Z]');
                         if (!regex.hasMatch(fullName)) {
-                          return context.tr('fullNameCapitalizedMessage');
+                          return tr("signup.fullNameCapitalizedMessage");
                         }
                         return null;
                       },
                       controller: _fullNameController,
-                      labelText: "Full Name",
+                      labelText:tr("signup.fullNameLabel"),
                       prefixIcon: const Icon(Icons.person),
                       keyboardType: TextInputType.name,
                     ),
@@ -92,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // Phone Number field
                     CustomTextFormField(
                       controller: _phoneController,
-                      labelText: "Phone Number",
+                      labelText: tr("signup.phoneLabel"),
                       prefixIcon: const Icon(Icons.phone),
                       keyboardType: TextInputType.phone,
                       validator: (value) {
@@ -109,16 +108,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     CustomTextFormField(
                       validator: (String? emailAddress) {
                         if (emailAddress == null || emailAddress.isEmpty) {
-                          return context.tr('emailAddressEmptyMessage');
+                          return tr("signup.emailAddressEmptyMessage");
                         }
                         var valid = emailAddress.contains('@');
                         if (!valid) {
-                          return context.tr('emailAddressInvalidMessage');
+                          return tr("signup.emailAddressInvalidMessage");
                         }
                         return null;
                       },
                       controller: _emailAddressController,
-                      labelText: "Email Address",
+                      labelText: tr("signup.emailLabel"),
                       prefixIcon: const Icon(Icons.alternate_email),
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -131,19 +130,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       keyboardType: TextInputType.text,
                       validator: (String? password) {
                         if (password == null || password.isEmpty) {
-                          return context.tr('passwordEmptyMessage');
+                          return tr("signup.passwordEmptyMessage");
                         }
 
                         if (password.length < 6) {
-                          return context.tr('passwordTooShortMessage');
+                          return tr("signup.passwordTooShortMessage");
                         }
 
                         return null;
                       },
                       controller: _passwordController,
 
-                      labelText: "Password",
-                      //labelStyle: ,
+                      labelText: tr("signup.passwordLabel"),
                       prefixIcon: const Icon(Icons.lock_open),
                     ),
                     const SizedBox(
@@ -155,12 +153,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (_passwordController.text != value) {
-                          return context.tr('confirmPasswordValidationMessage');
+                          return tr("signup.confirmPasswordValidationMessage");
                         }
                         return null;
                       },
                       controller: _confirmPasswordController,
-                      labelText: "Confirm Password",
+                      labelText: tr("signup.confirmPasswordLabel"),
                       prefixIcon: const Icon(Icons.lock_open),
                     ),
                     SizedBox(
@@ -173,7 +171,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SignUp();
                         }
                       },
-                      child: Text(context.tr('signUp')),
+                      child: Text(tr("signup.signUpButton")),
                     ),
                     SizedBox(
                       height: 15,
@@ -187,11 +185,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text.rich(
                           TextSpan(children: [
                             TextSpan(
-                              text: 'Arealdy Have an Account? ',
+                              text:tr("signup.alreadyHaveAnAccount"),
                               style: Styles.style12Medium(),
                             ),
                             TextSpan(
-                              text: 'Login In',
+                              text: tr("signup.goToLoginPage"),
                               style: Styles.style14Medium()
                                   .copyWith(color: ColorsManager.darkGreen),
                             ),
@@ -216,16 +214,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     switch (message) {
       case "This email is already registered!":
+      case "هذا البريد الإلكتروني مسجل بالفعل!":
         showToast(message, ColorsManager.softRed);
         break;
       case "User added successfully!":
+      case "تم إضافة المستخدم بنجاح!":
         showToast(message, ColorsManager.oliveGreen);
         Navigator.of(context).pushNamed(
           Routes.loginRoute,
         );
         break;
       default:
-        showToast("An unexpected error occurred.", ColorsManager.softRed,
+        showToast( (context.locale.languageCode == "ar" ? "خطأ غير متوقع" : "An unexpected error occurred"), ColorsManager.softRed,
         );
     }
   }

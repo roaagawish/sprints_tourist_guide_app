@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      title: 'sprint tourist guide Demo',
+      title: tr("title"),
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: getlightTheme(),

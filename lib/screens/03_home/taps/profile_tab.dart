@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,16 +43,17 @@ class _ProfileTabState extends State<ProfileTab> {
         UserModel? currentUser = users.firstWhere(
           (user) => user.email == currentUserEmail,
           orElse: () => UserModel(
-              fullName: 'No Name Found',
-              email: 'No Email Found',
-              password: 'No Password Found'),
+              fullName: tr("taps.profileNoNameFound"),
+              email: tr("taps.profileNoEmailFound"),
+              password: tr("taps.profileNoPasswordFound")
+              ),
         );
 
         setState(() {
           fullName = currentUser.fullName;
           email = currentUser.email;
           password = currentUser.password;
-          phone = currentUser.phone ?? 'No Phone Found';
+          phone = currentUser.phone ?? tr("taps.profileNoPhoneFound");
         });
       }
     }
@@ -82,22 +84,22 @@ class _ProfileTabState extends State<ProfileTab> {
             ),
             SizedBox(height: screenHeight * 0.03),
             buildInfoTile(
-              'Full Name',
+              tr("taps.profileFullName"),
               fullName,
               fontSize: screenWidth * 0.045,
             ),
               buildInfoTile(
-              'Phone Number',
+              tr("taps.profilePhoneNumber"),
               phone,
               fontSize: screenWidth * 0.045,
             ),
             buildInfoTile(
-              'Email',
+              tr("taps.profileEmail"),
               email,
               fontSize: screenWidth * 0.045,
             ),
             buildInfoTile(
-              'Password',
+               tr("taps.profilePassword"),
               '*' * password.length,
               fontSize: screenWidth * 0.045,
             ),

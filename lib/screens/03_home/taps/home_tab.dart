@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../resourses/styles_manager.dart';
@@ -16,16 +17,14 @@ class HomeTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16.0,
         children: [
-          Text(
-            'Popular Places',
+          Text( tr("taps.homePopelarPlaces"),
             style: Styles.style20Bold(),
           ),
           Expanded(
             flex: 2,
             child: PopularPlacesHorizontalList(),
           ),
-          Text(
-            'Suggested Places to Visit',
+          Text(tr("taps.homeSuggestedPlaces"),
             style: Styles.style20Bold(),
           ),
           Expanded(

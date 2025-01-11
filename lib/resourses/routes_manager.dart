@@ -28,11 +28,14 @@ class RouteGenerator {
           signInSuccessfulCallback:() => Navigator.of(context).pushNamed(Routes.homeRoute),
         ));
       case Routes.homeRoute:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (context) => HomeScreen(
+          localeChangeCallback: (languageCode, countryCode) => context.setLocale(Locale(languageCode, countryCode)),
+        ));
       case Routes.governmentDetailsRoute:
         Governorate governorate = settings.arguments as Governorate;
         return MaterialPageRoute(
-            builder: (_) => GovernorateDetailsScreen(
+            builder: (context) => GovernorateDetailsScreen( 
+               localeChangeCallback: (languageCode, countryCode) => context.setLocale(Locale(languageCode, countryCode)),
                   governorate: governorate,
                 ));
       default:
@@ -44,9 +47,9 @@ class RouteGenerator {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
               appBar: AppBar(
-                title: const Text('noRouteFound'),
+                title:  Text(tr("noRouteFound")),
               ),
-              body: const Center(child: Text('noRouteFound')),
+              body: Center(child:Text(tr("noRouteFound"))),
             ));
   }
 }

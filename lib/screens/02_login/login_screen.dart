@@ -3,10 +3,10 @@ import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
-import '../01_sign_up/widgets/flutter_toast.dart';
-import '../01_sign_up/widgets/text_form_field.dart';
-import 'widgets/locale_dropdown.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'widgets/flutter_toast.dart';
+import 'widgets/locale_dropdown.dart';
+import 'widgets/text_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
   final void Function(String languageCode, String? countryCode)?
@@ -52,9 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     SizedBox(height: 40),
                     Align(
-                      alignment: Alignment.centerLeft,
+                      alignment:context.locale.languageCode == "ar" ? Alignment.centerRight : Alignment.centerLeft,
                       child: Text(
-                        'Welcome Back!',
+                        tr("login.login"),
                         style: Styles.style24Bold().copyWith(fontSize: 35),
                       ),
                     ),
@@ -65,17 +65,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextFormField(
                       validator: (String? emailAddress) {
                         if (emailAddress == null || emailAddress.isEmpty) {
-                          return context.tr('emailAddressEmptyMessage');
+                          return tr("login.emailAddressEmptyMessage");
                         }
                         var valid = emailAddress.contains('@');
                         if (!valid) {
-                          return context.tr('emailAddressInvalidMessage');
+                          return tr("login.emailAddressInvalidMessage");
                         }
                         return null;
                       },
                       controller: _emailAddressController,
                       keyboardType: TextInputType.emailAddress,
-                      labelText: 'Email Address',
+                      labelText:  tr("login.emailLabel"),
                       prefixIcon: const Icon(Icons.alternate_email),
                     ),
                     const SizedBox(
@@ -87,18 +87,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       keyboardType: TextInputType.text,
                       validator: (String? password) {
                         if (password == null || password.isEmpty) {
-                          return context.tr('passwordEmptyMessage');
+                          return tr("login.passwordEmptyMessage");
                         }
 
                         if (password.length < 6) {
-                          return context.tr('passwordTooShortMessage');
+                          return tr("login.passwordTooShortMessage");
                         }
 
                         return null;
                       },
                       controller: _passwordController,
-                      labelText: "Password",
-                      //labelStyle: ,
+                      labelText:  tr("login.passwordLabel"),
                       prefixIcon: const Icon(Icons.lock_open),
                     ),
 
@@ -112,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Login();
                         }
                       },
-                      child: Text(context.tr('Login')),
+                      child: Text(tr("login.loginButton")),
                     ),
                     SizedBox(
                       height: 15,
@@ -128,11 +127,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text.rich(
                           TextSpan(children: [
                             TextSpan(
-                              text: 'Don\'t  Have an Account? ',
+                              text: tr("login.donotHaveAccount"),
                               style: Styles.style12Medium(),
                             ),
                             TextSpan(
-                              text: 'Register Now',
+                              text: tr("login.registerNow"),
                               style: Styles.style14Medium()
                                   .copyWith(color: ColorsManager.darkGreen),
                             ),
@@ -154,18 +153,22 @@ class _LoginScreenState extends State<LoginScreen> {
       password: _passwordController.text,
     );
     switch (message) {
-      case "Wrong password! Please try again.":
-      case "Account not found! Try registering first.":
+      case "Wrong password! Please try again":
+      case "كلمة المرور خاطئة! يرجى المحاولة مرة أخرى":
+      case "Account not found! Try registering first":
+      case  "الحساب غير موجود! يرجى التسجيل أولاً":
         showToast(message, ColorsManager.red);
         break;
       case "Logged in Successfully!":
-        showToast(message, ColorsManager.white);
+      case  "تم تسجيل الدخول بنجاح!":
+        showToast(message, ColorsManager.oliveGreen);
         Navigator.of(context).pushReplacementNamed(
           Routes.homeRoute,
         );
         break;
       default:
-        showToast( "An unexpected error occurred.",ColorsManager.softRed);
+        showToast( (context.locale.languageCode == "ar" ? "خطأ غير متوقع" : "An unexpected error occurred"), ColorsManager.softRed,
+        );
     }
   }
 }

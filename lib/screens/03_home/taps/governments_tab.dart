@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../models/governrate_model.dart';
 import '../../../resourses/styles_manager.dart';
@@ -15,8 +16,7 @@ class GovernrateTab extends StatelessWidget {
         spacing: 16.0,
         children: [
           SizedBox(height: 20),
-          Text(
-            'Most visited 3 Egyptian governorates.',
+          Text(tr("taps.governorateTitle"),
             style: Styles.style18Medium(),
           ),
           Expanded(
