@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../models/user_model.dart';
 import '../../../resourses/routes_manager.dart';
-import '../../../resourses/styles_manager.dart';
+import '../widgets/info_title.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -28,128 +24,62 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Future<void> _loadUserData() async {
-    final prefs = await SharedPreferences.getInstance();
-    // Get the current logged-in user's email
-    String? currentUserEmail = prefs.getString('currentUserEmail');
- 
-    if (currentUserEmail != null) {
-      // Fetch the list of users and find the current user's data
-      String? usersData = prefs.getString('users');
-      if (usersData != null) {
-        List<dynamic> jsonUsers = json.decode(usersData);
-        List<UserModel> users =
-            jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
-
-        // Find the user with the current email
-        UserModel? currentUser = users.firstWhere(
-          (user) => user.email == currentUserEmail,
-          orElse: () => UserModel(
-              fullName: tr("taps.profileNoNameFound"),
-              email: tr("taps.profileNoEmailFound"),
-              password: tr("taps.profileNoPasswordFound")
-              ),
-        );
-
-        setState(() {
-          fullName = currentUser.fullName;
-          email = currentUser.email;
-          password = currentUser.password;
-          phone = currentUser.phone ?? tr("taps.profileNoPhoneFound");
-        });
-      }
-    }
+    UserModel? currentUser = await LocalDataBase.loadUserData();
+    setState(() {
+      fullName = currentUser!.fullName;
+      email = currentUser.email;
+      password = currentUser.password;
+      phone = currentUser.phone ?? tr("taps.profileNoPhoneFound");
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(screenWidth * 0.04),
+        padding: EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 16.0,
           children: [
-            Center(
-              child: CircleAvatar(
-                radius: screenWidth * 0.15,
-                backgroundColor: Colors.lightGreen,
-                child: Icon(
-                  Icons.person,
-                  size: screenWidth * 0.15,
-                  color: Colors.white,
-                ),
+            CircleAvatar(
+              radius: screenWidth * 0.15,
+              backgroundColor: Colors.lightGreen,
+              child: Icon(
+                Icons.person,
+                size: screenWidth * 0.15,
+                color: Colors.white,
               ),
             ),
-            SizedBox(height: screenHeight * 0.03),
-            buildInfoTile(
-              tr("taps.profileFullName"),
-              fullName,
-              fontSize: screenWidth * 0.045,
+            InfoTitle(
+              title: context.tr("taps.profileFullName"),
+              value: fullName,
             ),
-              buildInfoTile(
-              tr("taps.profilePhoneNumber"),
-              phone,
-              fontSize: screenWidth * 0.045,
+            InfoTitle(
+              title: context.tr("taps.profilePhoneNumber"),
+              value: phone,
             ),
-            buildInfoTile(
-              tr("taps.profileEmail"),
-              email,
-              fontSize: screenWidth * 0.045,
+            InfoTitle(
+              title: context.tr("taps.profileEmail"),
+              value: email,
             ),
-            buildInfoTile(
-               tr("taps.profilePassword"),
-              '*' * password.length,
-              fontSize: screenWidth * 0.045,
+            InfoTitle(
+              title: context.tr("taps.profilePassword"),
+              value: '*' * password.length,
             ),
-             SizedBox(
-                      height: 30,
-                    ),
-                    // Sign Up button
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                         Navigator.of(context).pushReplacementNamed(
-                            Routes.signUpRoute,
-                          );
-                        },
-                        child: Text(tr("taps.profileLogout")),
-                      ),
-                    ),
+            Spacer(),
+            // Sign Up button
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed(
+                  Routes.signUpRoute,
+                );
+              },
+              child: Text(context.tr("taps.profileLogout")),
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget buildInfoTile(String title, String value, {required double fontSize}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Text(
-            '$title: ',
-            style: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                fontFamily: FontConstants.fontMarhey
-
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: TextStyle(
-                  fontSize: fontSize,
-                fontFamily: FontConstants.fontMarhey
-
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
       ),
     );
   }

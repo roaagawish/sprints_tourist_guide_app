@@ -107,4 +107,32 @@ class LocalDataBase {
     // If the email doesn't match any user in the database
     return tr("login.accountNotFound");
   }
+
+// login to already registerd user
+  static Future<UserModel?> loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    UserModel? currentUser;
+    // Get the current logged-in user's email
+    String? currentUserEmail = prefs.getString('currentUserEmail');
+    if (currentUserEmail != null) {
+      // Fetch the list of users and find the current user's data
+      String? usersData = prefs.getString('users');
+      if (usersData != null) {
+        List<dynamic> jsonUsers = json.decode(usersData);
+        List<UserModel> users =
+            jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
+
+        // Find the user with the current email
+        currentUser = users.firstWhere(
+          (user) => user.email == currentUserEmail,
+          orElse: () => UserModel(
+              fullName: tr("taps.profileNoNameFound"),
+              email: tr("taps.profileNoEmailFound"),
+              phone: tr("taps.profileNoPhoneFound"),
+              password: tr("taps.profileNoPasswordFound")),
+        );
+      }
+    }
+    return currentUser;
+  }
 }
