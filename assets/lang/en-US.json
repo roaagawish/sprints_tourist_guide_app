@@ -43,6 +43,7 @@
     "title": "sprint tourist guide Demo",
     "noRouteFound" : "noRouteFound" ,
     "appBarTitle" : "Tourist Guide",
+   
     
     "taps" : {
         "homeLabel" : "Home",
@@ -61,7 +62,8 @@
         "profileFullName" : "Full Name",
         "profilePhoneNumber" : "Phone Number",
         "profileEmail" : "Email",
-        "profilePassword" : "Password"
+        "profilePassword" : "Password",
+        "profileLogout": "Logout"
         
     },
     

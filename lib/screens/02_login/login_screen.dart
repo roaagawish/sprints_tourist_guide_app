@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // don't-have-an-account button
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(
+                        Navigator.of(context).pushReplacementNamed(
                           Routes.signUpRoute,
                         );
                       },

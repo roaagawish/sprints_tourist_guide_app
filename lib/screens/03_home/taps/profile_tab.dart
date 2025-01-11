@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/user_model.dart';
+import '../../../resourses/routes_manager.dart';
 import '../../../resourses/styles_manager.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -103,6 +104,20 @@ class _ProfileTabState extends State<ProfileTab> {
               '*' * password.length,
               fontSize: screenWidth * 0.045,
             ),
+             SizedBox(
+                      height: 30,
+                    ),
+                    // Sign Up button
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                         Navigator.of(context).pushReplacementNamed(
+                            Routes.signUpRoute,
+                          );
+                        },
+                        child: Text(tr("taps.profileLogout")),
+                      ),
+                    ),
           ],
         ),
       ),

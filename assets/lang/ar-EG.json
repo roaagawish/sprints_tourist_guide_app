@@ -38,6 +38,7 @@
     "title": "دليل السائح التجريبي",
     "noRouteFound": "لم يتم العثور على مسار",
     "appBarTitle": "دليل السائح",
+  
     "taps": {
         "homeLabel": "الرئيسية",
         "governmentsLabel": "المحافظات",
@@ -55,7 +56,8 @@
         "profileFullName": "الاسم الكامل",
         "profilePhoneNumber": "رقم الهاتف",
         "profileEmail": "البريد الإلكتروني",
-        "profilePassword": "كلمة المرور"
+        "profilePassword": "كلمة المرور",
+        "profileLogout": "تسجيل الخروج"
     },
     "governrate_model": {
         "Cairo": "القاهرة",

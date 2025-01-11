@@ -179,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // already-have-an-account button
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(Routes.loginRoute);
+                        Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
                       },
                       child: Center(
                         child: Text.rich(
@@ -220,7 +220,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       case "User added successfully!":
       case "تم إضافة المستخدم بنجاح!":
         showToast(message, ColorsManager.oliveGreen);
-        Navigator.of(context).pushNamed(
+        Navigator.of(context).pushReplacementNamed(
           Routes.loginRoute,
         );
         break;
