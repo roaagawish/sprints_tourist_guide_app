@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'resourses/routes_manager.dart';
 import 'resourses/theme_manager.dart';
 
-void main()  async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
-      path: 'assets/lang', 
-      fallbackLocale: Locale('en', 'US'),
-      child: MyApp()
-    ),
+        supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
+        path: 'assets/lang',
+        fallbackLocale: Locale('en', 'US'),
+        child: MyApp()),
   );
 }
 
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: getlightTheme(),
-      initialRoute: Routes.signUpRoute, //TODO: change to any route
+      initialRoute: Routes.signUpRoute,
       onGenerateRoute: RouteGenerator.getRoute,
     );
   }

@@ -8,18 +8,10 @@ import 'widgets/flutter_toast.dart';
 import 'widgets/locale_dropdown.dart';
 import 'widgets/text_form_field.dart';
 
-
 class SignUpScreen extends StatefulWidget {
-  final void Function(String languageCode, String? coutnryCode)?
-      localeChangeCallback;
-  final void Function()? signUpSuccessfulCallback;
-  final void Function()? alreadyHaveAnAccountCallback;
-
-  const SignUpScreen(
-      {super.key,
-      this.localeChangeCallback,
-      this.signUpSuccessfulCallback,
-      this.alreadyHaveAnAccountCallback});
+  const SignUpScreen({
+    super.key,
+  });
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -41,10 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: LocaleDropdown(
-              // dropdown menu to set app locale
-              callback: widget.localeChangeCallback,
-            ),
+            child: LocaleDropdown(),
           ),
         ],
       ),
@@ -61,8 +50,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: <Widget>[
                     SizedBox(height: 40),
                     Align(
-                      alignment:context.locale.languageCode == "ar" ? Alignment.centerRight : Alignment.centerLeft,
-                      child: Text(tr("signup.signUp"),
+                      alignment: context.locale.languageCode == "ar"
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Text(
+                        tr("signup.signUp"),
                         style: Styles.style24Bold().copyWith(fontSize: 35),
                       ),
                     ),
@@ -82,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return null;
                       },
                       controller: _fullNameController,
-                      labelText:tr("signup.fullNameLabel"),
+                      labelText: tr("signup.fullNameLabel"),
                       prefixIcon: const Icon(Icons.person),
                       keyboardType: TextInputType.name,
                     ),
@@ -141,7 +133,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return null;
                       },
                       controller: _passwordController,
-
                       labelText: tr("signup.passwordLabel"),
                       prefixIcon: const Icon(Icons.lock_open),
                     ),
@@ -180,13 +171,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // already-have-an-account button
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
+                        Navigator.of(context)
+                            .pushReplacementNamed(Routes.loginRoute);
                       },
                       child: Center(
                         child: Text.rich(
                           TextSpan(children: [
                             TextSpan(
-                              text:tr("signup.alreadyHaveAnAccount"),
+                              text: tr("signup.alreadyHaveAnAccount"),
                               style: Styles.style12Medium(),
                             ),
                             TextSpan(
@@ -226,7 +218,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
         break;
       default:
-        showToast( (context.locale.languageCode == "ar" ? "خطأ غير متوقع" : "An unexpected error occurred"), ColorsManager.softRed,
+        showToast(
+          (context.locale.languageCode == "ar"
+              ? "خطأ غير متوقع"
+              : "An unexpected error occurred"),
+          ColorsManager.softRed,
         );
     }
   }
