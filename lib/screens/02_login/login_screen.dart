@@ -52,7 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     SizedBox(height: 40),
                     Align(
-                      alignment:context.locale.languageCode == "ar" ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: context.locale.languageCode == "ar"
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Text(
                         tr("login.login"),
                         style: Styles.style24Bold().copyWith(fontSize: 35),
@@ -75,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       controller: _emailAddressController,
                       keyboardType: TextInputType.emailAddress,
-                      labelText:  tr("login.emailLabel"),
+                      labelText: tr("login.emailLabel"),
                       prefixIcon: const Icon(Icons.alternate_email),
                     ),
                     const SizedBox(
@@ -97,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return null;
                       },
                       controller: _passwordController,
-                      labelText:  tr("login.passwordLabel"),
+                      labelText: tr("login.passwordLabel"),
                       prefixIcon: const Icon(Icons.lock_open),
                     ),
 
@@ -148,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void Login() async {
-    String message = await LocalDataBase.Login(
+    String message = await LocalDataBase.login(
       email: _emailAddressController.text,
       password: _passwordController.text,
     );
@@ -156,18 +158,22 @@ class _LoginScreenState extends State<LoginScreen> {
       case "Wrong password! Please try again":
       case "كلمة المرور خاطئة! يرجى المحاولة مرة أخرى":
       case "Account not found! Try registering first":
-      case  "الحساب غير موجود! يرجى التسجيل أولاً":
+      case "الحساب غير موجود! يرجى التسجيل أولاً":
         showToast(message, ColorsManager.red);
         break;
       case "Logged in Successfully!":
-      case  "تم تسجيل الدخول بنجاح!":
+      case "تم تسجيل الدخول بنجاح!":
         showToast(message, ColorsManager.oliveGreen);
         Navigator.of(context).pushReplacementNamed(
           Routes.homeRoute,
         );
         break;
       default:
-        showToast( (context.locale.languageCode == "ar" ? "خطأ غير متوقع" : "An unexpected error occurred"), ColorsManager.softRed,
+        showToast(
+          (context.locale.languageCode == "ar"
+              ? "خطأ غير متوقع"
+              : "An unexpected error occurred"),
+          ColorsManager.softRed,
         );
     }
   }

@@ -40,19 +40,20 @@ class LocalDataBase {
   static const String _usersKey = 'users';
 
 // sign up and add new user to database
-  static Future<String> SignUp(
+  static Future<String> signUp(
       {String? phone,
       required String fullName,
       required String email,
       required String password}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-  
- // Get the existing users from SharedPreferences
+
+    // Get the existing users from SharedPreferences
     String? usersData = prefs.getString(_usersKey);
     List<UserModel> users = [];
     if (usersData != null) {
       List<dynamic> jsonUsers = json.decode(usersData);
-      users = jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
+      users =
+          jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
     }
 
     // Check if email already exists
@@ -76,7 +77,7 @@ class LocalDataBase {
   }
 
 // login to already registerd user
-  static Future<String> Login(
+  static Future<String> login(
       {required String email, required String password}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -98,7 +99,7 @@ class LocalDataBase {
             await prefs.setString('currentUserEmail', email);
             return tr("login.loggedin");
           } else {
-            return  tr("login.wrongPassword");
+            return tr("login.wrongPassword");
           }
         }
       }
