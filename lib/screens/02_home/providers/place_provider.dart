@@ -4,51 +4,51 @@ import '../../../models/place_model.dart';
 import '../../../resourses/assets_manager.dart';
 
 class PlaceProvider with ChangeNotifier {
-  final List<Place> _suggestedPlaces = [
-    Place(
-      name: tr("place_provider.pyramidsofGiza"),
-      governorate: tr("place_provider.giza"),
-      image: PngAssets.pyramids,
-    ),
-    Place(
-      name: tr("place_provider.luxorTemple"),
-      governorate: tr("place_provider.luxor"),
-      image: PngAssets.luxor,
-    ),
-    Place(
-      name:tr("place_provider.pyramidsofGiza"),
-      governorate: tr("place_provider.giza"),
-      image: PngAssets.pyramids,
-    ),
-    Place(
-      name: tr("place_provider.pyramidsofGiza"),
-      governorate: tr("place_provider.giza"),
-      image: PngAssets.pyramids,
-    ),
-  ];
+  List<Place> get _suggestedPlaces => [
+        Place(
+          name: tr("place_provider.pyramidsofGiza"),
+          governorate: tr("place_provider.giza"),
+          image: PngAssets.pyramids,
+        ),
+        Place(
+          name: tr("place_provider.luxorTemple"),
+          governorate: tr("place_provider.luxor"),
+          image: PngAssets.luxor,
+        ),
+        Place(
+          name: tr("place_provider.pyramidsofGiza"),
+          governorate: tr("place_provider.giza"),
+          image: PngAssets.pyramids,
+        ),
+        Place(
+          name: tr("place_provider.pyramidsofGiza"),
+          governorate: tr("place_provider.giza"),
+          image: PngAssets.pyramids,
+        ),
+      ];
 
-  final List<Place> _popularPlaces = [
-    Place(
-      name: tr("place_provider.pyramidsofGiza"),
-      governorate: tr("place_provider.giza"),
-      image: PngAssets.pyramids,
-    ),
-    Place(
-      name:tr("place_provider.luxorTemple"),
-      governorate: tr("place_provider.luxor"),
-      image: PngAssets.luxor,
-    ),
-    Place(
-      name: tr("place_provider.luxorTemple"),
-      governorate:tr("place_provider.luxor"),
-      image: PngAssets.luxor,
-    ),
-    Place(
-      name: tr("place_provider.luxorTemple"),
-      governorate:tr("place_provider.luxor"),
-      image: PngAssets.luxor,
-    ),
-  ];
+  List<Place> get _popularPlaces => [
+        Place(
+          name: tr("place_provider.pyramidsofGiza"),
+          governorate: tr("place_provider.giza"),
+          image: PngAssets.pyramids,
+        ),
+        Place(
+          name: tr("place_provider.luxorTemple"),
+          governorate: tr("place_provider.luxor"),
+          image: PngAssets.luxor,
+        ),
+        Place(
+          name: tr("place_provider.luxorTemple"),
+          governorate: tr("place_provider.luxor"),
+          image: PngAssets.luxor,
+        ),
+        Place(
+          name: tr("place_provider.luxorTemple"),
+          governorate: tr("place_provider.luxor"),
+          image: PngAssets.luxor,
+        ),
+      ];
 
   List<Place> get suggestedPlaces => _suggestedPlaces;
   List<Place> get popularPlaces => _popularPlaces;

@@ -16,7 +16,8 @@ class GovernrateTab extends StatelessWidget {
         spacing: 16.0,
         children: [
           SizedBox(height: 20),
-          Text(tr("taps.governorateTitle"),
+          Text(
+            context.tr("taps.governorateTitle"),
             style: Styles.style18Medium(),
           ),
           Expanded(

@@ -17,14 +17,16 @@ class HomeTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16.0,
         children: [
-          Text( tr("taps.homePopelarPlaces"),
+          Text(
+            context.tr("taps.homePopelarPlaces"),
             style: Styles.style20Bold(),
           ),
           Expanded(
             flex: 2,
             child: PopularPlacesHorizontalList(),
           ),
-          Text(tr("taps.homeSuggestedPlaces"),
+          Text(
+            context.tr("taps.homeSuggestedPlaces"),
             style: Styles.style20Bold(),
           ),
           Expanded(
