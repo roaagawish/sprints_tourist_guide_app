@@ -61,11 +61,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (value == null || value.isEmpty) {
       return tr("signup.passwordEmptyMessage");
     }
-
     if (value.length < 6) {
       return tr("signup.passwordTooShortMessage");
     }
-
     return null;
   }
 
@@ -108,6 +106,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   @override
+  void dispose() {
+    _phoneController.dispose();
+    _passwordController.dispose();
+    _emailAddressController.dispose();
+    _fullNameController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -119,110 +127,109 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ],
       ),
-      body: Form(
-          // the user input form
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 40),
-                  Align(
-                    alignment: context.locale.languageCode == "ar"
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                    child: Text(
-                      tr("signup.signUp"),
-                      style: Styles.style24Bold().copyWith(fontSize: 35),
+      body: Center(
+        child: Form(
+            // the user input form
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Align(
+                      alignment: context.locale.languageCode == "ar"
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Text(
+                        tr("signup.signUp"),
+                        style: Styles.style24Bold().copyWith(fontSize: 35),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // Full name field
-                  CustomTextFormField(
-                    controller: _fullNameController,
-                    labelText: tr("signup.fullNameLabel"),
-                    prefixIcon: const Icon(Icons.person),
-                    keyboardType: TextInputType.name,
-                    validator: nameValidator,
-                  ),
-                  const SizedBox(height: 15),
-                  // Phone Number field
-                  CustomTextFormField(
-                    controller: _phoneController,
-                    labelText: tr("signup.phoneLabel"),
-                    prefixIcon: const Icon(Icons.phone),
-                    keyboardType: TextInputType.phone,
-                    validator: phoneValidator,
-                  ),
-                  const SizedBox(height: 15),
-                  // Email field
-                  CustomTextFormField(
-                    controller: _emailAddressController,
-                    labelText: tr("signup.emailLabel"),
-                    prefixIcon: const Icon(Icons.alternate_email),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: emailValidator,
-                  ),
-                  const SizedBox(height: 15),
-                  // Password field
-                  CustomTextFormField(
-                    isPasswordField: true,
-                    controller: _passwordController,
-                    labelText: tr("signup.passwordLabel"),
-                    prefixIcon: const Icon(Icons.lock_open),
-                    keyboardType: TextInputType.text,
-                    validator: passwordValidator,
-                  ),
-                  const SizedBox(height: 15),
-                  // Confirm password field
-                  CustomTextFormField(
-                    isPasswordField: true,
-                    controller: _confirmPasswordController,
-                    labelText: tr("signup.confirmPasswordLabel"),
-                    prefixIcon: const Icon(Icons.lock_open),
-                    keyboardType: TextInputType.text,
-                    validator: confirmPasswordValidator,
-                  ),
-                  SizedBox(height: 30),
-                  // Sign Up button
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        signUp();
-                      }
-                    },
-                    child: Text(tr("signup.signUpButton")),
-                  ),
-                  SizedBox(height: 15),
-                  // already-have-an-account button
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Routes.loginRoute);
-                    },
-                    child: Text.rich(
-                      TextSpan(children: [
-                        TextSpan(
-                          text: tr("signup.alreadyHaveAnAccount"),
-                          style: Styles.style12Medium(),
-                        ),
-                        TextSpan(
-                          text: tr("signup.goToLoginPage"),
-                          style: Styles.style14Medium()
-                              .copyWith(color: ColorsManager.darkGreen),
-                        ),
-                      ]),
+                    const SizedBox(height: 20),
+                    // Full name field
+                    CustomTextFormField(
+                      controller: _fullNameController,
+                      labelText: tr("signup.fullNameLabel"),
+                      prefixIcon: const Icon(Icons.person),
+                      keyboardType: TextInputType.name,
+                      validator: nameValidator,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 15),
+                    // Phone Number field
+                    CustomTextFormField(
+                      controller: _phoneController,
+                      labelText: tr("signup.phoneLabel"),
+                      prefixIcon: const Icon(Icons.phone),
+                      keyboardType: TextInputType.phone,
+                      validator: phoneValidator,
+                    ),
+                    const SizedBox(height: 15),
+                    // Email field
+                    CustomTextFormField(
+                      controller: _emailAddressController,
+                      labelText: tr("signup.emailLabel"),
+                      prefixIcon: const Icon(Icons.alternate_email),
+                      keyboardType: TextInputType.emailAddress,
+                      validator: emailValidator,
+                    ),
+                    const SizedBox(height: 15),
+                    // Password field
+                    CustomTextFormField(
+                      isPasswordField: true,
+                      controller: _passwordController,
+                      labelText: tr("signup.passwordLabel"),
+                      prefixIcon: const Icon(Icons.lock_open),
+                      keyboardType: TextInputType.text,
+                      validator: passwordValidator,
+                    ),
+                    const SizedBox(height: 15),
+                    // Confirm password field
+                    CustomTextFormField(
+                      isPasswordField: true,
+                      controller: _confirmPasswordController,
+                      labelText: tr("signup.confirmPasswordLabel"),
+                      prefixIcon: const Icon(Icons.lock_open),
+                      keyboardType: TextInputType.text,
+                      validator: confirmPasswordValidator,
+                    ),
+                    SizedBox(height: 30),
+                    // Sign Up button
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          signUp();
+                        }
+                      },
+                      child: Text(tr("signup.signUpButton")),
+                    ),
+                    SizedBox(height: 15),
+                    // already-have-an-account button
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(Routes.loginRoute);
+                      },
+                      child: Text.rich(
+                        TextSpan(children: [
+                          TextSpan(
+                            text: tr("signup.alreadyHaveAnAccount"),
+                            style: Styles.style12Medium(),
+                          ),
+                          TextSpan(
+                            text: tr("signup.goToLoginPage"),
+                            style: Styles.style14Medium()
+                                .copyWith(color: ColorsManager.darkGreen),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          )),
+            )),
+      ),
     );
   }
 }

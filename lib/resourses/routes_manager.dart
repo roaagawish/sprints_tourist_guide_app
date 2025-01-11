@@ -19,13 +19,7 @@ class RouteGenerator {
       case Routes.signUpRoute:
         return MaterialPageRoute(builder: (context) => SignUpScreen());
       case Routes.loginRoute:
-        return MaterialPageRoute(
-            builder: (context) => LoginScreen(
-                  localeChangeCallback: (languageCode, countryCode) =>
-                      context.setLocale(Locale(languageCode, countryCode)),
-                  signInSuccessfulCallback: () =>
-                      Navigator.of(context).pushNamed(Routes.homeRoute),
-                ));
+        return MaterialPageRoute(builder: (context) => LoginScreen());
       case Routes.homeRoute:
         return MaterialPageRoute(
             builder: (context) => HomeScreen(
