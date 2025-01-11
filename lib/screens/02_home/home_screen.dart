@@ -4,18 +4,17 @@ import 'package:provider/provider.dart';
 import '../../models/bottom_nav_bar_entity.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/styles_manager.dart';
+import '../01_auth_screens/widgets/locale_dropdown.dart';
 import 'providers/place_provider.dart';
 import 'taps/favorites_tab.dart';
 import 'taps/governments_tab.dart';
 import 'taps/home_tab.dart';
 import 'taps/profile_tab.dart';
-import '../02_login/widgets/locale_dropdown.dart';
 
 class HomeScreen extends StatefulWidget {
-    final void Function(String languageCode, String? coutnryCode)?
+  final void Function(String languageCode, String? coutnryCode)?
       localeChangeCallback;
-  const HomeScreen({super.key , this.localeChangeCallback});
-  
+  const HomeScreen({super.key, this.localeChangeCallback});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -39,9 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<BottomNavIconEntity> get _navigationItems => [
         BottomNavIconEntity(icon: Icons.home, label: tr("taps.homeLabel")),
-        BottomNavIconEntity(icon: Icons.public, label: tr("taps.governmentsLabel")),
-        BottomNavIconEntity(icon: Icons.favorite, label:tr("taps.favLabel")),
-        BottomNavIconEntity(icon: Icons.account_circle, label: tr("taps.profileLabel")),
+        BottomNavIconEntity(
+            icon: Icons.public, label: tr("taps.governmentsLabel")),
+        BottomNavIconEntity(icon: Icons.favorite, label: tr("taps.favLabel")),
+        BottomNavIconEntity(
+            icon: Icons.account_circle, label: tr("taps.profileLabel")),
       ];
 
   void onTabTapped(int index) {
@@ -72,14 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(tr("appBarTitle")),
           actions: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: LocaleDropdown(
-              // dropdown menu to set app locale
-              callback: widget.localeChangeCallback,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: LocaleDropdown(),
             ),
-          ),
-        ],
+          ],
         ),
         body: PageView(
           controller: _pageController,

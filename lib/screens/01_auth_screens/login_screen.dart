@@ -32,10 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: LocaleDropdown(
-              // dropdown menu to set app locale
-              callback: widget.localeChangeCallback,
-            ),
+            child: LocaleDropdown(),
           ),
         ],
       ),

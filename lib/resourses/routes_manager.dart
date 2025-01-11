@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../models/governrate_model.dart';
-import '../screens/01_sign_up/sign_up_screen.dart';
-import '../screens/02_login/login_screen.dart';
-import '../screens/03_home/home_screen.dart';
-import '../screens/04_governorate _details/governorate _details_screen.dart';
+import '../screens/01_auth_screens/sign_up_screen.dart';
+import '../screens/01_auth_screens/login_screen.dart';
+import '../screens/02_home/home_screen.dart';
+import '../screens/03_governorate _details/governorate _details_screen.dart';
 
 class Routes {
   static const String signUpRoute = "/";

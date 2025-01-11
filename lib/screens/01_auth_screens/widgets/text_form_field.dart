@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/styles_manager.dart';
 
@@ -17,34 +16,36 @@ class CustomTextFormField extends StatefulWidget {
     required this.labelText,
     required this.prefixIcon,
     this.isPasswordField = false,
-    required this.validator, 
+    required this.validator,
     required this.keyboardType,
   });
 
   @override
-  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
+  CustomTextFormFieldState createState() => CustomTextFormFieldState();
 }
 
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
+class CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _obscureText = true;
 
-   TextStyle testFieldStyle = Styles.style14Medium().copyWith(fontWeight: FontWeight.normal);
+  TextStyle testFieldStyle =
+      Styles.style14Medium().copyWith(fontWeight: FontWeight.normal);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       obscureText: widget.isPasswordField ? _obscureText : false,
-      obscuringCharacter: widget.isPasswordField ? "*" : " " ,
+      obscuringCharacter: widget.isPasswordField ? "*" : " ",
       decoration: InputDecoration(
         hoverColor: ColorsManager.mediumGreen,
         focusColor: ColorsManager.mediumGreen,
-        border:  OutlineInputBorder(
-        borderRadius: BorderRadius.circular(50),),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: BorderSide(
-          color: ColorsManager.darkGreen),),
+          borderSide: BorderSide(color: ColorsManager.darkGreen),
+        ),
         labelText: widget.labelText,
         labelStyle: testFieldStyle,
         prefixIcon: widget.prefixIcon,
