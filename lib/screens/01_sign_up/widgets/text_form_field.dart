@@ -40,19 +40,22 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hoverColor: ColorsManager.mediumGreen,
         focusColor: ColorsManager.mediumGreen,
         border:  OutlineInputBorder(
-        borderRadius: BorderRadius.circular(50),
-        ),
+        borderRadius: BorderRadius.circular(50),),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: BorderSide(
+          color: ColorsManager.darkGreen),),
         labelText: widget.labelText,
         labelStyle: testFieldStyle,
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPasswordField
-            ? InkWell(
-                onTap: () {
+            ? IconButton(
+                onPressed: () {
                   setState(() {
                     _obscureText = !_obscureText;
                   });
                 },
-                child: _obscureText
+                icon: _obscureText
                     ? const Icon(Icons.visibility_off)
                     : const Icon(Icons.visibility),
               )

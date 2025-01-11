@@ -4,9 +4,10 @@ import '../../models/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
-import '../02_login/widgets/flutter_toast.dart';
-import '../02_login/widgets/locale_dropdown.dart';
-import '../02_login/widgets/text_form_field.dart';
+import 'widgets/flutter_toast.dart';
+import 'widgets/locale_dropdown.dart';
+import 'widgets/text_form_field.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   final void Function(String languageCode, String? coutnryCode)?
