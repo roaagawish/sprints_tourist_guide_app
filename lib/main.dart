@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'resourses/local_database.dart';
 import 'resourses/routes_manager.dart';
 import 'resourses/theme_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
+  await LocalDataBase.init();
   runApp(
     EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
@@ -29,7 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: getlightTheme(),
-      initialRoute: Routes.signUpRoute,
+      initialRoute: LocalDataBase.getEligibility() == true
+          ? Routes.homeRoute
+          : Routes.signUpRoute,
       onGenerateRoute: RouteGenerator.getRoute,
     );
   }

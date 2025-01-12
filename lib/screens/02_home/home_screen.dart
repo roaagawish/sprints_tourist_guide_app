@@ -71,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (_) => PlaceProvider(),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(tr("appBarTitle")),
           actions: [
             Padding(

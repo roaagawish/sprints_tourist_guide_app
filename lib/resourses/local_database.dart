@@ -5,16 +5,30 @@ import '../models/user_model.dart';
 
 const String _usersKey = 'users';
 const String _currentUserEmailKey = 'currentUserEmail';
+const String prefsKeyOnboarding = "PREFS_KEY_ONBOARDING";
 
 class LocalDataBase {
+  static late final SharedPreferences prefs;
+
+  static init() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future<bool> saveEligibility() async {
+    bool result = await prefs.setBool(prefsKeyOnboarding, true);
+    return result;
+  }
+
+  static bool getEligibility() {
+    return prefs.getBool(prefsKeyOnboarding) ?? false;
+  }
+
 // sign up and add new user to database
   static Future<String> signUp(
       {String? phone,
       required String fullName,
       required String email,
       required String password}) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
     // Get the existing users from SharedPreferences
     String? usersData = prefs.getString(_usersKey);
     List<UserModel> users = [];
@@ -47,8 +61,6 @@ class LocalDataBase {
 // login to already registerd user
   static Future<String> login(
       {required String email, required String password}) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
     // String? savedEmail = prefs.getString('email');
     // String? savedPassword = prefs.getString('password');
 
@@ -78,7 +90,6 @@ class LocalDataBase {
 
 // load user data
   static Future<UserModel?> loadUserData() async {
-    final prefs = await SharedPreferences.getInstance();
     UserModel? currentUser;
     // Get the current logged-in user's email
     String? currentUserEmail = prefs.getString(_currentUserEmailKey);

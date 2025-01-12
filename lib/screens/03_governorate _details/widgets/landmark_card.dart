@@ -33,7 +33,9 @@ class LandmarkCard extends StatelessWidget {
               boxShadow: [BoxShadow(color: ColorsManager.black, blurRadius: 6)],
             ),
             child: Align(
-             alignment:context.locale.languageCode == "ar" ? Alignment.bottomRight : Alignment.bottomLeft,
+              alignment: context.locale.languageCode == "ar"
+                  ? Alignment.bottomRight
+                  : Alignment.bottomLeft,
               child: Text(
                 landmark.name,
                 style: Styles.style24Bold().copyWith(

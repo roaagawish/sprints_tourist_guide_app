@@ -57,7 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
         break;
       case "Logged in Successfully!":
       case "تم تسجيل الدخول بنجاح!":
+        //1 show the toast first
         showToast(message, ColorsManager.oliveGreen);
+        //2 then save the eligibility
+        LocalDataBase.saveEligibility();
+        //3 then navigate to home screen
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(
             Routes.homeRoute,
