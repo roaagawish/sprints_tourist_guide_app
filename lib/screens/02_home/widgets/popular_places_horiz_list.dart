@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/place_provider.dart';
@@ -15,7 +16,9 @@ class PopularPlacesHorizontalList extends StatelessWidget {
       itemCount: placeProvider.popularPlaces.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(right: 16.0),
+          padding: context.locale == Locale('ar', 'EG')
+              ? const EdgeInsets.only(left: 16.0)
+              : const EdgeInsets.only(right: 16.0),
           child: SizedBox(
             width: 200,
             child: PlaceCard(

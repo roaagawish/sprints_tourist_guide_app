@@ -14,16 +14,15 @@ class LocaleDropdown extends StatelessWidget {
     var menuItems = <DropdownMenuItem>[];
     for (var locale in context.supportedLocales) {
       menuItems.add(
-        DropdownMenuItem(value: {
-          'countryCode': locale.countryCode,
-          'languageCode': locale.languageCode
-        }, child: CountryFlag.fromCountryCode(locale.countryCode!)),
+        DropdownMenuItem(
+            value: {'locale': locale},
+            child: CountryFlag.fromCountryCode(locale.countryCode!)),
       );
     }
     return DropdownButton(
       items: menuItems,
       onChanged: (value) {
-        context.setLocale(Locale(value['languageCode'], value['countryCode']));
+        context.setLocale(value['locale']);
       },
       icon: Icon(
         Icons.language,

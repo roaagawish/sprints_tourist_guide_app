@@ -12,7 +12,9 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final placeProvider = Provider.of<PlaceProvider>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
+      padding: context.locale == Locale('ar', 'EG')
+          ? const EdgeInsets.only(top: 16.0, bottom: 16.0, right: 16.0)
+          : const EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16.0,
@@ -32,7 +34,9 @@ class HomeTab extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Padding(
-              padding: const EdgeInsets.only(right: 16.0),
+              padding: context.locale == Locale('ar', 'EG')
+                  ? const EdgeInsets.only(left: 16.0)
+                  : const EdgeInsets.only(right: 16.0),
               child: PlacesGridView(
                 places: placeProvider.suggestedPlaces,
               ),
