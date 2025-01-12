@@ -12,9 +12,9 @@ import 'taps/home_tab.dart';
 import 'taps/profile_tab.dart';
 
 class HomeScreen extends StatefulWidget {
-  final void Function(String languageCode, String? coutnryCode)?
-      localeChangeCallback;
-  const HomeScreen({super.key, this.localeChangeCallback});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

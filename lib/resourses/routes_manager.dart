@@ -17,21 +17,15 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.signUpRoute:
-        return MaterialPageRoute(builder: (context) => SignUpScreen());
+        return MaterialPageRoute(builder: (_) => SignUpScreen());
       case Routes.loginRoute:
-        return MaterialPageRoute(builder: (context) => LoginScreen());
+        return MaterialPageRoute(builder: (_) => LoginScreen());
       case Routes.homeRoute:
-        return MaterialPageRoute(
-            builder: (context) => HomeScreen(
-                  localeChangeCallback: (languageCode, countryCode) =>
-                      context.setLocale(Locale(languageCode, countryCode)),
-                ));
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case Routes.governmentDetailsRoute:
         Governorate governorate = settings.arguments as Governorate;
         return MaterialPageRoute(
-            builder: (context) => GovernorateDetailsScreen(
-                  localeChangeCallback: (languageCode, countryCode) =>
-                      context.setLocale(Locale(languageCode, countryCode)),
+            builder: (_) => GovernorateDetailsScreen(
                   governorate: governorate,
                 ));
       default:
