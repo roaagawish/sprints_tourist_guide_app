@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../models/user_model.dart';
+import '../../../resourses/local_database.dart';
 import '../../../resourses/routes_manager.dart';
 import '../widgets/info_title.dart';
 
