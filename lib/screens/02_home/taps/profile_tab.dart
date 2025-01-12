@@ -73,8 +73,9 @@ class _ProfileTabState extends State<ProfileTab> {
             // Sign Up button
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed(
+                Navigator.of(context).pushNamedAndRemoveUntil(
                   Routes.signUpRoute,
+                  (route) => false, // This clears the stack
                 );
               },
               child: Text(context.tr("taps.profileLogout")),
