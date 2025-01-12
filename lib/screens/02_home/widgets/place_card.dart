@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../models/place_model.dart';
@@ -51,11 +52,12 @@ class PlaceCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, top: 4.0),
-                  child: Text(place.name, style: Styles.style14Medium()),
+                  child: Text(place.name.tr(), style: Styles.style14Medium()),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, top: 4.0),
-                  child: Text(place.governorate, style: Styles.style12Medium()),
+                  child: Text(place.governorate.tr(),
+                      style: Styles.style12Medium()),
                 ),
               ],
             ),
