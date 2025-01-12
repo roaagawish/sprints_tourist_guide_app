@@ -51,11 +51,13 @@ class PlaceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 4.0),
+                  padding:
+                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
                   child: Text(place.name.tr(), style: Styles.style14Medium()),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 4.0),
+                  padding:
+                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
                   child: Text(place.governorate.tr(),
                       style: Styles.style12Medium()),
                 ),
