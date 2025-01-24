@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../resourses/language_manager.dart';
 import '../../../resourses/styles_manager.dart';
 import '../providers/place_provider.dart';
 import '../widgets/popular_places_horiz_list.dart';
@@ -12,7 +13,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final placeProvider = Provider.of<PlaceProvider>(context);
     return Padding(
-      padding: context.locale == Locale('ar', 'EG')
+      padding: LocalizationUtils.isCurrentLocalAr(context)
           ? const EdgeInsets.only(top: 16.0, bottom: 16.0, right: 16.0)
           : const EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
       child: Column(
@@ -34,7 +35,7 @@ class HomeTab extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Padding(
-              padding: context.locale == Locale('ar', 'EG')
+              padding: LocalizationUtils.isCurrentLocalAr(context)
                   ? const EdgeInsets.only(left: 16.0)
                   : const EdgeInsets.only(right: 16.0),
               child: PlacesGridView(
