@@ -23,6 +23,10 @@ class LocalDataBase {
     return prefs.getBool(prefsKeyOnboarding) ?? false;
   }
 
+  static void removeEligibility() {
+    prefs.remove(prefsKeyOnboarding);
+  }
+
 // sign up and add new user to database
   static Future<String> signUp(
       {String? phone,

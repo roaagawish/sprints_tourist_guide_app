@@ -70,9 +70,10 @@ class _ProfileTabState extends State<ProfileTab> {
               value: '*' * password.length,
             ),
             Spacer(),
-            // Sign Up button
+            // logout button
             ElevatedButton(
               onPressed: () {
+                LocalDataBase.removeEligibility();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   Routes.signUpRoute,
                   (route) => false, // This clears the stack

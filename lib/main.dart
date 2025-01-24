@@ -30,10 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: getlightTheme(),
-      initialRoute: LocalDataBase.getEligibility() == true
-          ? Routes.homeRoute
-          : Routes.signUpRoute,
+      initialRoute: Routes.signUpRoute,
       onGenerateRoute: RouteGenerator.getRoute,
+      onGenerateInitialRoutes: RouteGenerator.generateInitialRoutes,
     );
   }
 }

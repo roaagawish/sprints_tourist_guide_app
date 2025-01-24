@@ -5,6 +5,7 @@ import '../screens/01_auth_screens/sign_up_screen.dart';
 import '../screens/01_auth_screens/login_screen.dart';
 import '../screens/02_home/home_screen.dart';
 import '../screens/03_governorate _details/governorate _details_screen.dart';
+import 'local_database.dart';
 
 class Routes {
   static const String signUpRoute = "/";
@@ -31,6 +32,13 @@ class RouteGenerator {
       default:
         return unDefinedRoute();
     }
+  }
+
+  static List<Route<dynamic>> generateInitialRoutes(String initialRouteName) {
+    if (LocalDataBase.getEligibility()) {
+      return [MaterialPageRoute(builder: (_) => const HomeScreen())];
+    }
+    return [MaterialPageRoute(builder: (_) => const SignUpScreen())];
   }
 
   static Route<dynamic> unDefinedRoute() {
