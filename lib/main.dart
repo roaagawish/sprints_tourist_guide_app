@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'resourses/local_database.dart';
+import 'app/app_prefs.dart';
 import 'resourses/routes_manager.dart';
 import 'resourses/theme_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await LocalDataBase.init();
+  await AppPreferencesImpl.init();
   runApp(
     EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],

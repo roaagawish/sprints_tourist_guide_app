@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../resourses/colors_manager.dart';
-import '../../resourses/local_database.dart';
+import '../../app/app_prefs.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() async {
-    String message = await LocalDataBase.login(
+    String message = await AppPreferencesImpl.login(
       email: _emailAddressController.text,
       password: _passwordController.text,
     );
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
         //1 show the toast first
         showToast(message, ColorsManager.oliveGreen);
         //2 then save the eligibility
-        LocalDataBase.saveEligibility();
+        AppPreferencesImpl().setUserLoggedIn();
         //3 then navigate to home screen
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(

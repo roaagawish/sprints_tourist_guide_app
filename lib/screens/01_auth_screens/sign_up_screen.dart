@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../resourses/colors_manager.dart';
-import '../../resourses/local_database.dart';
+import '../../app/app_prefs.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import 'widgets/flutter_toast.dart';
@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void signUp() async {
-    String message = await LocalDataBase.signUp(
+    String message = await AppPreferencesImpl.signUp(
         fullName: _fullNameController.text,
         email: _emailAddressController.text,
         password: _passwordController.text,

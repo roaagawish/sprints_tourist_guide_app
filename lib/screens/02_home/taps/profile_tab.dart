@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../models/user_model.dart';
-import '../../../resourses/local_database.dart';
+import '../../../app/app_prefs.dart';
 import '../../../resourses/routes_manager.dart';
 import '../widgets/info_title.dart';
 
@@ -25,7 +25,7 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Future<void> _loadUserData() async {
-    UserModel? currentUser = await LocalDataBase.loadUserData();
+    UserModel? currentUser = await AppPreferencesImpl.loadUserData();
     setState(() {
       fullName = currentUser!.fullName;
       email = currentUser.email;
@@ -73,7 +73,7 @@ class _ProfileTabState extends State<ProfileTab> {
             // logout button
             ElevatedButton(
               onPressed: () {
-                LocalDataBase.removeEligibility();
+                AppPreferencesImpl().removePrefs();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   Routes.signUpRoute,
                   (route) => false, // This clears the stack

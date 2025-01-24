@@ -1,31 +1,91 @@
 import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'extensions.dart';
 import '../models/user_model.dart';
 
 const String _usersKey = 'users';
 const String _currentUserEmailKey = 'currentUserEmail';
-const String prefsKeyOnboarding = "PREFS_KEY_ONBOARDING";
+const String prefsKeyIsUserLoggedIn = "PREFS_KEY_IS_USER_LOGGED_IN";
+const String prefsKeyTheme = "PREFS_KEY_THEME";
 
-class LocalDataBase {
+abstract class AppPreferences {
+  Future<String> getAppThemeName();
+  Future<void> setTheme(ThemeMode theme);
+  Future<ThemeMode> getTheme();
+  Future<void> setUserLoggedIn();
+  bool isUserLoggedIn();
+  Future<void> removePrefs();
+}
+
+class AppPreferencesImpl implements AppPreferences {
   static late final SharedPreferences prefs;
 
   static init() async {
     prefs = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> saveEligibility() async {
-    bool result = await prefs.setBool(prefsKeyOnboarding, true);
-    return result;
+  // ############################################################# theme
+  @override
+  Future<String> getAppThemeName() async {
+    String? themeName = prefs.getString(prefsKeyTheme);
+    if (themeName != null && themeName.isNotEmpty) {
+      return themeName;
+    } else {
+      // return default theme
+      return ThemeMode.light.getName();
+    }
   }
 
-  static bool getEligibility() {
-    return prefs.getBool(prefsKeyOnboarding) ?? false;
+  @override
+  Future<void> setTheme(ThemeMode theme) async {
+    if (theme == ThemeMode.light) {
+      prefs.setString(prefsKeyTheme, ThemeMode.light.getName());
+    } else if (theme == ThemeMode.dark) {
+      prefs.setString(prefsKeyTheme, ThemeMode.dark.getName());
+    } else {
+      prefs.setString(prefsKeyTheme, ThemeMode.system.getName());
+    }
   }
 
-  static void removeEligibility() {
-    prefs.remove(prefsKeyOnboarding);
+  @override
+  Future<ThemeMode> getTheme() async {
+    String currentThemeName = await getAppThemeName();
+
+    if (currentThemeName == ThemeMode.light.getName()) {
+      return ThemeMode.light;
+    } else if (currentThemeName == ThemeMode.dark.getName()) {
+      return ThemeMode.dark;
+    } else {
+      return ThemeMode.system;
+    }
   }
+
+  // ############################################################# user logged in
+  @override
+  Future<void> setUserLoggedIn() async {
+    prefs.setBool(prefsKeyIsUserLoggedIn, true);
+  }
+
+  @override
+  bool isUserLoggedIn() {
+    return prefs.getBool(prefsKeyIsUserLoggedIn) ?? false;
+  }
+
+  // ############################################################# remove all prefs
+  @override
+  Future<void> removePrefs() async {
+    prefs.remove(prefsKeyTheme);
+    prefs.remove(prefsKeyIsUserLoggedIn);
+  }
+
+  // #############################################################
+/* 
+signUp & login & loadUserData will be removed from here as soon as we use firebase 👀
+so there is no need to be in the abstract class above...
+*/
+  // #############################################################
 
 // sign up and add new user to database
   static Future<String> signUp(
@@ -104,7 +164,6 @@ class LocalDataBase {
         List<dynamic> jsonUsers = json.decode(usersData);
         List<UserModel> users =
             jsonUsers.map((jsonUser) => UserModel.fromJson(jsonUser)).toList();
-
         // Find the user with the current email
         currentUser = users.firstWhere(
           (user) => user.email == currentUserEmail,
