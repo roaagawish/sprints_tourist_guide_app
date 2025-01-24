@@ -1,6 +1,8 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../resourses/colors_manager.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
 import 'dart:ui' as dui;
 
 class ThemeToggleSwitch extends StatelessWidget {
@@ -12,7 +14,7 @@ class ThemeToggleSwitch extends StatelessWidget {
       textDirection: dui.TextDirection.ltr,
       child: AnimatedToggleSwitch<bool>.rolling(
         // if the current == true , so it will select the true item which is light theme
-        current: true, //todo initial theme here
+        current: context.watch<ThemeBloc>().state.themeMode == ThemeMode.light,
         // light theme => true , dark theme => false , as 0 & 1
         values: const [true, false],
         iconOpacity:
@@ -43,7 +45,7 @@ class ThemeToggleSwitch extends StatelessWidget {
                 );
         },
         onChanged: (value) {
-          //TODO toggle theme here :)
+          context.read<ThemeBloc>().add(ToggleTheme());
         },
       ),
     );

@@ -62,3 +62,63 @@ ThemeData getlightTheme() {
     ),
   );
 }
+
+ThemeData getDarkTheme() {
+  return ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: ColorsManager.black,
+    primaryColor: ColorsManager.mediumBrown,
+
+    //app bar theme
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      backgroundColor: ColorsManager.oliveGreen,
+      titleSpacing: 0,
+      elevation: 0,
+      shadowColor: ColorsManager.black,
+      titleTextStyle: Styles.style20Bold(),
+      toolbarTextStyle: Styles.style20Bold(),
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: ColorsManager.oliveGreen, // Status bar color
+        statusBarIconBrightness: Brightness.dark, // black icons
+        statusBarBrightness: Brightness.light, // For iOS dark background
+      ),
+    ),
+
+    // text selection theme
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: ColorsManager.mediumBrown,
+      selectionColor: ColorsManager.grey,
+      // Change the handle to blue for the text form field ;)
+      selectionHandleColor: ColorsManager.mediumBrown,
+    ),
+
+    // elevated button theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        //side: const BorderSide(color: ColorsManager.blue, width: 2),
+        elevation: 0,
+        foregroundColor: ColorsManager.white,
+        backgroundColor: ColorsManager.mediumGreen,
+        textStyle: Styles.style20Bold(),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      ),
+    ),
+
+    // card theme
+    cardTheme: CardTheme(
+      elevation: 4,
+      clipBehavior: Clip.hardEdge,
+      color: ColorsManager.creamyBeige,
+      shadowColor: ColorsManager.black,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    ),
+
+    //divider theme
+    dividerTheme: const DividerThemeData(
+      color: ColorsManager.black,
+      thickness: 2,
+    ),
+  );
+}

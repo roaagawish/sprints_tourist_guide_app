@@ -43,6 +43,7 @@ dependencies:
   animated_toggle_switch: ^0.8.4
   flutter_bloc: ^9.0.0
   bloc: ^9.0.0
+  meta: ^1.15.0
 
 dev_dependencies:
   flutter_test:
