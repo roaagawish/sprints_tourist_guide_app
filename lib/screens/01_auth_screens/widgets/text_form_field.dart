@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../resourses/colors_manager.dart';
 import '../../../resourses/styles_manager.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -27,27 +26,15 @@ class CustomTextFormField extends StatefulWidget {
 class CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _obscureText = true;
 
-  TextStyle testFieldStyle =
-      Styles.style14Medium().copyWith(fontWeight: FontWeight.normal);
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       obscureText: widget.isPasswordField ? _obscureText : false,
       obscuringCharacter: widget.isPasswordField ? "*" : " ",
+      style: Styles.style16Medium(),
       decoration: InputDecoration(
-        hoverColor: ColorsManager.mediumGreen,
-        focusColor: ColorsManager.mediumGreen,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(50),
-          borderSide: BorderSide(color: ColorsManager.darkGreen),
-        ),
         labelText: widget.labelText,
-        labelStyle: testFieldStyle,
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPasswordField
             ? IconButton(

@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../resourses/colors_manager.dart';
 import '../../app/app_prefs.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
+import '../02_home/blocs/theme_bloc/theme_bloc.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
 import 'widgets/flutter_toast.dart';
@@ -137,7 +139,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             : Alignment.centerLeft,
                         child: Text(
                           tr("signup.signUp"),
-                          style: Styles.style24Bold().copyWith(fontSize: 35),
+                          style: Styles.style35Bold().copyWith(
+                              color:
+                                  context.read<ThemeBloc>().state.themeMode ==
+                                          ThemeMode.light
+                                      ? ColorsManager.darkGreen
+                                      : ColorsManager.lightOrange),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -212,8 +219,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             TextSpan(
                               text: tr("signup.goToLoginPage"),
-                              style: Styles.style14Medium()
-                                  .copyWith(color: ColorsManager.darkGreen),
+                              style: Styles.style14Medium().copyWith(
+                                  color: context
+                                              .read<ThemeBloc>()
+                                              .state
+                                              .themeMode ==
+                                          ThemeMode.light
+                                      ? ColorsManager.darkGreen
+                                      : ColorsManager.lightOrange),
                             ),
                           ]),
                         ),
