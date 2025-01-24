@@ -10,22 +10,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, state) {
-        return MaterialApp(
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          title: tr("title"),
-          debugShowCheckedModeBanner: false,
-          themeMode: state.themeMode,
-          theme: getlightTheme(),
-          darkTheme: getDarkTheme(),
-          initialRoute: Routes.signUpRoute,
-          onGenerateRoute: RouteGenerator.getRoute,
-          onGenerateInitialRoutes: RouteGenerator.generateInitialRoutes,
-        );
-      },
+    return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      title: tr("title"),
+      debugShowCheckedModeBanner: false,
+      themeMode: context.watch<ThemeBloc>().state.themeMode,
+      theme: getlightTheme(),
+      darkTheme: getDarkTheme(),
+      initialRoute: Routes.signUpRoute,
+      onGenerateRoute: RouteGenerator.getRoute,
+      onGenerateInitialRoutes: RouteGenerator.generateInitialRoutes,
     );
   }
 }
