@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../models/bottom_nav_bar_entity.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/styles_manager.dart';
-import '../01_auth_screens/widgets/locale_dropdown.dart';
 import 'providers/place_provider.dart';
 import 'taps/favorites_tab.dart';
 import 'taps/governments_tab.dart';
@@ -37,12 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<BottomNavIconEntity> get _navigationItems => [
-        BottomNavIconEntity(icon: Icons.home, label: tr("taps.homeLabel")),
+        BottomNavIconEntity(icon: Icons.home, label: "taps.homeLabel"),
+        BottomNavIconEntity(icon: Icons.public, label: "taps.governmentsLabel"),
+        BottomNavIconEntity(icon: Icons.favorite, label: "taps.favLabel"),
         BottomNavIconEntity(
-            icon: Icons.public, label: tr("taps.governmentsLabel")),
-        BottomNavIconEntity(icon: Icons.favorite, label: tr("taps.favLabel")),
-        BottomNavIconEntity(
-            icon: Icons.account_circle, label: tr("taps.profileLabel")),
+            icon: Icons.account_circle, label: "taps.profileLabel"),
       ];
 
   void onTabTapped(int index) {
@@ -73,12 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(tr("appBarTitle")),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: LocaleDropdown(),
-            ),
-          ],
         ),
         body: PageView(
           controller: _pageController,
@@ -102,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
           items: _navigationItems.map((e) {
             return BottomNavigationBarItem(
                 icon: Icon(e.icon),
-                label: e.label,
+                label: context.tr(e.label),
                 backgroundColor: ColorsManager.darkGreen);
           }).toList(),
           selectedLabelStyle: Styles.style14Medium(),

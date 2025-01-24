@@ -4,6 +4,7 @@ import '../../../models/user_model.dart';
 import '../../../app/app_prefs.dart';
 import '../../../resourses/routes_manager.dart';
 import '../widgets/info_title.dart';
+import '../widgets/setting_row.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -70,6 +71,14 @@ class _ProfileTabState extends State<ProfileTab> {
               value: '*' * password.length,
             ),
             Spacer(),
+            SettingRow(
+              label: context.tr('language'),
+              isLanguage: true,
+            ),
+            SettingRow(
+              label: context.tr('theme'),
+              isLanguage: false,
+            ),
             // logout button
             ElevatedButton(
               onPressed: () {

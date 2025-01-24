@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'app/app_prefs.dart';
 import 'app/my_app.dart';
+import 'resourses/language_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,9 +10,12 @@ void main() async {
   await AppPreferencesImpl.init();
   runApp(
     EasyLocalization(
-        supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
+        supportedLocales: [
+          LocalizationUtils.englishLocal,
+          LocalizationUtils.arabicLocal
+        ],
         path: 'assets/lang',
-        fallbackLocale: Locale('en', 'US'),
+        fallbackLocale: LocalizationUtils.englishLocal,
         child: MyApp()),
   );
 }

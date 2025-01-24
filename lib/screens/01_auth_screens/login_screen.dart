@@ -4,8 +4,9 @@ import '../../app/app_prefs.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../02_home/widgets/language_toggle_switch.dart';
+import '../02_home/widgets/theme_toggle_switch.dart';
 import 'widgets/flutter_toast.dart';
-import 'widgets/locale_dropdown.dart';
 import 'widgets/text_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -87,93 +88,90 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: LocaleDropdown(),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Form(
-            // the user input form
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Align(
-                      alignment: context.locale.languageCode == "ar"
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Text(
-                        tr("login.login"),
-                        style: Styles.style24Bold().copyWith(fontSize: 35),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    // Email field
-                    CustomTextFormField(
-                      controller: _emailAddressController,
-                      labelText: tr("signup.emailLabel"),
-                      prefixIcon: const Icon(Icons.alternate_email),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: emailValidator,
-                    ),
-                    const SizedBox(height: 15),
-                    // Password field
-                    CustomTextFormField(
-                      isPasswordField: true,
-                      controller: _passwordController,
-                      labelText: tr("signup.passwordLabel"),
-                      prefixIcon: const Icon(Icons.lock_open),
-                      keyboardType: TextInputType.text,
-                      validator: passwordValidator,
-                    ),
-                    SizedBox(height: 30),
-                    // Login button
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          login();
-                        }
-                      },
-                      child: Text(tr("login.loginButton")),
-                    ),
-                    SizedBox(height: 15),
-                    // don't-have-an-account button
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushReplacementNamed(
-                          Routes.signUpRoute,
-                        );
-                      },
-                      child: Center(
-                        child: Text.rich(
-                          TextSpan(children: [
-                            TextSpan(
-                              text: tr("login.donotHaveAccount"),
-                              style: Styles.style12Medium(),
-                            ),
-                            TextSpan(
-                              text: tr("login.registerNow"),
-                              style: Styles.style14Medium()
-                                  .copyWith(color: ColorsManager.darkGreen),
-                            ),
-                          ]),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Form(
+              // the user input form
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Align(
+                        alignment: context.locale.languageCode == "ar"
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Text(
+                          tr("login.login"),
+                          style: Styles.style24Bold().copyWith(fontSize: 35),
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      // Email field
+                      CustomTextFormField(
+                        controller: _emailAddressController,
+                        labelText: tr("signup.emailLabel"),
+                        prefixIcon: const Icon(Icons.alternate_email),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: emailValidator,
+                      ),
+                      const SizedBox(height: 15),
+                      // Password field
+                      CustomTextFormField(
+                        isPasswordField: true,
+                        controller: _passwordController,
+                        labelText: tr("signup.passwordLabel"),
+                        prefixIcon: const Icon(Icons.lock_open),
+                        keyboardType: TextInputType.text,
+                        validator: passwordValidator,
+                      ),
+                      SizedBox(height: 30),
+                      // Login button
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            login();
+                          }
+                        },
+                        child: Text(tr("login.loginButton")),
+                      ),
+                      SizedBox(height: 15),
+                      // don't-have-an-account button
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushReplacementNamed(
+                            Routes.signUpRoute,
+                          );
+                        },
+                        child: Center(
+                          child: Text.rich(
+                            TextSpan(children: [
+                              TextSpan(
+                                text: tr("login.donotHaveAccount"),
+                                style: Styles.style12Medium(),
+                              ),
+                              TextSpan(
+                                text: tr("login.registerNow"),
+                                style: Styles.style14Medium()
+                                    .copyWith(color: ColorsManager.darkGreen),
+                              ),
+                            ]),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      LanguageToggleSwitch(),
+                      SizedBox(height: 10),
+                      ThemeToggleSwitch(),
+                    ],
+                  ),
                 ),
-              ),
-            )),
+              )),
+        ),
       ),
     );
   }
