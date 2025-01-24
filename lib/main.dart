@@ -6,6 +6,7 @@ import 'app/app_prefs.dart';
 import 'app/my_app.dart';
 import 'resourses/language_manager.dart';
 import 'screens/02_home/blocs/theme_bloc/theme_bloc.dart';
+import 'simple_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  Bloc.observer = SimpleObserver();
   runApp(
     EasyLocalization(
         supportedLocales: [
