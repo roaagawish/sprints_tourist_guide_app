@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../resourses/colors_manager.dart';
 import '../../app/app_prefs.dart';
+import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import '../02_home/blocs/theme_bloc/theme_bloc.dart';
@@ -100,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         break;
       default:
         showToast(
-          (context.locale.languageCode == "ar"
+          (LocalizationUtils.isCurrentLocalAr(context)
               ? "خطأ غير متوقع"
               : "An unexpected error occurred"),
           ColorsManager.softRed,
@@ -134,7 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Align(
-                        alignment: context.locale.languageCode == "ar"
+                        alignment: LocalizationUtils.isCurrentLocalAr(context)
                             ? Alignment.centerRight
                             : Alignment.centerLeft,
                         child: Text(

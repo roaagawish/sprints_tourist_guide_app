@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../resourses/language_manager.dart';
 import '../../../resourses/styles_manager.dart';
 import '../providers/place_provider.dart';
 import '../widgets/empty_favorite_list.dart';
@@ -19,8 +20,11 @@ class FavoritesTab extends StatelessWidget {
         spacing: 16.0,
         children: [
           Align(
-            alignment:context.locale.languageCode == "ar" ? Alignment.centerRight : Alignment.centerLeft,
-            child: Text(tr("taps.favTitle"),
+            alignment: LocalizationUtils.isCurrentLocalAr(context)
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            child: Text(
+              tr("taps.favTitle"),
               style: Styles.style20Bold(),
             ),
           ),

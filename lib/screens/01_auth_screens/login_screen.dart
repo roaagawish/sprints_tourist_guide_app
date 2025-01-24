@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../resourses/colors_manager.dart';
 import '../../app/app_prefs.dart';
+import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -73,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
         break;
       default:
         showToast(
-          (context.locale.languageCode == "ar"
+          (LocalizationUtils.isCurrentLocalAr(context)
               ? "خطأ غير متوقع"
               : "An unexpected error occurred"),
           ColorsManager.softRed,
@@ -104,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Align(
-                        alignment: context.locale.languageCode == "ar"
+                        alignment: LocalizationUtils.isCurrentLocalAr(context)
                             ? Alignment.centerRight
                             : Alignment.centerLeft,
                         child: Text(
