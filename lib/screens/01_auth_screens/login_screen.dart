@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../../app/functions.dart';
 import '../../resourses/colors_manager.dart';
 import '../../app/app_prefs.dart';
 import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../02_home/blocs/theme_bloc/theme_bloc.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
 import 'widgets/flutter_toast.dart';
@@ -111,11 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           tr("login.login"),
                           style: Styles.style35Bold().copyWith(
-                              color:
-                                  context.read<ThemeBloc>().state.themeMode ==
-                                          ThemeMode.light
-                                      ? ColorsManager.darkGreen
-                                      : ColorsManager.lightOrange),
+                              color: isLightTheme(context)
+                                  ? ColorsManager.darkGreen
+                                  : ColorsManager.lightOrange),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -165,11 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextSpan(
                                 text: tr("login.registerNow"),
                                 style: Styles.style14Medium().copyWith(
-                                    color: context
-                                                .read<ThemeBloc>()
-                                                .state
-                                                .themeMode ==
-                                            ThemeMode.light
+                                    color: isLightTheme(context)
                                         ? ColorsManager.darkGreen
                                         : ColorsManager.lightOrange),
                               ),

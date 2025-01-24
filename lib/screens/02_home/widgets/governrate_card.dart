@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../../../app/functions.dart';
 import '../../../models/governrate_model.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/routes_manager.dart';
 import '../../../resourses/styles_manager.dart';
-import '../blocs/theme_bloc/theme_bloc.dart';
 
 class GovernorateCard extends StatelessWidget {
   const GovernorateCard({
@@ -27,13 +26,12 @@ class GovernorateCard extends StatelessWidget {
                 ColorsManager.black.withValues(alpha: 0.5), BlendMode.darken),
           ),
           borderRadius: BorderRadius.circular(15),
-          border: context.read<ThemeBloc>().state.themeMode == ThemeMode.light
+          border: isLightTheme(context)
               ? Border.all(color: ColorsManager.black)
               : Border.all(color: ColorsManager.white),
-          boxShadow:
-              context.read<ThemeBloc>().state.themeMode == ThemeMode.light
-                  ? [BoxShadow(color: ColorsManager.black, blurRadius: 6)]
-                  : [BoxShadow(color: ColorsManager.white, blurRadius: 6)],
+          boxShadow: isLightTheme(context)
+              ? [BoxShadow(color: ColorsManager.black, blurRadius: 6)]
+              : [BoxShadow(color: ColorsManager.white, blurRadius: 6)],
         ),
         child: ListTile(
           contentPadding: EdgeInsets.all(16),

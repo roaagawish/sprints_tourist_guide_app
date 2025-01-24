@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../app/functions.dart';
 import '../../resourses/colors_manager.dart';
 import '../../app/app_prefs.dart';
 import '../../resourses/language_manager.dart';
@@ -141,11 +142,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(
                           tr("signup.signUp"),
                           style: Styles.style35Bold().copyWith(
-                              color:
-                                  context.read<ThemeBloc>().state.themeMode ==
-                                          ThemeMode.light
-                                      ? ColorsManager.darkGreen
-                                      : ColorsManager.lightOrange),
+                              color: isLightTheme(context)
+                                  ? ColorsManager.darkGreen
+                                  : ColorsManager.lightOrange),
                         ),
                       ),
                       const SizedBox(height: 20),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../../../app/functions.dart';
 import '../../../models/governrate_model.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/language_manager.dart';
 import '../../../resourses/styles_manager.dart';
-import '../../02_home/blocs/theme_bloc/theme_bloc.dart';
 
 class LandmarkCard extends StatelessWidget {
   const LandmarkCard({
@@ -50,10 +49,9 @@ class LandmarkCard extends StatelessWidget {
               text: TextSpan(
             text: landmark.description,
             style: Styles.style14Medium().copyWith(
-                color:
-                    context.read<ThemeBloc>().state.themeMode == ThemeMode.light
-                        ? ColorsManager.black
-                        : ColorsManager.white),
+                color: isLightTheme(context)
+                    ? ColorsManager.black
+                    : ColorsManager.white),
           )),
         ],
       ),
