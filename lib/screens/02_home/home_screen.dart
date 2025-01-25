@@ -1,13 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import '../../models/bottom_nav_bar_entity.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/styles_manager.dart';
+import 'blocs/favorite_places/favorite_places_bloc.dart';
 import 'blocs/popular_places/popular_places_bloc.dart';
 import 'blocs/suggested_places/suggested_places_bloc.dart';
-import 'providers/place_provider.dart';
 import 'taps/favorites_tab.dart';
 import 'taps/governments_tab.dart';
 import 'taps/home_tab.dart';
@@ -68,50 +67,50 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => PlaceProvider(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => PopularPlacesBloc()..add(LoadPopularPlaces()),
-          ),
-          BlocProvider(
-            create: (_) => SuggestedPlacesBloc()..add(LoadSuggestedPlaces()),
-          ),
-        ],
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(tr("appBarTitle")),
-          ),
-          body: PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _currentPage = index;
-              });
-            },
-            children: const [
-              HomeTab(),
-              GovernrateTab(),
-              FavoritesTab(),
-              ProfileTab(),
-            ],
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentPage,
-            onTap: onTabTapped,
-            selectedItemColor: ColorsManager.white,
-            unselectedItemColor: ColorsManager.black,
-            items: _navigationItems.map((e) {
-              return BottomNavigationBarItem(
-                  icon: Icon(e.icon),
-                  label: context.tr(e.label),
-                  backgroundColor: ColorsManager.darkGreen);
-            }).toList(),
-            selectedLabelStyle: Styles.style14Medium(),
-            unselectedLabelStyle: Styles.style12Medium(),
-          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => PopularPlacesBloc()..add(LoadPopularPlaces()),
+        ),
+        BlocProvider(
+          create: (_) => SuggestedPlacesBloc()..add(LoadSuggestedPlaces()),
+        ),
+        BlocProvider(
+          create: (_) => FavoritePlacesBloc()..add(LoadFavoritePlaces()),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(tr("appBarTitle")),
+        ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
+          children: const [
+            HomeTab(),
+            GovernrateTab(),
+            FavoritesTab(),
+            ProfileTab(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentPage,
+          onTap: onTabTapped,
+          selectedItemColor: ColorsManager.white,
+          unselectedItemColor: ColorsManager.black,
+          items: _navigationItems.map((e) {
+            return BottomNavigationBarItem(
+                icon: Icon(e.icon),
+                label: context.tr(e.label),
+                backgroundColor: ColorsManager.darkGreen);
+          }).toList(),
+          selectedLabelStyle: Styles.style14Medium(),
+          unselectedLabelStyle: Styles.style12Medium(),
         ),
       ),
     );

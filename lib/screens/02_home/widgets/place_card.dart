@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../models/place_model.dart';
 import '../../../resourses/styles_manager.dart';
-import '../providers/place_provider.dart';
 
 class PlaceCard extends StatelessWidget {
   final Place place;
@@ -15,7 +13,6 @@ class PlaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final placeProvider = Provider.of<PlaceProvider>(context);
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +36,9 @@ class PlaceCard extends StatelessWidget {
                       color: place.isFavorite ? Colors.red : Colors.white,
                     ),
                     onPressed: () {
-                      placeProvider.toggleFavorite(place);
+                      //we deleted this provider,
+                      //TODO: in the next firebase submit(add event in favoritePlacesBloc to like place)
+                      //placeProvider.toggleFavorite(place);
                     },
                   ),
                 ),
