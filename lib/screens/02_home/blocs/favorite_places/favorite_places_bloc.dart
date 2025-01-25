@@ -31,7 +31,7 @@ class FavoritePlacesBloc
           .loadString('assets/json/favorite_places.json', cache: false);
       final data = json.decode(response);
       //set actual data
-      _placesList = (data['FavoritePlaces'] as List)
+      _placesList = (data['favoritePlaces'] as List)
           .map((place) => Place.fromJson(place))
           .toList();
 

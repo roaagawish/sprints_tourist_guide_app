@@ -89,5 +89,5 @@
   },
   "language": "Language",
   "theme": "Theme",
-  "failedToLoadPlaces": "Failed to load places: {error}"
+  "failedToLoadPlaces": "Failed to load places: {}"
 }

@@ -16,7 +16,7 @@ class FavoritePlacesBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state is FavoritePlacesError) {
           return ErrorStateWidget(
-            width: MediaQuery.sizeOf(context).width * 0.3,
+            width: MediaQuery.sizeOf(context).width * 0.6,
             errorText: state.message,
           );
         } else if (state is FavoritePlacesEmpty) {
