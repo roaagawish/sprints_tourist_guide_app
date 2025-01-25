@@ -83,5 +83,6 @@
     "luxor": "الأقصر"
   },
   "language": "اللغة",
-  "theme": "الموضوع"
+  "theme": "السمة",
+  "failedToLoadPlaces": "فشل تحميل الأماكن: {error}"
 }

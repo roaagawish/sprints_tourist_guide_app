@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 import '../../../../app/functions.dart';
@@ -41,7 +42,8 @@ class FavoritePlacesBloc
       }
     } catch (e) {
       emit(FavoritePlacesError(_placesList,
-          message: 'Failed to load places: $e', loading: false));
+          message: tr('failedToLoadPlaces', args: [e.toString()]),
+          loading: false));
     }
   }
 }

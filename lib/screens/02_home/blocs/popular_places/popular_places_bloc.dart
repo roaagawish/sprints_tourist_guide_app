@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 import '../../../../app/functions.dart';
@@ -47,7 +48,8 @@ class PopularPlacesBloc extends Bloc<PopularPlacesEvent, PopularPlacesState> {
       ));
     } catch (e) {
       emit(PopularPlacesError(_placesList,
-          message: 'Failed to load places: $e', loading: false));
+          message: tr('failedToLoadPlaces', args: [e.toString()]),
+          loading: false));
     }
   }
 
@@ -98,7 +100,8 @@ class PopularPlacesBloc extends Bloc<PopularPlacesEvent, PopularPlacesState> {
         }
       } catch (e) {
         emit(PopularPlacesError(_placesList,
-            message: 'Failed to load places: $e', loading: false));
+            message: tr('failedToLoadPlaces', args: [e.toString()]),
+            loading: false));
       }
     }
   }

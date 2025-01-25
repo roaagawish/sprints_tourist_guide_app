@@ -88,5 +88,6 @@
     "luxor": "Luxor"
   },
   "language": "Language",
-  "theme": "Theme"
+  "theme": "Theme",
+  "failedToLoadPlaces": "Failed to load places: {error}"
 }
