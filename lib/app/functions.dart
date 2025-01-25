@@ -12,7 +12,8 @@ List<Place> generateDummyPlacesList() {
     return Place(
       name: 'dummy dummy',
       governorate: 'dummy',
-      image: 'assets/png/pyramids.png',
+      image: '',
+      // 'https://th.bing.com/th/id/R.19d85673609bd44f947692ea02c94775?rik=Pkz20f6behuSdA&pid=ImgRaw&r=0',
     );
   });
 }

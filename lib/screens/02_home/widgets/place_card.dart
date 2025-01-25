@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../models/place_model.dart';
+import '../../../resourses/assets_manager.dart';
 import '../../../resourses/styles_manager.dart';
 
 class PlaceCard extends StatelessWidget {
@@ -20,12 +23,33 @@ class PlaceCard extends StatelessWidget {
             flex: 2,
             child: Stack(
               children: [
-                Image.asset(
-                  place.image,
-                  height: double.infinity,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+                place.image.isNotEmpty
+                    ? CachedNetworkImage(
+                        imageUrl: place.image,
+                        height: double.infinity,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) {
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.error, color: Colors.red),
+                                Text(
+                                  'Failed_to_load_image'.tr(),
+                                  style: Styles.style14Medium(),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        PngAssets.cairo, //dummy img
+                        height: double.infinity,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                 Positioned(
                   top: 8,
                   right: 8,

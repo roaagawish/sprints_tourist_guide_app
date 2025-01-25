@@ -1,63 +1,63 @@
 {
   "suggestedPlaces": [
     {
-      "name": "luxorTemple",
+      "name": "luxor Temple",
       "governorate": "luxor",
-      "image": "assets/png/alexandria.png",
+      "image": "https://www.imtilak.net/uploads/posts/b8df22b62d1d4e26df4e009d85bd4d12kCZ275.webp",
       "isFavorite": false
     },
     {
-      "name": "pyramidsofGiza",
+      "name": "pyramids of Giza",
       "governorate": "giza",
-      "image": "assets/png/egyptian_museum.png",
+      "image": "https://th.bing.com/th/id/OIP.FZuXZ3Cvw0gXwvYvb-uH3AHaEK?rs=1&pid=ImgDetMain",
       "isFavorite": false
     },
     {
-      "name": "luxorTemple",
+      "name": "luxor Temple",
       "governorate": "luxor",
-      "image": "assets/png/luxor.png",
+      "image": "https://th.bing.com/th/id/R.19d85673609bd44f947692ea02c94775?rik=Pkz20f6behuSdA&pid=ImgRaw&r=0",
       "isFavorite": false
     },
     {
-      "name": "luxorTemple",
+      "name": "luxor Temple",
       "governorate": "dummy",
-      "image": "assets/png/cairo.png",
+      "image": "https://th.bing.com/th/id/OIP.FZuXZ3Cvw0gXwvYvb-uH3AHaEK?rs=1&pid=ImgDetMain",
       "isFavorite": false
     },
     {
-      "name": "luxorTemple",
+      "name": "luxor Temple",
       "governorate": "dummy",
-      "image": "assets/png/alexandria.png",
+      "image": "https://www.imtilak.net/uploads/posts/b8df22b62d1d4e26df4e009d85bd4d12kCZ275.webp",
       "isFavorite": false
     },
     {
-      "name": "pyramidsofGiza",
+      "name": "pyramids of Giza",
       "governorate": "giza",
-      "image": "assets/png/pyramids.png",
+      "image": "https://th.bing.com/th/id/OIP.FZuXZ3Cvw0gXwvYvb-uH3AHaEK?rs=1&pid=ImgDetMain",
       "isFavorite": false
     },
     {
-      "name": "luxorTemple",
-      "governorate": "luxor",
-      "image": "assets/png/egyptian_museum.png",
+      "name": "luxor Temple",
+      "governorate": "egyptian museum",
+      "image": "https://th.bing.com/th/id/R.37000325929aff9091b8f1d835c0a356?rik=VVoOv4wuSdZADg&pid=ImgRaw&r=0",
       "isFavorite": false
     },
     {
-      "name": "luxorTemple",
+      "name": "luxor Temple",
       "governorate": "luxor",
-      "image": "assets/png/alexandria.png",
+      "image": "https://www.imtilak.net/uploads/posts/b8df22b62d1d4e26df4e009d85bd4d12kCZ275.webp",
       "isFavorite": false
     },
     {
-      "name": "luxorTemple",
+      "name": "luxor Temple",
       "governorate": "luxor",
-      "image": "assets/png/alexandria.png",
+      "image": "https://www.imtilak.net/uploads/posts/b8df22b62d1d4e26df4e009d85bd4d12kCZ275.webp",
       "isFavorite": false
     },
     {
-      "name": "luxorTemple",
+      "name": "luxor Temple",
       "governorate": "luxor",
-      "image": "assets/png/alexandria.png",
+      "image": "https://www.imtilak.net/uploads/posts/b8df22b62d1d4e26df4e009d85bd4d12kCZ275.webp",
       "isFavorite": false
     }
   ]

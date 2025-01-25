@@ -89,5 +89,6 @@
   },
   "language": "Language",
   "theme": "Theme",
-  "failedToLoadPlaces": "Failed to load places: {}"
+  "failedToLoadPlaces": "Failed to load places: {}",
+  "Failed_to_load_image": "فشل تحميل الصورة."
 }
