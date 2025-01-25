@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../models/bottom_nav_bar_entity.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/styles_manager.dart';
-import 'blocs/popular_places_bloc/popular_places_bloc.dart';
+import 'blocs/popular_places/popular_places_bloc.dart';
 import 'providers/place_provider.dart';
 import 'taps/favorites_tab.dart';
 import 'taps/governments_tab.dart';

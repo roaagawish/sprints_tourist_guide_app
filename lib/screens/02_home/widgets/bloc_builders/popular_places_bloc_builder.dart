@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../blocs/popular_places_bloc/popular_places_bloc.dart';
+import '../../blocs/popular_places/popular_places_bloc.dart';
 import '../popular_places_horiz_list.dart';
 import '../state_widgets/error_state_widget.dart';
 
