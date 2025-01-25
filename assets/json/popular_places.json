@@ -1,56 +1,56 @@
 {
   "popularPlaces": [
     {
-      "name": "place_provider.pyramidsofGiza",
-      "governorate": "place_provider.giza",
+      "name": "pyramidsofGiza",
+      "governorate": "giza",
       "image": "assets/png/egyptian_museum.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.luxorTemple",
-      "governorate": "place_provider.luxor",
+      "name": "luxorTemple",
+      "governorate": "luxor",
       "image": "assets/png/luxor.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.luxorTemple",
+      "name": "luxorTemple",
       "governorate": "dummy",
       "image": "assets/png/cairo.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.luxorTemple",
+      "name": "luxorTemple",
       "governorate": "dummy",
       "image": "assets/png/alexandria.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.pyramidsofGiza",
-      "governorate": "place_provider.giza",
+      "name": "pyramidsofGiza",
+      "governorate": "giza",
       "image": "assets/png/pyramids.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.luxorTemple",
-      "governorate": "place_provider.luxor",
+      "name": "luxorTemple",
+      "governorate": "luxor",
       "image": "assets/png/egyptian_museum.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.luxorTemple",
-      "governorate": "place_provider.luxor",
+      "name": "luxorTemple",
+      "governorate": "luxor",
       "image": "assets/png/alexandria.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.luxorTemple",
-      "governorate": "place_provider.luxor",
+      "name": "luxorTemple",
+      "governorate": "luxor",
       "image": "assets/png/alexandria.png",
       "isFavorite": false
     },
     {
-      "name": "place_provider.luxorTemple",
-      "governorate": "place_provider.luxor",
+      "name": "luxorTemple",
+      "governorate": "luxor",
       "image": "assets/png/alexandria.png",
       "isFavorite": false
     }
