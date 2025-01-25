@@ -1,11 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import '../../../resourses/assets_manager.dart';
-import '../../../resourses/styles_manager.dart';
+import '../../../../resourses/assets_manager.dart';
+import '../../../../resourses/styles_manager.dart';
 
-class EmptyFavoriteList extends StatelessWidget {
-  const EmptyFavoriteList({super.key});
+class EmptyStateWidget extends StatelessWidget {
+  final String label;
+  const EmptyStateWidget({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,8 @@ class EmptyFavoriteList extends StatelessWidget {
       spacing: 30.0,
       children: [
         SizedBox(height: 30.0),
-        Text( tr("taps.emptyFav"),
+        Text(
+          label,
           style: Styles.style14Medium(),
         ),
         Lottie.asset(

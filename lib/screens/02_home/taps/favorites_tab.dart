@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../resourses/language_manager.dart';
 import '../../../resourses/styles_manager.dart';
 import '../providers/place_provider.dart';
-import '../widgets/empty_favorite_list.dart';
+import '../widgets/state_widgets/empty_state_widget.dart';
 import '../widgets/places_grid_view.dart';
 
 class FavoritesTab extends StatelessWidget {
@@ -31,7 +31,9 @@ class FavoritesTab extends StatelessWidget {
           Expanded(
             flex: 3,
             child: placeProvider.favoritePlaces.isEmpty
-                ? EmptyFavoriteList()
+                ? EmptyStateWidget(
+                    label: tr("taps.emptyFav"),
+                  )
                 : PlacesGridView(
                     places: placeProvider.favoritePlaces,
                   ),

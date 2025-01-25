@@ -17,6 +17,7 @@ class PngAssets {
 
 class JsonAssets {
   static const String empty = '$jsonPath/empty.json';
+  static const String error = '$jsonPath/error.json';
 }
 
 class SvgAssets {

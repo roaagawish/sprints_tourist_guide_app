@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../resourses/language_manager.dart';
 import '../../../resourses/styles_manager.dart';
 import '../providers/place_provider.dart';
-import '../widgets/popular_places_horiz_list.dart';
+import '../widgets/bloc_builders/popular_places_bloc_builder.dart';
 import '../widgets/places_grid_view.dart';
 
 class HomeTab extends StatelessWidget {
@@ -26,7 +26,7 @@ class HomeTab extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: PopularPlacesHorizontalList(),
+            child: PopularPlacesBlocBuilder(),
           ),
           Text(
             context.tr("taps.homeSuggestedPlaces"),
