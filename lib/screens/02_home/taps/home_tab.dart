@@ -1,17 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../resourses/language_manager.dart';
 import '../../../resourses/styles_manager.dart';
-import '../providers/place_provider.dart';
 import '../widgets/bloc_builders/popular_places_bloc_builder.dart';
-import '../widgets/places_grid_view.dart';
+import '../widgets/bloc_builders/suggested_places_bloc_builder.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
   @override
   Widget build(BuildContext context) {
-    final placeProvider = Provider.of<PlaceProvider>(context);
     return Padding(
       padding: LocalizationUtils.isCurrentLocalAr(context)
           ? const EdgeInsets.only(top: 16.0, bottom: 16.0, right: 16.0)
@@ -38,9 +35,7 @@ class HomeTab extends StatelessWidget {
               padding: LocalizationUtils.isCurrentLocalAr(context)
                   ? const EdgeInsets.only(left: 16.0)
                   : const EdgeInsets.only(right: 16.0),
-              child: PlacesGridView(
-                places: placeProvider.suggestedPlaces,
-              ),
+              child: SuggestedPlacesBlocBuilder(),
             ),
           ),
         ],

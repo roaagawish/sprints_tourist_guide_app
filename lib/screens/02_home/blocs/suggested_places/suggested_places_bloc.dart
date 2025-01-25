@@ -27,10 +27,10 @@ class SuggestedPlacesBloc
       await Future.delayed(const Duration(seconds: 5));
       // Load data from JSON
       final String response = await rootBundle
-          .loadString('assets/json/Suggested_places.json', cache: false);
+          .loadString('assets/json/suggested_places.json', cache: false);
       final data = json.decode(response);
       //set actual data
-      _placesList = (data['SuggestedPlaces'] as List)
+      _placesList = (data['suggestedPlaces'] as List)
           .map((place) => Place.fromJson(place))
           .toList();
       //if nothing went wrong emit loaded state :)
