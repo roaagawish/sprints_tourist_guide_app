@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/user_model.dart';
-import '../blocs/profile_bloc.dart';
 
 class EditUserScreen extends StatelessWidget {
   final UserModel userData;
@@ -19,19 +17,11 @@ class EditUserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileBloc, ProfileState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        return Scaffold(
+    return Scaffold(
           appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.white),
             title: Text(
               context.tr('editUser.title'),
-              style: TextStyle(color: Colors.white),
             ),
-            backgroundColor: Colors.blueGrey,
           ),
           body: Padding(
             padding: const EdgeInsets.all(20),
@@ -44,8 +34,6 @@ class EditUserScreen extends StatelessWidget {
                     children: [
                       Text(
                         context.tr("editUser.personalDetails"),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       TextFormField(
                         decoration: InputDecoration(labelText: context.tr('editUser.fullName')),
@@ -102,7 +90,5 @@ class EditUserScreen extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
   }
 }
