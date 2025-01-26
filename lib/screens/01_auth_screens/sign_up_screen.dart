@@ -14,8 +14,10 @@ import 'widgets/flutter_toast.dart';
 import 'widgets/text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
+  final void Function()? onSignUpSuccessful;
   const SignUpScreen({
     super.key,
+    this.onSignUpSuccessful,
   });
 
   @override
@@ -79,7 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return null;
   }
 
-  void signUp() async {
+  Future<void> signUp() async {
     String message = await AppPreferencesImpl.signUp(
         fullName: _fullNameController.text,
         email: _emailAddressController.text,
@@ -199,7 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            signUp();
+                            signUp().then((_) => widget.onSignUpSuccessful?.call());
                           }
                         },
                         child: Text(tr("signup.signUpButton")),

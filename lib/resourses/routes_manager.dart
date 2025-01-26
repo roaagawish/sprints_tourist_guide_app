@@ -18,7 +18,9 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.signUpRoute:
-        return MaterialPageRoute(builder: (_) => SignUpScreen());
+        return MaterialPageRoute(builder: (context) => SignUpScreen(onSignUpSuccessful: () {
+          Navigator.of(context).pushReplacementNamed(Routes.homeRoute);
+        },));
       case Routes.loginRoute:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case Routes.homeRoute:
