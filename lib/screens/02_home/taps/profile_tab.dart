@@ -1,8 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/user_model.dart';
 import '../../../app/app_prefs.dart';
+import '../../../resourses/colors_manager.dart';
 import '../../../resourses/routes_manager.dart';
+import '../../01_auth_screens/bloc/auth_bloc.dart';
+import '../../01_auth_screens/widgets/flutter_toast.dart';
 import '../widgets/info_title.dart';
 import '../widgets/setting_row.dart';
 
@@ -80,15 +84,32 @@ class _ProfileTabState extends State<ProfileTab> {
               isLanguage: false,
             ),
             // logout button
-            ElevatedButton(
-              onPressed: () {
-                AppPreferencesImpl().removePrefs();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  Routes.signUpRoute,
-                  (route) => false, // This clears the stack
+            BlocConsumer<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is LogoutSuccess) {
+                  showToast(state.message, ColorsManager.oliveGreen);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.signUpRoute,
+                    (route) => false, // This clears the stack
+                  );
+                }
+                if (state is LogoutFailure) {
+                  showToast(state.errMessage, ColorsManager.softRed);
+                }
+              },
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: () {
+                    context.read<AuthBloc>().add(LogoutRequested());
+                  },
+                  child: state.loading == true
+                      ? CircularProgressIndicator(
+                        color: ColorsManager.white,
+                        strokeAlign: CircularProgressIndicator.strokeAlignInside,
+                      )
+                      : Text(context.tr("taps.profileLogout")),
                 );
               },
-              child: Text(context.tr("taps.profileLogout")),
             ),
           ],
         ),

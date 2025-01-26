@@ -1,15 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../app/functions.dart';
 import '../../resourses/colors_manager.dart';
-import '../../app/app_prefs.dart';
 import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import '../02_home/blocs/theme_bloc/theme_bloc.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
+import 'bloc/auth_bloc.dart';
 import 'widgets/flutter_toast.dart';
 import 'widgets/text_form_field.dart';
 
@@ -77,37 +77,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return tr("signup.confirmPasswordValidationMessage");
     }
     return null;
-  }
-
-  void signUp() async {
-    String message = await AppPreferencesImpl.signUp(
-        fullName: _fullNameController.text,
-        email: _emailAddressController.text,
-        password: _passwordController.text,
-        phone: _phoneController.text);
-
-    switch (message) {
-      case "This email is already registered!":
-      case "هذا البريد الإلكتروني مسجل بالفعل!":
-        showToast(message, ColorsManager.softRed);
-        break;
-      case "User added successfully!":
-      case "تم إضافة المستخدم بنجاح!":
-        showToast(message, ColorsManager.oliveGreen);
-        if (mounted) {
-          Navigator.of(context).pushReplacementNamed(
-            Routes.loginRoute,
-          );
-        }
-        break;
-      default:
-        showToast(
-          (LocalizationUtils.isCurrentLocalAr(context)
-              ? "خطأ غير متوقع"
-              : "An unexpected error occurred"),
-          ColorsManager.softRed,
-        );
-    }
   }
 
   @override
@@ -196,14 +165,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       SizedBox(height: 30),
                       // Sign Up button
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            signUp();
+                      BlocConsumer<AuthBloc, AuthState>(
+                        listener: (context, state) {
+                          if (state is RegisterSuccess) {
+                            showToast(state.message, ColorsManager.oliveGreen);
+                            if (mounted) {
+                              Navigator.of(context).pushReplacementNamed(
+                                Routes.loginRoute,
+                              );
+                            }
+                          }
+                          if (state is RegisterFailure) {
+                            showToast(state.errMessage, ColorsManager.softRed);
                           }
                         },
-                        child: Text(tr("signup.signUpButton")),
+                        builder: (context, state) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<AuthBloc>().add(RegisterRequested(
+                                    email: _emailAddressController.text,
+                                    password: _passwordController.text,
+                                    fullName: _fullNameController.text,
+                                    phone: _phoneController.text));
+                              }
+                            },
+                            child: state.loading == true
+                                ? CircularProgressIndicator(
+                                    color: ColorsManager.white,
+                                    strokeAlign: CircularProgressIndicator
+                                        .strokeAlignInside,
+                                  )
+                                : Text(tr("signup.signUpButton")),
+                          );
+                        },
                       ),
+
                       SizedBox(height: 15),
                       // already-have-an-account button
                       GestureDetector(

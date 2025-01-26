@@ -58,7 +58,9 @@
     "profilePhoneNumber": "Phone Number",
     "profileEmail": "Email",
     "profilePassword": "Password",
-    "profileLogout": "Logout"
+    "profileLogout": "Logout",
+    "profileLogoutMsg" : "Logged out Successfully",
+    "profileLogouterrMsg" : "Logout failed"
   },
 
   "governrate_model": {
