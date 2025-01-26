@@ -29,30 +29,29 @@ class ProfileTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 16.0,
               children: [
-                Flexible(
-                  child: Stack(
-                    children: [
-                      CircleAvatar(
-                        radius: screenWidth * 0.15,
-                        backgroundColor: Colors.lightGreen,
-                        child: _avatar == null
-                            ? Icon(
-                                Icons.person,
-                                size: screenWidth * 0.15,
-                                color: Colors.white,
-                              )
-                            : ClipOval(
-                                child: Image(
-                                  image: _avatar!,
-                                  width: screenWidth * 0.3,
-                                  height: screenWidth * 0.3,
-                                  fit: BoxFit.cover,
-                                ),
+                Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: screenWidth * 0.15,
+                      backgroundColor: Colors.lightGreen,
+                      child: _avatar == null
+                          ? Icon(
+                              Icons.person,
+                              size: screenWidth * 0.15,
+                              color: Colors.white,
+                            )
+                          : ClipOval(
+                              child: Image(
+                                image: _avatar!,
+                                width: screenWidth * 0.3,
+                                height: screenWidth * 0.3,
+                                fit: BoxFit.cover,
                               ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
+                            ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: AlignmentDirectional.bottomEnd,
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
                           child: IconButton(
@@ -72,57 +71,70 @@ class ProfileTab extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Stack(
-                  children: [
-                    Column(
-                      children: [
-                        InfoTitle(
-                          title: context.tr("taps.profileFullName"),
-                          value: _userData.fullName,
-                        ),
-                        InfoTitle(
-                          title: context.tr("taps.profilePhoneNumber"),
-                          value: _userData.phone ?? "NA",
-                        ),
-                        InfoTitle(
-                          title: context.tr("taps.profileEmail"),
-                          value: _userData.email,
-                        ),
-                        InfoTitle(
-                          title: context.tr("taps.profilePassword"),
-                          value: '*' * _userData.password.length,
-                        ),
-                      ],
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                            color: Colors.black54,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditUserScreen(
-                                      userData: _userData,
-                                      editUserData: (newUserData) async {
-                                        context
-                                            .read<ProfileBloc>()
-                                            .add(UpdateProfile(newUserData));
-                                        return true;
-                                      },
-                                    )));
-                          },
-                        ),
-                      ),
                     ),
                   ],
+                ),
+                Flexible(
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          InfoTitle(
+                            title: context.tr("taps.profileFullName"),
+                            value: _userData.fullName,
+                          ),
+                          InfoTitle(
+                            title: context.tr("taps.profilePhoneNumber"),
+                            value: _userData.phone ?? "NA",
+                          ),
+                          InfoTitle(
+                            title: context.tr("taps.profileEmail"),
+                            value: _userData.email,
+                          ),
+                          InfoTitle(
+                            title: context.tr("taps.profilePassword"),
+                            value: '*' * _userData.password.length,
+                          ),
+                        ],
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.black54,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => EditUserScreen(
+                                        userData: _userData,
+                                        editUserData: (newUserData) async {
+                                          context
+                                              .read<ProfileBloc>()
+                                              .add(UpdateProfile(newUserData));
+                                          return true;
+                                        },
+                                        onDone: () {
+                                          SchedulerBinding.instance.addPostFrameCallback((_){
+                                            ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                              SnackBar(
+                                                content: Text(context.tr('taps.dataUpdatedSuccessfully')),
+                                                duration: Duration(seconds: 2),
+                                              )
+                                            );
+                                          });
+                                          Navigator.of(context).pop();
+                                        },
+                                      )));
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
                 Spacer(),
@@ -179,7 +191,7 @@ class ProfileTab extends StatelessWidget {
           SchedulerBinding.instance.addPostFrameCallback(
               (_) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text("An unexpected error occurred!"),
+                      content: Text(context.tr('taps.unexpectedError')),
                       duration: Duration(seconds: 2),
                     ),
                   ));

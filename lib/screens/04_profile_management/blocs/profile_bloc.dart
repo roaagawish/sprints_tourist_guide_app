@@ -61,7 +61,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         }).catchError((error) {
           return false;
         });
-        if (!await result) {
+        if (await result) {
           emit(ProfileUpdated(userData: oldUserData, avatar: newAvatar));
         } else {
           emit(ProfileError(userData: oldUserData, avatar: oldAvatar, message: 'Failed to update avatar'));

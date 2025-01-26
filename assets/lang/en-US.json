@@ -58,7 +58,20 @@
     "profilePhoneNumber": "Phone Number",
     "profileEmail": "Email",
     "profilePassword": "Password",
-    "profileLogout": "Logout"
+    "profileLogout": "Logout",
+    "unexpectedError": "An unexpected error occurred!",
+    "dataUpdatedSuccessfully": "Data updated successfully!"
+  },
+
+  "editUser": {
+    "title": "Edit User screen",
+    "personalDetails": "Personal Details",
+    "fullName": "Full Name",
+    "fullNameEmpty": "Full Name may not be empty!",
+    "email": "Email",
+    "phone": "Phone",
+    "failedToUpdate": "Failed to update!",
+    "submit": "Submit"
   },
 
   "governrate_model": {

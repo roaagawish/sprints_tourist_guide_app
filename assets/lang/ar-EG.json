@@ -57,7 +57,19 @@
     "profilePhoneNumber": "رقم الهاتف",
     "profileEmail": "البريد الإلكتروني",
     "profilePassword": "كلمة المرور",
-    "profileLogout": "تسجيل الخروج"
+    "profileLogout": "تسجيل الخروج",
+    "unexpectedError": "حدث خطأ غير متوقع!",
+    "dataUpdatedSuccessfully": "تم تحديث البيانات بنجاح!"
+  },
+  "editUser": {
+    "title": "شاشة تعديل بيانات المستخدم",
+    "personalDetails": "معلومات شخصية",
+    "fullName": "الاسم الكامل",
+    "fullNameEmpty": "خانة الاسم الكامل لا ينبغي أن تكون فارغة!",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "failedToUpdate": "فشل التحديث!",
+    "submit": "حفظ"
   },
   "governrate_model": {
     "Cairo": "القاهرة",

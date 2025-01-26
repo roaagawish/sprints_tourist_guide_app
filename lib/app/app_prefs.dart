@@ -214,23 +214,23 @@ so there is no need to be in the abstract class above...
 
 
     // Fetch the list of users and find the current user's data
-    String? avatarsSerialized = prefs.getString('avatars');
+    String? avatarsSerialized = prefs.getString(_avatarsKey);
     if (avatarsSerialized == null) {
       return null;
     }
 
-    List<Map<String, dynamic>?> avatars = json.decode(avatarsSerialized);
+    List<dynamic> avatars = json.decode(avatarsSerialized);
     final currentAvatarMap = avatars.firstWhere((m) => m!.keys.first == currentUserEmail, orElse: ()=>null);
     if (currentAvatarMap == null) {
       return null;
     }
 
-    final String? currentAvatarString = currentAvatarMap.values.first;
-    if (currentAvatarString == null) {
+    final Uint8List? currentAvatarBytes = Uint8List.fromList((currentAvatarMap.values.first as List<dynamic>).map((i) => (i as int)).toList());
+    if (currentAvatarBytes == null) {
       return null;
     }
 
-    return MemoryImage(Uint8List.fromList(currentAvatarString.codeUnits));
+    return MemoryImage(currentAvatarBytes);
   }
 
   static Future<bool> updateUserData(UserModel updatedUserData) async {
@@ -266,29 +266,28 @@ so there is no need to be in the abstract class above...
     List<Map<String, MemoryImage?>> avatars = [];
 
     if (avatarsData != null) {
-      List<Map<String, dynamic>> jsonAvatars = json.decode(avatarsData);
+      List<dynamic> jsonAvatars = json.decode(avatarsData);
       avatars = jsonAvatars.map((jsonAvatar) {
         String key = jsonAvatar.keys.first;
-        final avatarString = jsonAvatar.values.first;
-        if (avatarString == null) {
+        final List<dynamic> avatarList = jsonAvatar.values.first;
+        if (avatarList == null) {
           return {key: null};
         }
-        final avatarListInt = avatarString.codeUnits;
-        final avatarMemoryImage = MemoryImage(Uint8List.fromList(avatarListInt));
+        final avatarMemoryImage = MemoryImage(Uint8List.fromList(avatarList.map((i) => (i as int)).toList()));
 
         return {key: avatarMemoryImage};
       }).toList();
     }
 
-    // Check if email already exists
-    if (!avatars.any((avatarJson) => avatarJson.keys.first == email)) {
-      false;
-    }
-
     // Save the avatar
     final idx = avatars.indexWhere((avatarJson)=>avatarJson.keys.first == email);
-    avatars[idx] = {email: avatar};
+    if (idx == -1) {
+      avatars += [{email: avatar}];
+    } else {
+      avatars[idx] = {email: avatar};
+    }
 
-    return prefs.setString(_avatarsKey, json.encode(avatars.map((m) => {email: m[email] != null ? String.fromCharCodes(m[email]!.bytes) : null})));    
+    final newAvatarsSerialized = avatars.map((m) => {"\""+email+"\"": m[email]?.bytes}).toList().toString();
+    return prefs.setString(_avatarsKey, newAvatarsSerialized);    
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/user_model.dart';
@@ -27,7 +28,7 @@ class EditUserScreen extends StatelessWidget {
           appBar: AppBar(
             iconTheme: IconThemeData(color: Colors.white),
             title: Text(
-              'Edit User screen',
+              context.tr('editUser.title'),
               style: TextStyle(color: Colors.white),
             ),
             backgroundColor: Colors.blueGrey,
@@ -39,28 +40,30 @@ class EditUserScreen extends StatelessWidget {
                 Form(
                   key: _formKey,
                   child: Column(
+                    spacing: 16.0,
                     children: [
                       Text(
-                        'Personal Details',
+                        context.tr("editUser.personalDetails"),
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Full Name'),
+                        decoration: InputDecoration(labelText: context.tr('editUser.fullName')),
                         controller: _fullnameController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Full Name may not be empty!';
+                            return context.tr('editUser.fullNameEmpty');
                           }
                           return null;
                         },
                       ),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Email'),
+                        decoration: InputDecoration(labelText: context.tr('editUser.email')),
                         controller: _emailController,
+                        enabled: false,
                       ),
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Phone'),
+                        decoration: InputDecoration(labelText: context.tr('editUser.phone')),
                         controller: _phoneController,
                       ),
                       ElevatedButton(
@@ -76,23 +79,18 @@ class EditUserScreen extends StatelessWidget {
                           
                           editUserData?.call(updatedUserData).then((value) {
                             if (value) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Updated successfully'),
-                                ),
-                              );
                               onDone?.call();
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Failed to update!'),
+                                  content: Text(context.tr('editUser.failedToUpdate')),
                                 ),
                               );
                             }
                           });
                         },
                         child: Text(
-                          'Submit',
+                          context.tr('editUser.submit'),
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
