@@ -4,9 +4,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../models/user_model.dart';
-import '../../../app/app_prefs.dart';
 import '../../../resourses/colors_manager.dart';
 import '../../../resourses/routes_manager.dart';
+import '../../01_auth_screens/bloc/auth_bloc.dart';
+import '../../01_auth_screens/widgets/flutter_toast.dart';
 import '../../04_profile_management/blocs/profile_bloc.dart';
 import '../../04_profile_management/screens/edit_user_screen.dart';
 import '../widgets/info_title.dart';
@@ -118,14 +119,14 @@ class ProfileTab extends StatelessWidget {
                                           return true;
                                         },
                                         onDone: () {
-                                          SchedulerBinding.instance.addPostFrameCallback((_){
+                                          SchedulerBinding.instance
+                                              .addPostFrameCallback((_) {
                                             ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                              SnackBar(
-                                                content: Text(context.tr('taps.dataUpdatedSuccessfully')),
-                                                duration: Duration(seconds: 2),
-                                              )
-                                            );
+                                                .showSnackBar(SnackBar(
+                                              content: Text(context.tr(
+                                                  'taps.dataUpdatedSuccessfully')),
+                                              duration: Duration(seconds: 2),
+                                            ));
                                           });
                                           Navigator.of(context).pop();
                                         },
@@ -148,15 +149,33 @@ class ProfileTab extends StatelessWidget {
                   isLanguage: false,
                 ),
                 // logout button
-                ElevatedButton(
-                  onPressed: () {
-                    AppPreferencesImpl().removePrefs();
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      Routes.signUpRoute,
-                      (route) => false, // This clears the stack
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: (context, state) {
+                    if (state is LogoutSuccess) {
+                      showToast(state.message, ColorsManager.oliveGreen);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        Routes.signUpRoute,
+                        (route) => false, // This clears the stack
+                      );
+                    }
+                    if (state is LogoutFailure) {
+                      showToast(state.errMessage, ColorsManager.softRed);
+                    }
+                  },
+                  builder: (context, state) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        context.read<AuthBloc>().add(LogoutRequested());
+                      },
+                      child: state.loading == true
+                          ? CircularProgressIndicator(
+                              color: ColorsManager.white,
+                              strokeAlign:
+                                  CircularProgressIndicator.strokeAlignInside,
+                            )
+                          : Text(context.tr("taps.profileLogout")),
                     );
                   },
-                  child: Text(context.tr("taps.profileLogout")),
                 ),
               ],
             ),
