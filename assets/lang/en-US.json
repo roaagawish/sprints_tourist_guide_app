@@ -59,6 +59,8 @@
     "profileEmail": "Email",
     "profilePassword": "Password",
     "profileLogout": "Logout",
+    "profileLogoutMsg" : "Logged out Successfully",
+    "profileLogouterrMsg" : "Logout failed",
     "unexpectedError": "An unexpected error occurred!",
     "dataUpdatedSuccessfully": "Data updated successfully!"
   },

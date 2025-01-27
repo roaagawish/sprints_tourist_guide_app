@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'app/app_prefs.dart';
 import 'app/my_app.dart';
 import 'resourses/language_manager.dart';
+import 'screens/01_auth_screens/bloc/auth_bloc.dart';
 import 'screens/02_home/blocs/theme_bloc/theme_bloc.dart';
 import 'screens/04_profile_management/blocs/profile_bloc.dart';
 import 'simple_observer.dart';
@@ -28,14 +29,15 @@ void main() async {
         ],
         path: 'assets/lang',
         fallbackLocale: LocalizationUtils.englishLocal,
-        child: BlocProvider(
-          create: (_) => ThemeBloc(AppPreferencesImpl())..add(LoadTheme()),
-          child: BlocProvider<ProfileBloc>(
-            create: (context) {
-              return ProfileBloc(initialUserData: initialUserData, initialAvatar: initialAvatar);
-            },
-            child: MyApp(),
-          ),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+                create: (_) => AuthBloc(appPreferences: AppPreferencesImpl())),
+            BlocProvider(
+              create: (_) => ThemeBloc(AppPreferencesImpl())..add(LoadTheme()),
+            )
+          ],
+          child: MyApp(),
         )),
   );
 }

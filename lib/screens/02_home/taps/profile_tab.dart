@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../models/user_model.dart';
 import '../../../app/app_prefs.dart';
+import '../../../resourses/colors_manager.dart';
 import '../../../resourses/routes_manager.dart';
 import '../../04_profile_management/blocs/profile_bloc.dart';
 import '../../04_profile_management/screens/edit_user_screen.dart';

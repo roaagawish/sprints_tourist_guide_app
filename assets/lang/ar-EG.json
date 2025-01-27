@@ -58,6 +58,8 @@
     "profileEmail": "البريد الإلكتروني",
     "profilePassword": "كلمة المرور",
     "profileLogout": "تسجيل الخروج",
+    "profileLogoutMsg" : " تم تسجيل الخروج بنجاح",
+    "profileLogouterrMsg" : "فشل تسجيل الخروج",
     "unexpectedError": "حدث خطأ غير متوقع!",
     "dataUpdatedSuccessfully": "تم تحديث البيانات بنجاح!"
   },

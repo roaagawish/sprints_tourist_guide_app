@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../app/functions.dart';
 import '../../resourses/colors_manager.dart';
-import '../../app/app_prefs.dart';
 import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
+import 'bloc/auth_bloc.dart';
 import 'widgets/flutter_toast.dart';
 import 'widgets/text_form_field.dart';
 
@@ -44,41 +45,6 @@ class _LoginScreenState extends State<LoginScreen> {
       return tr("signup.passwordTooShortMessage");
     }
     return null;
-  }
-
-  void login() async {
-    String message = await AppPreferencesImpl.login(
-      email: _emailAddressController.text,
-      password: _passwordController.text,
-    );
-    switch (message) {
-      case "Wrong password! Please try again":
-      case "كلمة المرور خاطئة! يرجى المحاولة مرة أخرى":
-      case "Account not found! Try registering first":
-      case "الحساب غير موجود! يرجى التسجيل أولاً":
-        showToast(message, ColorsManager.red);
-        break;
-      case "Logged in Successfully!":
-      case "تم تسجيل الدخول بنجاح!":
-        //1 show the toast first
-        showToast(message, ColorsManager.oliveGreen);
-        //2 then save the eligibility
-        AppPreferencesImpl().setUserLoggedIn();
-        //3 then navigate to home screen
-        if (mounted) {
-          Navigator.of(context).pushReplacementNamed(
-            Routes.homeRoute,
-          );
-        }
-        break;
-      default:
-        showToast(
-          (LocalizationUtils.isCurrentLocalAr(context)
-              ? "خطأ غير متوقع"
-              : "An unexpected error occurred"),
-          ColorsManager.softRed,
-        );
-    }
   }
 
   @override
@@ -136,13 +102,40 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 30),
                       // Login button
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            login();
+                      BlocConsumer<AuthBloc, AuthState>(
+                        listener: (context, state) {
+                          if (state is LoginSuccess) {
+                            //1 show the toast first
+                            showToast(state.message, ColorsManager.oliveGreen);
+                            //2 then navigate to home screen
+                            if (mounted) {
+                              Navigator.of(context).pushReplacementNamed(
+                                Routes.homeRoute,
+                              );
+                            }
+                          }
+                          if (state is LoginFailure) {
+                            showToast(state.errMessage, ColorsManager.softRed);
                           }
                         },
-                        child: Text(tr("login.loginButton")),
+                        builder: (context, state) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<AuthBloc>().add(LoginRequested(
+                                    email: _emailAddressController.text,
+                                    password: _passwordController.text));
+                              }
+                            },
+                            child: state.loading == true
+                                ? CircularProgressIndicator(
+                                    color: ColorsManager.white,
+                                    strokeAlign: CircularProgressIndicator
+                                        .strokeAlignInside,
+                                  )
+                                : Text(tr("login.loginButton")),
+                          );
+                        },
                       ),
                       SizedBox(height: 15),
                       // don't-have-an-account button
