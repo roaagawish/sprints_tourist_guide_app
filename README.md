@@ -44,11 +44,9 @@ This project is a mobile application designed for tourists visiting Egypt. The a
     - Password (hashed for security).
     - Avatar.
 
-  Enable the user to edit his information (Full Name - Phone)  and set avatar.
-  
-  Enable the user to toggle between Arabic and English.
-  
-  Enable the user to toggle between light and dark mode.
+   Enable the user to edit his information (Full Name - Phone)  and set avatar.
+   Enable the user to toggle between Arabic and English.
+   Enable the user to toggle between light and dark mode.
 
 6. Favorites Page
 
