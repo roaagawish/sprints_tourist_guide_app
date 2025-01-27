@@ -7,6 +7,7 @@ import 'app/my_app.dart';
 import 'resourses/language_manager.dart';
 import 'screens/01_auth_screens/bloc/auth_bloc.dart';
 import 'screens/02_home/blocs/theme_bloc/theme_bloc.dart';
+import 'screens/04_profile_management/blocs/profile_bloc.dart';
 import 'simple_observer.dart';
 
 void main() async {
@@ -32,6 +33,8 @@ void main() async {
           providers: [
             BlocProvider(
                 create: (_) => AuthBloc(appPreferences: AppPreferencesImpl())),
+            BlocProvider(
+              create: (_) => ProfileBloc(initialUserData: initialUserData , initialAvatar:  initialAvatar)),  
             BlocProvider(
               create: (_) => ThemeBloc(AppPreferencesImpl())..add(LoadTheme()),
             )
