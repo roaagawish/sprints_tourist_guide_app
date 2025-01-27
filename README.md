@@ -119,8 +119,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/Signup2.jpg" alt="signup" width="150">
      <img src="readme/vol2/Signup3.jpg" alt="signup" width="150">
    </div>
-   
-    light mode
+   light mode
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/HomeLight1.jpg" alt="home" width="150">
      <img src="readme/vol2/HomeLight2.jpg" alt="home" width="150">
@@ -129,8 +128,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/HomeLight5.jpg" alt="home" width="150">
      <img src="readme/vol2/HomeLight6.jpg" alt="home" width="150">
    </div>
-   
-    dark mode
+   dark mode
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/HomeDark1.jpg" alt="home" width="150">
      <img src="readme/vol2/HomeDark2.jpg" alt="home" width="150">
@@ -139,7 +137,6 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/HomeDark5.jpg" alt="home" width="150">
      <img src="readme/vol2/HomeDark6.jpg" alt="home" width="150">
    </div>
-   
    edit user info
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/edit1.jpg" alt="edit" width="150">
@@ -149,7 +146,6 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/edit5.jpg" alt="edit" width="150">
      <img src="readme/vol2/edit6.jpg" alt="edit" width="150">
    </div>
-   
    auth messages / loading
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/loginload.jpg" alt="edit" width="150">
