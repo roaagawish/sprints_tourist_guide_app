@@ -43,20 +43,21 @@ This project is a mobile application designed for tourists visiting Egypt. The a
     - Email.
     - Password (hashed for security).
     - Avatar.
+
   Enable user to edit his information (Full Name - Phone)  and set avatar.
   Enable user to toggel between arabic and English.
   Enable user to toggel between light and dark mode.
 
-5. Favorites Page
+6. Favorites Page
 
    Displays static cards similar to the "Popular Places" section from the Home Page.
 
-6. Navigation
+7. Navigation
 
    Bottom Navigation Bar visible on all main pages:
    Includes icons for Home, Governments, Favorites, and Profile.
 
-7. Page Navigation Animations
+8. Page Navigation Animations
 
    Smooth animations when transitioning between pages.
 
