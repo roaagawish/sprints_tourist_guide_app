@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Overview
 
-This project is a mobile application designed for tourists visiting Egypt. The app helps users explore landmarks, museums, and attractions across various Egyptian governorates, providing a user-friendly interface and engaging features. App diffirent states is managed using Bloc State Managment.
+This project is a mobile application designed for tourists visiting Egypt. The app helps users explore landmarks, museums, and attractions across various Egyptian governorates, providing a user-friendly interface and engaging features. Different states of the app are managed using Bloc State Management.
 
 ## Features
 
@@ -44,9 +44,11 @@ This project is a mobile application designed for tourists visiting Egypt. The a
     - Password (hashed for security).
     - Avatar.
 
-  Enable user to edit his information (Full Name - Phone)  and set avatar.
-  Enable user to toggel between arabic and English.
-  Enable user to toggel between light and dark mode.
+  Enable the user to edit his information (Full Name - Phone)  and set avatar.
+  
+  Enable the user to toggle between Arabic and English.
+  
+  Enable the user to toggle between light and dark mode.
 
 6. Favorites Page
 
@@ -143,7 +145,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/edit5.jpg" alt="edit" width="150">
      <img src="readme/vol2/edit6.jpg" alt="edit" width="150">
    </div>
-   auth messges
+   auth messages / loading
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/loginload.jpg" alt="edit" width="150">
      <img src="readme/vol2/loginerr.jpg" alt="edit" width="150">
