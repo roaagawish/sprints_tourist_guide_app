@@ -105,8 +105,11 @@ This project is a mobile application designed for tourists visiting Egypt. The a
     <img src="readme/vol1/home_9.jpg" alt="home" width="200">
     <img src="readme/vol1/home_10.jpg" alt="home" width="200">
  </div>
+
+
  
  App 0.0.2
+
     
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/Login1.jpg" alt="login" width="150">
@@ -116,6 +119,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/Signup2.jpg" alt="signup" width="150">
      <img src="readme/vol2/Signup3.jpg" alt="signup" width="150">
    </div>
+   
     light mode
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/HomeLight1.jpg" alt="home" width="150">
@@ -125,6 +129,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/HomeLight5.jpg" alt="home" width="150">
      <img src="readme/vol2/HomeLight6.jpg" alt="home" width="150">
    </div>
+   
     dark mode
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/HomeDark1.jpg" alt="home" width="150">
@@ -134,6 +139,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/HomeDark5.jpg" alt="home" width="150">
      <img src="readme/vol2/HomeDark6.jpg" alt="home" width="150">
    </div>
+   
    edit user info
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/edit1.jpg" alt="edit" width="150">
@@ -143,6 +149,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
      <img src="readme/vol2/edit5.jpg" alt="edit" width="150">
      <img src="readme/vol2/edit6.jpg" alt="edit" width="150">
    </div>
+   
    auth messages / loading
    <div style="display: flex; gap: 10px;">
      <img src="readme/vol2/loginload.jpg" alt="edit" width="150">
