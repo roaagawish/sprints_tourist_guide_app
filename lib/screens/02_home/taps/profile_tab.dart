@@ -14,16 +14,17 @@ import '../widgets/info_title.dart';
 import '../widgets/setting_row.dart';
 
 class ProfileTab extends StatelessWidget {
-  const ProfileTab({super.key});
+  late UserModel _userData;
+  MemoryImage? _avatar;
+
+  ProfileTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    late UserModel userData;
-    MemoryImage? avatar;
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         final screenWidth = MediaQuery.of(context).size.width;
-        final basicScreenTemplate = Scaffold(
+        late final basicScreenTemplate = Scaffold(
           body: Padding(
             padding: EdgeInsets.all(20),
             child: Column(
@@ -35,7 +36,7 @@ class ProfileTab extends StatelessWidget {
                     CircleAvatar(
                       radius: screenWidth * 0.15,
                       backgroundColor: Colors.lightGreen,
-                      child: avatar == null
+                      child: _avatar == null
                           ? Icon(
                               Icons.person,
                               size: screenWidth * 0.15,
@@ -43,7 +44,7 @@ class ProfileTab extends StatelessWidget {
                             )
                           : ClipOval(
                               child: Image(
-                                image: avatar!,
+                                image: _avatar!,
                                 width: screenWidth * 0.3,
                                 height: screenWidth * 0.3,
                                 fit: BoxFit.cover,
@@ -66,7 +67,7 @@ class ProfileTab extends StatelessWidget {
                                   .then((image) {
                                 context
                                     .read<ProfileBloc>()
-                                    .add(UpdateAvatar(userData.email, image));
+                                    .add(UpdateAvatar(_userData.email, image));
                               });
                             },
                           ),
@@ -82,19 +83,19 @@ class ProfileTab extends StatelessWidget {
                         children: [
                           InfoTitle(
                             title: context.tr("taps.profileFullName"),
-                            value: userData.fullName,
+                            value: _userData.fullName,
                           ),
                           InfoTitle(
                             title: context.tr("taps.profilePhoneNumber"),
-                            value: userData.phone ?? "NA",
+                            value: _userData.phone ?? "NA",
                           ),
                           InfoTitle(
                             title: context.tr("taps.profileEmail"),
-                            value: userData.email,
+                            value: _userData.email,
                           ),
                           InfoTitle(
                             title: context.tr("taps.profilePassword"),
-                            value: '*' * userData.password.length,
+                            value: '*' * _userData.password.length,
                           ),
                         ],
                       ),
@@ -110,7 +111,7 @@ class ProfileTab extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => EditUserScreen(
-                                        userData: userData,
+                                        userData: _userData,
                                         editUserData: (newUserData) async {
                                           context
                                               .read<ProfileBloc>()
@@ -180,8 +181,8 @@ class ProfileTab extends StatelessWidget {
             ),
           ),
         );
-        userData = state.userData;
-        avatar = state.avatar;
+        _userData = state.userData;
+        _avatar = state.avatar;
         if (state is ProfileInitial) {
           return basicScreenTemplate;
         } else if (state is ProfileLoaded) {

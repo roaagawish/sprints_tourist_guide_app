@@ -18,7 +18,8 @@
     "goToLoginPage": "Login now",
     "loginSuccessMessage": "You have logged in successfully",
     "accountAlreadyRegisterd": "This email is already registered!",
-    "userAddedSuccessfully": "User added successfully!"
+    "userAddedSuccessfully": "User added successfully!",
+    "phoneEmptyMessage": "The phone number must be 11 digits"
   },
   "login": {
     "login": "Welcome Back!",
@@ -59,8 +60,8 @@
     "profileEmail": "Email",
     "profilePassword": "Password",
     "profileLogout": "Logout",
-    "profileLogoutMsg" : "Logged out Successfully",
-    "profileLogouterrMsg" : "Logout failed",
+    "profileLogoutMsg": "Logged out Successfully",
+    "profileLogouterrMsg": "Logout failed",
     "unexpectedError": "An unexpected error occurred!",
     "dataUpdatedSuccessfully": "Data updated successfully!"
   },
