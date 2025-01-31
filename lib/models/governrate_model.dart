@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 
-import '../resourses/assets_manager.dart';
+import '../presentation/resourses/assets_manager.dart';
 
 class Landmark {
   final String name;
@@ -26,19 +26,19 @@ class Governorate {
 List<Governorate> getGovernorates() {
   return [
     Governorate(
-      name:tr("governrate_model.Cairo"),
+      name: tr("governrate_model.Cairo"),
       governorateImage: PngAssets.cairo,
       landmarks: [
         Landmark(
           name: tr("governrate_model.TheGreatPyramids"),
           image: PngAssets.pyramids,
-          description:  tr("governrate_model.TheGreatPyramidsDescription"),
-          ),
+          description: tr("governrate_model.TheGreatPyramidsDescription"),
+        ),
         Landmark(
           name: tr("governrate_model.EgyptianMuseum"),
           image: PngAssets.egyptianMuseum,
           description: tr("governrate_model.EgyptianMuseumDescription"),
-              ),
+        ),
       ],
     ),
     Governorate(
@@ -48,13 +48,13 @@ List<Governorate> getGovernorates() {
         Landmark(
           name: tr("governrate_model.KarnakTemple"),
           image: PngAssets.karnakTemple,
-          description:tr("governrate_model.KarnakTempleDescription"),
-          ),
+          description: tr("governrate_model.KarnakTempleDescription"),
+        ),
         Landmark(
           name: tr("governrate_model.ValleyoftheKings"),
           image: PngAssets.valleyOfTheKings,
-          description:tr("governrate_model.ValleyoftheKingsDescription"),
-          ),
+          description: tr("governrate_model.ValleyoftheKingsDescription"),
+        ),
       ],
     ),
     Governorate(
@@ -65,12 +65,12 @@ List<Governorate> getGovernorates() {
           name: tr("governrate_model.BibliothecaAlexandria"),
           image: PngAssets.bibliothecaAlexandrina,
           description: tr("governrate_model.BibliothecaAlexandriaDescription"),
-          ),
+        ),
         Landmark(
           name: tr("governrate_model.QaitbayCitadel"),
           image: PngAssets.qaitbayCitadel,
           description: tr("governrate_model.QaitbayCitadelDescription"),
-          ),
+        ),
       ],
     ),
   ];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../resourses/styles_manager.dart';
+import '../../resourses/styles_manager.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;

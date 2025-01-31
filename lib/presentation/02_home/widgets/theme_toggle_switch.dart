@@ -1,22 +1,21 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import 'package:country_flags/country_flags.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../resourses/colors_manager.dart';
-import '../../../resourses/language_manager.dart';
+import 'package:provider/provider.dart';
+import '../../resourses/colors_manager.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
 import 'dart:ui' as dui;
 
-class LanguageToggleSwitch extends StatelessWidget {
-  const LanguageToggleSwitch({super.key});
+class ThemeToggleSwitch extends StatelessWidget {
+  const ThemeToggleSwitch({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: dui.TextDirection.ltr,
       child: AnimatedToggleSwitch<bool>.rolling(
-        // current == true so its english , current == false so its arabic
-        current: !LocalizationUtils.isCurrentLocalAr(context),
-        // english => true , arabic => false , as 0 & 1
+        // if the current == true , so it will select the true item which is light theme
+        current: context.watch<ThemeBloc>().state.themeMode == ThemeMode.light,
+        // light theme => true , dark theme => false , as 0 & 1
         values: const [true, false],
         iconOpacity:
             1, //showing the exact color of unselected items without opacity
@@ -32,23 +31,21 @@ class LanguageToggleSwitch extends StatelessWidget {
             indicatorColor: ColorsManager.lightOrange),
         iconBuilder: (value, foreground) {
           return value
-              ? CountryFlag.fromCountryCode(
-                  LanguageType.english.getCountryCode(),
-                  shape: const Circle(),
-                  height: 20,
-                  width: 20,
+              ? Icon(
+                  Icons.sunny,
+                  color: foreground
+                      ? ColorsManager.white
+                      : ColorsManager.lightOrange,
                 )
-              : CountryFlag.fromCountryCode(
-                  LanguageType.arabic.getCountryCode(),
-                  shape: const Circle(),
-                  height: 20,
-                  width: 20,
+              : Icon(
+                  Icons.nightlight_round,
+                  color: foreground
+                      ? ColorsManager.white
+                      : ColorsManager.lightOrange,
                 );
         },
         onChanged: (value) {
-          value
-              ? context.setLocale(LocalizationUtils.englishLocal)
-              : context.setLocale(LocalizationUtils.arabicLocal);
+          context.read<ThemeBloc>().add(ToggleTheme());
         },
       ),
     );

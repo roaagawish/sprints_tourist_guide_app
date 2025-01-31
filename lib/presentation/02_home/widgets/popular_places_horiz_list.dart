@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/place_model.dart';
-import '../../../resourses/language_manager.dart';
+import '../../resourses/language_manager.dart';
 import '../blocs/popular_places/popular_places_bloc.dart';
 import 'place_card.dart';
 

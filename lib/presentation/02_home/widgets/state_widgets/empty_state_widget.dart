@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../resourses/assets_manager.dart';
-import '../../../../resourses/styles_manager.dart';
+import '../../../resourses/assets_manager.dart';
+import '../../../resourses/styles_manager.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final String label;

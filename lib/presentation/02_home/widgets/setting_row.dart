@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../resourses/styles_manager.dart';
+import '../../resourses/styles_manager.dart';
 import 'language_toggle_switch.dart';
 import 'theme_toggle_switch.dart';
 

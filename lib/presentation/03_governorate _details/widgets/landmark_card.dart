@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../app/functions.dart';
 import '../../../models/governrate_model.dart';
-import '../../../resourses/colors_manager.dart';
-import '../../../resourses/language_manager.dart';
-import '../../../resourses/styles_manager.dart';
+import '../../resourses/colors_manager.dart';
+import '../../resourses/language_manager.dart';
+import '../../resourses/styles_manager.dart';
 
 class LandmarkCard extends StatelessWidget {
   const LandmarkCard({

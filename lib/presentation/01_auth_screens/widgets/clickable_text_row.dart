@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../app/functions.dart';
-import '../../../resourses/colors_manager.dart';
-import '../../../resourses/routes_manager.dart';
-import '../../../resourses/styles_manager.dart';
+import '../../resourses/colors_manager.dart';
+import '../../resourses/routes_manager.dart';
+import '../../resourses/styles_manager.dart';
 
 class ClickableTextRow extends StatelessWidget {
   final String firstLabel;

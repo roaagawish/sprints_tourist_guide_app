@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../resourses/language_manager.dart';
-import '../../../resourses/styles_manager.dart';
+import '../../resourses/language_manager.dart';
+import '../../resourses/styles_manager.dart';
 import '../widgets/bloc_builders/favorite_places_bloc_builder.dart';
 
 class FavoritesTab extends StatelessWidget {

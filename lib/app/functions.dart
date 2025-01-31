@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../models/place_model.dart';
-import '../screens/02_home/blocs/theme_bloc/theme_bloc.dart';
+import '../presentation/02_home/blocs/theme_bloc/theme_bloc.dart';
 
 bool isLightTheme(BuildContext context) {
   return context.read<ThemeBloc>().state.themeMode == ThemeMode.light;
