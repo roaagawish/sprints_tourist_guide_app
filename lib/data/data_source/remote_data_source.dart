@@ -41,7 +41,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     //return the AuthenticationEntity with updated data.
     return AuthenticationEntity(
         uid: credential.user!.uid,
-        name: credential.user!.displayName.orEmpty(),
+        name: registerRequest.userName,
         email: credential.user!.email.orEmpty());
   }
 
