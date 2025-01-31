@@ -91,6 +91,7 @@ class ProfileTab extends StatelessWidget {
                       onPressed: null,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
+                        spacing: 10,
                         children: [
                           Text(tr("taps.profileLogout")),
                           CircularProgressIndicator(

@@ -96,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: null,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
+                                  spacing: 10,
                                   children: [
                                     Text(tr("login.loginButton")),
                                     CircularProgressIndicator(

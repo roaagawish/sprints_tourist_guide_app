@@ -134,6 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPressed: null,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
+                                  spacing: 10,
                                   children: [
                                     Text(tr("signup.signUpButton")),
                                     CircularProgressIndicator(
