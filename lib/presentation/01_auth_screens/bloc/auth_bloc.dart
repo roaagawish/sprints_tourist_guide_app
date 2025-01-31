@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import '../../../app/app_prefs.dart';
 import '../../../app/di.dart';
 import '../../../data/data_source/local_data_source.dart';
 import '../../../domain/entities/auth_entity.dart';
