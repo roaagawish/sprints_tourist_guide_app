@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../app/functions.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/language_manager.dart';
@@ -11,7 +9,6 @@ import '../../resourses/styles_manager.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
 import 'bloc/auth_bloc.dart';
-import 'widgets/flutter_toast.dart';
 import 'widgets/text_form_field.dart';
 import 'widgets/clickable_text_row.dart';
 

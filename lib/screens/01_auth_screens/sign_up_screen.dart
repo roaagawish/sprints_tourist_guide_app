@@ -10,7 +10,6 @@ import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
 import 'bloc/auth_bloc.dart';
 import 'widgets/clickable_text_row.dart';
-import 'widgets/flutter_toast.dart';
 import 'widgets/text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
