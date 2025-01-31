@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../app/di.dart';
+import '../../../app/type_definitions.dart';
+import '../../../app/validation_service.dart';
 import '../../resourses/styles_manager.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -6,8 +9,8 @@ class CustomTextFormField extends StatefulWidget {
   final String labelText;
   final Icon prefixIcon;
   final bool isPasswordField;
-  final String? Function(String?)? validator;
-  final TextInputType keyboardType;
+  final ValidatorFunction? validator;
+  final TextInputType inputType;
 
   const CustomTextFormField({
     super.key,
@@ -15,9 +18,11 @@ class CustomTextFormField extends StatefulWidget {
     required this.labelText,
     required this.prefixIcon,
     this.isPasswordField = false,
-    required this.validator,
-    required this.keyboardType,
+    this.validator,
+    required this.inputType,
   });
+
+  static final validationService = instance<IValidationService>();
 
   @override
   CustomTextFormFieldState createState() => CustomTextFormFieldState();
@@ -25,6 +30,21 @@ class CustomTextFormField extends StatefulWidget {
 
 class CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _obscureText = true;
+
+  ValidatorFunction get _defaultValidator {
+    switch (widget.inputType) {
+      case TextInputType.name:
+        return CustomTextFormField.validationService.validateName;
+      case TextInputType.visiblePassword:
+        return CustomTextFormField.validationService.validatePassword;
+      case TextInputType.emailAddress:
+        return CustomTextFormField.validationService.validateEmail;
+      case TextInputType.phone:
+        return CustomTextFormField.validationService.validatePhone;
+      default:
+        return CustomTextFormField.validationService.validateNotEmpty;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +69,8 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
               )
             : null,
       ),
-      validator: widget.validator,
-      keyboardType: widget.keyboardType,
+      validator: widget.validator ?? _defaultValidator,
+      keyboardType: widget.inputType,
     );
   }
 }

@@ -26,27 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  String? emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return tr("signup.emailAddressEmptyMessage");
-    }
-    var valid = value.contains('@');
-    if (!valid) {
-      return tr("signup.emailAddressInvalidMessage");
-    }
-    return null;
-  }
-
-  String? passwordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return tr("signup.passwordEmptyMessage");
-    }
-    if (value.length < 6) {
-      return tr("signup.passwordTooShortMessage");
-    }
-    return null;
-  }
-
   @override
   void dispose() {
     _passwordController.dispose();
@@ -87,8 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _emailAddressController,
                         labelText: tr("signup.emailLabel"),
                         prefixIcon: const Icon(Icons.alternate_email),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: emailValidator,
+                        inputType: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: 15),
                       // Password field
@@ -97,8 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _passwordController,
                         labelText: tr("signup.passwordLabel"),
                         prefixIcon: const Icon(Icons.lock_open),
-                        keyboardType: TextInputType.text,
-                        validator: passwordValidator,
+                        inputType: TextInputType.visiblePassword,
                       ),
                       SizedBox(height: 30),
                       // Login button

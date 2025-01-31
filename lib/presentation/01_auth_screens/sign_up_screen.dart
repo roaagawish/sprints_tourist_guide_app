@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../app/di.dart';
 import '../../app/functions.dart';
+import '../../app/validation_service.dart';
 import '../resourses/colors_manager.dart';
 import '../resourses/language_manager.dart';
 import '../resourses/routes_manager.dart';
@@ -28,55 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  String? nameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return tr("signup.fullNameEmptyMessage");
-    }
-    final regex = RegExp('^[A-Z]');
-    if (!regex.hasMatch(value)) {
-      return tr("signup.fullNameCapitalizedMessage");
-    }
-    return null;
-  }
-
-  String? phoneValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return null;
-    }
-    if (value.length < 11) {
-      return tr("signup.phoneEmptyMessage");
-    }
-    return null;
-  }
-
-  String? emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return tr("signup.emailAddressEmptyMessage");
-    }
-    var valid = value.contains('@');
-    if (!valid) {
-      return tr("signup.emailAddressInvalidMessage");
-    }
-    return null;
-  }
-
-  String? passwordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return tr("signup.passwordEmptyMessage");
-    }
-    if (value.length < 6) {
-      return tr("signup.passwordTooShortMessage");
-    }
-    return null;
-  }
-
-  String? confirmPasswordValidator(String? value) {
-    if (_passwordController.text != value) {
-      return tr("signup.confirmPasswordValidationMessage");
-    }
-    return null;
-  }
+  final _validationService = instance<IValidationService>();
 
   @override
   void dispose() {
@@ -121,8 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _fullNameController,
                         labelText: tr("signup.fullNameLabel"),
                         prefixIcon: const Icon(Icons.person),
-                        keyboardType: TextInputType.name,
-                        validator: nameValidator,
+                        inputType: TextInputType.name,
                       ),
                       const SizedBox(height: 15),
                       // Phone Number field
@@ -130,8 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _phoneController,
                         labelText: tr("signup.phoneLabel"),
                         prefixIcon: const Icon(Icons.phone),
-                        keyboardType: TextInputType.phone,
-                        validator: phoneValidator,
+                        inputType: TextInputType.phone,
                       ),
                       const SizedBox(height: 15),
                       // Email field
@@ -139,8 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _emailAddressController,
                         labelText: tr("signup.emailLabel"),
                         prefixIcon: const Icon(Icons.alternate_email),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: emailValidator,
+                        inputType: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: 15),
                       // Password field
@@ -149,8 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _passwordController,
                         labelText: tr("signup.passwordLabel"),
                         prefixIcon: const Icon(Icons.lock_open),
-                        keyboardType: TextInputType.text,
-                        validator: passwordValidator,
+                        inputType: TextInputType.visiblePassword,
                       ),
                       const SizedBox(height: 15),
                       // Confirm password field
@@ -159,8 +109,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _confirmPasswordController,
                         labelText: tr("signup.confirmPasswordLabel"),
                         prefixIcon: const Icon(Icons.lock_open),
-                        keyboardType: TextInputType.text,
-                        validator: confirmPasswordValidator,
+                        inputType: TextInputType.visiblePassword,
+                        validator: (value) {
+                          return _validationService.validateConfirmPassword(
+                              value, _confirmPasswordController.text);
+                        },
                       ),
                       SizedBox(height: 30),
                       // Sign Up button
