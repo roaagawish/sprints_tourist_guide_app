@@ -1,16 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../app/functions.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
-import 'package:easy_localization/easy_localization.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
 import 'bloc/auth_bloc.dart';
 import 'widgets/flutter_toast.dart';
 import 'widgets/text_form_field.dart';
+import 'widgets/clickable_text_row.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -143,30 +146,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       SizedBox(height: 15),
-                      // don't-have-an-account button
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushReplacementNamed(
-                            Routes.signUpRoute,
-                          );
-                        },
-                        child: Center(
-                          child: Text.rich(
-                            TextSpan(children: [
-                              TextSpan(
-                                text: tr("login.donotHaveAccount"),
-                                style: Styles.style12Medium(),
-                              ),
-                              TextSpan(
-                                text: tr("login.registerNow"),
-                                style: Styles.style14Medium().copyWith(
-                                    color: isLightTheme(context)
-                                        ? ColorsManager.darkGreen
-                                        : ColorsManager.lightOrange),
-                              ),
-                            ]),
-                          ),
-                        ),
+                      ClickableTextRow(
+                        firstLabel: tr("login.donotHaveAccount"),
+                        secondLabel: tr("login.registerNow"),
                       ),
                       SizedBox(height: 10),
                       LanguageToggleSwitch(),

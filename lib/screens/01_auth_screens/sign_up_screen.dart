@@ -9,6 +9,7 @@ import '../../resourses/styles_manager.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
 import 'bloc/auth_bloc.dart';
+import 'widgets/clickable_text_row.dart';
 import 'widgets/flutter_toast.dart';
 import 'widgets/text_form_field.dart';
 
@@ -207,29 +208,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           );
                         },
                       ),
-
                       SizedBox(height: 15),
-                      // already-have-an-account button
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed(Routes.loginRoute);
-                        },
-                        child: Text.rich(
-                          TextSpan(children: [
-                            TextSpan(
-                              text: tr("signup.alreadyHaveAnAccount"),
-                              style: Styles.style12Medium(),
-                            ),
-                            TextSpan(
-                              text: tr("signup.goToLoginPage"),
-                              style: Styles.style14Medium().copyWith(
-                                  color: isLightTheme(context)
-                                      ? ColorsManager.darkGreen
-                                      : ColorsManager.lightOrange),
-                            ),
-                          ]),
-                        ),
+                      ClickableTextRow(
+                        firstLabel: tr("signup.alreadyHaveAnAccount"),
+                        secondLabel: tr("signup.goToLoginPage"),
                       ),
                       SizedBox(height: 10),
                       LanguageToggleSwitch(),
