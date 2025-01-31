@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/place_model.dart';
+import '../../../domain/entities/place_model.dart';
 import 'place_card.dart';
 
 class PlacesGridView extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/governrate_model.dart';
+import '../../domain/entities/governrate_model.dart';
 import 'widgets/landmark_card.dart';
 
 class GovernorateDetailsScreen extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 import '../../../../app/functions.dart';
-import '../../../../models/place_model.dart';
+import '../../../../domain/entities/place_model.dart';
 
 part 'popular_places_event.dart';
 part 'popular_places_state.dart';

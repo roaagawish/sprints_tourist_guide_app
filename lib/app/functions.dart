@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import '../domain/entities/auth_entity.dart';
-import '../models/place_model.dart';
+import '../domain/entities/place_model.dart';
 import '../presentation/02_home/blocs/theme_bloc/theme_bloc.dart';
 import '../presentation/resourses/constant_manager.dart';
 

@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../models/governrate_model.dart';
+import '../../../domain/entities/governrate_model.dart';
 import '../../resourses/styles_manager.dart';
 import '../widgets/governrate_card.dart';
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../app/app_prefs.dart';
-import '../../../models/user_model.dart';
+import '../../../domain/entities/user_model.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../app/di.dart';
-import '../../models/governrate_model.dart';
+import '../../domain/entities/governrate_model.dart';
 import '../01_auth_screens/sign_up_screen.dart';
 import '../01_auth_screens/login_screen.dart';
 import '../02_home/home_screen.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../app/functions.dart';
-import '../../../models/user_model.dart';
+import '../../../domain/entities/user_model.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../01_auth_screens/bloc/auth_bloc.dart';

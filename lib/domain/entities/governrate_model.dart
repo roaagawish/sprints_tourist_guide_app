@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 
-import '../presentation/resourses/assets_manager.dart';
+import '../../presentation/resourses/assets_manager.dart';
 
 class Landmark {
   final String name;
