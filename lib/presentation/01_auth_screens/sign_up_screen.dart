@@ -13,10 +13,8 @@ import 'widgets/clickable_text_row.dart';
 import 'widgets/text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
-  final void Function()? onSignUpSuccessful;
   const SignUpScreen({
     super.key,
-    this.onSignUpSuccessful,
   });
 
   @override

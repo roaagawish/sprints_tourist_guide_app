@@ -4,20 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'app/app_prefs.dart';
+import 'app/di.dart';
 import 'app/functions.dart';
 import 'app/my_app.dart';
 import 'firebase_options.dart';
 import 'presentation/resourses/language_manager.dart';
 import 'presentation/01_auth_screens/bloc/auth_bloc.dart';
 import 'presentation/02_home/blocs/theme_bloc/theme_bloc.dart';
-import 'presentation/04_profile_management/blocs/profile_bloc.dart';
 import 'simple_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await AppPreferencesImpl.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -29,8 +27,9 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   Bloc.observer = SimpleObserver();
-  final initialUserData = await AppPreferencesImpl.loadUserData();
-  final initialAvatar = await AppPreferencesImpl.loadUserAvatar();
+  // final initialUserData = await AppPreferencesImpl.loadUserData();
+  // final initialAvatar = await AppPreferencesImpl.loadUserAvatar();
+  await initAppModule();
   runApp(
     EasyLocalization(
         supportedLocales: [
@@ -41,14 +40,13 @@ void main() async {
         fallbackLocale: LocalizationUtils.englishLocal,
         child: MultiBlocProvider(
           providers: [
+            BlocProvider(create: (_) => AuthBloc(instance())),
+            // BlocProvider(
+            //     create: (_) => ProfileBloc(
+            //         initialUserData: initialUserData,
+            //         initialAvatar: initialAvatar)),
             BlocProvider(
-                create: (_) => AuthBloc(appPreferences: AppPreferencesImpl())),
-            BlocProvider(
-                create: (_) => ProfileBloc(
-                    initialUserData: initialUserData,
-                    initialAvatar: initialAvatar)),
-            BlocProvider(
-              create: (_) => ThemeBloc(AppPreferencesImpl())..add(LoadTheme()),
+              create: (_) => ThemeBloc(instance())..add(LoadTheme()),
             )
           ],
           child: MyApp(),
