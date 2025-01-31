@@ -6,7 +6,6 @@ import '../../resourses/colors_manager.dart';
 import '../../resourses/language_manager.dart';
 import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
-import '../02_home/blocs/theme_bloc/theme_bloc.dart';
 import '../02_home/widgets/language_toggle_switch.dart';
 import '../02_home/widgets/theme_toggle_switch.dart';
 import 'bloc/auth_bloc.dart';
@@ -225,11 +224,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             TextSpan(
                               text: tr("signup.goToLoginPage"),
                               style: Styles.style14Medium().copyWith(
-                                  color: context
-                                              .read<ThemeBloc>()
-                                              .state
-                                              .themeMode ==
-                                          ThemeMode.light
+                                  color: isLightTheme(context)
                                       ? ColorsManager.darkGreen
                                       : ColorsManager.lightOrange),
                             ),
