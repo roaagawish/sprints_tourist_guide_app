@@ -64,7 +64,7 @@ class ValidationServiceImpl implements IValidationService {
       return null;
     }
     if (value.length < 11) {
-      return tr("signup.phoneEmptyMessage");
+      return "signup.phoneEmptyMessage".tr();
     }
     return null;
   }
