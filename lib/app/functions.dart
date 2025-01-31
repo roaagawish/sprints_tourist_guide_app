@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
+import '../domain/entities/auth_entity.dart';
 import '../models/place_model.dart';
 import '../presentation/02_home/blocs/theme_bloc/theme_bloc.dart';
+import '../presentation/resourses/constant_manager.dart';
+
+Future<void> hiveBoxes() async {
+  await Hive.openBox<AuthenticationEntity>(AppConstants.kUserDataBox);
+}
+
+void hiveAdapters() {
+  Hive.registerAdapter(AuthenticationEntityAdapter());
+}
 
 bool isLightTheme(BuildContext context) {
   return context.read<ThemeBloc>().state.themeMode == ThemeMode.light;
