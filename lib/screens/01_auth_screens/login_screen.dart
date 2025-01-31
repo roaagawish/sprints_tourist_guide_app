@@ -120,13 +120,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         builder: (context, state) {
                           return ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<AuthBloc>().add(LoginRequested(
-                                    email: _emailAddressController.text,
-                                    password: _passwordController.text));
-                              }
-                            },
+                            onPressed: state.loading == true
+                                ? null
+                                : () {
+                                    if (_formKey.currentState!.validate()) {
+                                      context.read<AuthBloc>().add(
+                                          LoginRequested(
+                                              email:
+                                                  _emailAddressController.text,
+                                              password:
+                                                  _passwordController.text));
+                                    }
+                                  },
                             child: state.loading == true
                                 ? CircularProgressIndicator(
                                     color: ColorsManager.white,

@@ -183,15 +183,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                         builder: (context, state) {
                           return ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<AuthBloc>().add(RegisterRequested(
-                                    email: _emailAddressController.text,
-                                    password: _passwordController.text,
-                                    fullName: _fullNameController.text,
-                                    phone: _phoneController.text));
-                              }
-                            },
+                            onPressed: state.loading == true
+                                ? null
+                                : () {
+                                    if (_formKey.currentState!.validate()) {
+                                      context.read<AuthBloc>().add(
+                                          RegisterRequested(
+                                              email:
+                                                  _emailAddressController.text,
+                                              password:
+                                                  _passwordController.text,
+                                              fullName:
+                                                  _fullNameController.text,
+                                              phone: _phoneController.text));
+                                    }
+                                  },
                             child: state.loading == true
                                 ? CircularProgressIndicator(
                                     color: ColorsManager.white,
