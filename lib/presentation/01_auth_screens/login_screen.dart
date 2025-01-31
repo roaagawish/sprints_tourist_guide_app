@@ -123,6 +123,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       ClickableTextRow(
                         firstLabel: tr("login.donotHaveAccount"),
                         secondLabel: tr("login.registerNow"),
+                        onTap: () {
+                          Navigator.of(context).pushReplacementNamed(
+                            Routes.signUpRoute,
+                          );
+                        },
                       ),
                       SizedBox(height: 10),
                       LanguageToggleSwitch(),

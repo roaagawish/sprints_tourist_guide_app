@@ -162,6 +162,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ClickableTextRow(
                         firstLabel: tr("signup.alreadyHaveAnAccount"),
                         secondLabel: tr("signup.goToLoginPage"),
+                        onTap: () {
+                          Navigator.of(context).pushReplacementNamed(
+                            Routes.loginRoute,
+                          );
+                        },
                       ),
                       SizedBox(height: 10),
                       LanguageToggleSwitch(),
