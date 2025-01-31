@@ -120,41 +120,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       BlocConsumer<AuthBloc, AuthState>(
                         listener: (context, state) {
                           if (state is RegisterSuccess) {
-                            showToast(state.message, ColorsManager.oliveGreen);
-                            if (mounted) {
-                              Navigator.of(context).pushReplacementNamed(
-                                Routes.loginRoute,
-                              );
-                            }
+                            Navigator.of(context).pushReplacementNamed(
+                              Routes.homeRoute,
+                            );
                           }
                           if (state is RegisterFailure) {
                             showToast(state.errMessage, ColorsManager.softRed);
                           }
                         },
                         builder: (context, state) {
+                          if (state is RegisterLoading) {
+                            return ElevatedButton(
+                                onPressed: null,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(tr("signup.signUpButton")),
+                                    CircularProgressIndicator(
+                                      color: ColorsManager.white,
+                                      strokeAlign: CircularProgressIndicator
+                                          .strokeAlignInside,
+                                    ),
+                                  ],
+                                ));
+                          }
                           return ElevatedButton(
-                            onPressed: state.loading == true
-                                ? null
-                                : () {
-                                    if (_formKey.currentState!.validate()) {
-                                      context.read<AuthBloc>().add(
-                                          RegisterRequested(
-                                              email:
-                                                  _emailAddressController.text,
-                                              password:
-                                                  _passwordController.text,
-                                              fullName:
-                                                  _fullNameController.text,
-                                              phone: _phoneController.text));
-                                    }
-                                  },
-                            child: state.loading == true
-                                ? CircularProgressIndicator(
-                                    color: ColorsManager.white,
-                                    strokeAlign: CircularProgressIndicator
-                                        .strokeAlignInside,
-                                  )
-                                : Text(tr("signup.signUpButton")),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<AuthBloc>().add(RegisterRequested(
+                                      fullName: _fullNameController.text,
+                                      email: _emailAddressController.text,
+                                      password: _passwordController.text,
+                                      phone: _phoneController.text,
+                                    ));
+                              }
+                            },
+                            child: Text(tr("signup.signUpButton")),
                           );
                         },
                       ),

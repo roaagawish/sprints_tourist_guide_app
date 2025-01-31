@@ -40,7 +40,8 @@ void main() async {
         fallbackLocale: LocalizationUtils.englishLocal,
         child: MultiBlocProvider(
           providers: [
-            BlocProvider(create: (_) => AuthBloc(instance())),
+            BlocProvider(
+                create: (_) => AuthBloc(instance(), instance(), instance())),
             // BlocProvider(
             //     create: (_) => ProfileBloc(
             //         initialUserData: initialUserData,

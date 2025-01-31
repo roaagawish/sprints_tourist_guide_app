@@ -152,7 +152,6 @@ class ProfileTab extends StatelessWidget {
                 BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
                     if (state is LogoutSuccess) {
-                      showToast(state.message, ColorsManager.oliveGreen);
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         Routes.signUpRoute,
                         (route) => false, // This clears the stack
@@ -163,17 +162,26 @@ class ProfileTab extends StatelessWidget {
                     }
                   },
                   builder: (context, state) {
+                    if (state is LogoutLoading) {
+                      return ElevatedButton(
+                          onPressed: null,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(tr("taps.profileLogout")),
+                              CircularProgressIndicator(
+                                color: ColorsManager.white,
+                                strokeAlign:
+                                    CircularProgressIndicator.strokeAlignInside,
+                              ),
+                            ],
+                          ));
+                    }
                     return ElevatedButton(
                       onPressed: () {
                         context.read<AuthBloc>().add(LogoutRequested());
                       },
-                      child: state.loading == true
-                          ? CircularProgressIndicator(
-                              color: ColorsManager.white,
-                              strokeAlign:
-                                  CircularProgressIndicator.strokeAlignInside,
-                            )
-                          : Text(context.tr("taps.profileLogout")),
+                      child: Text(tr("taps.profileLogout")),
                     );
                   },
                 ),

@@ -82,40 +82,39 @@ class _LoginScreenState extends State<LoginScreen> {
                       BlocConsumer<AuthBloc, AuthState>(
                         listener: (context, state) {
                           if (state is LoginSuccess) {
-                            //1 show the toast first
-                            showToast(state.message, ColorsManager.oliveGreen);
-                            //2 then navigate to home screen
-                            if (mounted) {
-                              Navigator.of(context).pushReplacementNamed(
-                                Routes.homeRoute,
-                              );
-                            }
+                            Navigator.of(context).pushReplacementNamed(
+                              Routes.homeRoute,
+                            );
                           }
                           if (state is LoginFailure) {
                             showToast(state.errMessage, ColorsManager.softRed);
                           }
                         },
                         builder: (context, state) {
+                          if (state is LoginLoading) {
+                            return ElevatedButton(
+                                onPressed: null,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(tr("login.loginButton")),
+                                    CircularProgressIndicator(
+                                      color: ColorsManager.white,
+                                      strokeAlign: CircularProgressIndicator
+                                          .strokeAlignInside,
+                                    ),
+                                  ],
+                                ));
+                          }
                           return ElevatedButton(
-                            onPressed: state.loading == true
-                                ? null
-                                : () {
-                                    if (_formKey.currentState!.validate()) {
-                                      context.read<AuthBloc>().add(
-                                          LoginRequested(
-                                              email:
-                                                  _emailAddressController.text,
-                                              password:
-                                                  _passwordController.text));
-                                    }
-                                  },
-                            child: state.loading == true
-                                ? CircularProgressIndicator(
-                                    color: ColorsManager.white,
-                                    strokeAlign: CircularProgressIndicator
-                                        .strokeAlignInside,
-                                  )
-                                : Text(tr("login.loginButton")),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<AuthBloc>().add(LoginRequested(
+                                    email: _emailAddressController.text,
+                                    password: _passwordController.text));
+                              }
+                            },
+                            child: Text(tr("login.loginButton")),
                           );
                         },
                       ),
