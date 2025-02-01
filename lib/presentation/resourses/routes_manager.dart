@@ -7,12 +7,14 @@ import '../01_auth_screens/login_screen.dart';
 import '../02_home/home_screen.dart';
 import '../03_governorate _details/governorate _details_screen.dart';
 import '../../app/app_prefs.dart';
+import '../04_profile_management/screens/edit_user_screen.dart';
 
 class Routes {
   static const String signUpRoute = "/";
   static const String loginRoute = "/login_route";
   static const String homeRoute = "/home_route";
   static const String governmentDetailsRoute = "/government_details_route";
+  static const String editUserRoute = "/edit_user_route";
 }
 
 class RouteGenerator {
@@ -32,6 +34,8 @@ class RouteGenerator {
             builder: (_) => GovernorateDetailsScreen(
                   governorate: governorate,
                 ));
+      case Routes.editUserRoute:
+        return MaterialPageRoute(builder: (_) => EditUserScreen());
       default:
         return unDefinedRoute();
     }

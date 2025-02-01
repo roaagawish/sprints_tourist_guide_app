@@ -9,18 +9,19 @@ class CustomTextFormField extends StatefulWidget {
   final String labelText;
   final Icon prefixIcon;
   final bool isPasswordField;
+  final bool? enabled;
   final ValidatorFunction? validator;
   final TextInputType? inputType;
 
-  const CustomTextFormField({
-    super.key,
-    required this.controller,
-    required this.labelText,
-    required this.prefixIcon,
-    this.isPasswordField = false,
-    this.validator,
-    required this.inputType,
-  });
+  const CustomTextFormField(
+      {super.key,
+      required this.controller,
+      required this.labelText,
+      required this.prefixIcon,
+      this.isPasswordField = false,
+      this.validator,
+      required this.inputType,
+      this.enabled});
 
   static final validationService = instance<IValidationService>();
 
@@ -50,6 +51,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      enabled: widget.enabled,
       obscureText: widget.isPasswordField ? _obscureText : false,
       obscuringCharacter: widget.isPasswordField ? "*" : " ",
       style: Styles.style16Medium(),

@@ -83,7 +83,9 @@ class _ProfileTabState extends State<ProfileTab> {
               ],
             ),
             EditButton(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes.editUserRoute);
+              },
             ),
             Spacer(),
             SettingRow(
