@@ -13,6 +13,7 @@ import '../domain/usecase/logout_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/send_phone_otp_usecase.dart';
 import 'app_prefs.dart';
+import 'image_service.dart';
 import 'validation_service.dart';
 
 final instance = GetIt.instance;
@@ -26,6 +27,8 @@ Future<void> initAppModule() async {
   // validation service instance for all text form fields in the app
   instance
       .registerLazySingleton<IValidationService>(() => ValidationServiceImpl());
+  // Image service instance for the entire app
+  instance.registerLazySingleton<ImageService>(() => ImageServiceImpl());
   // network info
   instance.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(InternetConnectionChecker.instance));

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginRequest {
@@ -15,7 +13,7 @@ class RegisterRequest {
   String password;
   PhoneAuthCredential? phoneAuthCredential;
   String? phoneNumber;
-  File? profileImage;
+  String? profileImage;
 
   RegisterRequest(this.userName, this.email, this.password,
       {this.phoneAuthCredential, this.phoneNumber, this.profileImage});

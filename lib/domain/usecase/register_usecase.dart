@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../data/network/failure.dart';
@@ -31,7 +30,7 @@ class RegisterUseCaseInput {
   String password;
   PhoneAuthCredential? phoneAuthCredential;
   String? phone;
-  File? photo;
+  String? photo;
 
   RegisterUseCaseInput(this.userName, this.email, this.password,
       {this.phoneAuthCredential, this.phone, this.photo});

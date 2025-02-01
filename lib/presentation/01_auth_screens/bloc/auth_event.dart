@@ -16,7 +16,7 @@ class RegisterRequested extends AuthEvent {
   final String password;
   final PhoneAuthCredential? phoneAuthCredential;
   final String? phone;
-  final File? photo;
+  final String? photo;
 
   RegisterRequested(
       {required this.fullName,

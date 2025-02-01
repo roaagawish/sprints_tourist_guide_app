@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../app/di.dart';
 import '../../../app/extensions.dart';
 import '../../../app/functions.dart';
+import '../../../app/image_service.dart';
 import '../../../domain/entities/auth_entity.dart';
 import '../../resourses/colors_manager.dart';
 import '../../resourses/routes_manager.dart';
@@ -11,12 +15,36 @@ import '../widgets/edit_button.dart';
 import '../widgets/info_title.dart';
 import '../widgets/setting_row.dart';
 
-class ProfileTab extends StatelessWidget {
+class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
 
   @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab> {
+  final _imageService = instance<ImageService>();
+  File? _image;
+  @override
+  void initState() {
+    super.initState();
+    final authEntity = context.read<AuthBloc>().authObj!;
+    _convertToFile(authEntity.photo); // Convert Base64 to File
+  }
+
+  Future<void> _convertToFile(String? base64String) async {
+    if (base64String == null) return;
+    // Convert Base64 back to File
+    File? newFile = await _imageService.convertBase64ToFile(base64String);
+    if (newFile != null) {
+      setState(() {
+        _image = newFile;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     AuthenticationEntity authEntity = context.read<AuthBloc>().authObj!;
     return Scaffold(
       body: Padding(
@@ -25,23 +53,17 @@ class ProfileTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 16.0,
           children: [
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: screenWidth * 0.15,
-                  backgroundColor: Colors.lightGreen,
-                  child: Icon(
-                    Icons.person,
-                    size: screenWidth * 0.15,
-                    color: Colors.white,
-                  ),
-                ),
-                Positioned.fill(
-                  child: EditButton(
-                    onTap: () {},
-                  ),
-                ),
-              ],
+            CircleAvatar(
+              radius: 70,
+              backgroundColor: ColorsManager.oliveGreen,
+              backgroundImage: _image == null ? null : FileImage(_image!),
+              child: _image == null
+                  ? Icon(
+                      Icons.person,
+                      size: 40,
+                      color: ColorsManager.white,
+                    )
+                  : null,
             ),
             Column(
               spacing: 20,

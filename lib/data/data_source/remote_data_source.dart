@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../app/extensions.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../../domain/entities/otp_entity.dart';
 import '../network/requests.dart';
+import '../responses/user_response.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationEntity> login(LoginRequest loginRequest);
@@ -16,8 +18,57 @@ abstract class RemoteDataSource {
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
-
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
   RemoteDataSourceImpl(this._firebaseAuth);
+
+  @override
+  Future<AuthenticationEntity> login(LoginRequest loginRequest) async {
+    final UserCredential credential =
+        await _firebaseAuth.signInWithEmailAndPassword(
+      email: loginRequest.email,
+      password: loginRequest.password,
+    );
+    //read doc
+    DocumentSnapshot<Map<String, dynamic>> userDoc = await users
+        .doc(credential.user?.uid)
+        .get() as DocumentSnapshot<Map<String, dynamic>>;
+    UserResponse userData = UserResponse.fromFirestore(userDoc);
+    return AuthenticationEntity(
+      uid: credential.user!.uid,
+      name: userData.name.orEmpty(),
+      email: userData.email.orEmpty(),
+      phone: userData.phoneNumber.orEmpty(),
+      photo: userData.photo.orEmpty(),
+    );
+  }
+
+  @override
+  Future<AuthenticationEntity> register(RegisterRequest registerRequest) async {
+    final UserCredential credential =
+        await _firebaseAuth.createUserWithEmailAndPassword(
+      email: registerRequest.email,
+      password: registerRequest.password,
+    );
+    //write doc
+    await users.doc(credential.user?.uid).set(UserResponse(
+            name: registerRequest.userName,
+            email: registerRequest.email,
+            phoneNumber: registerRequest.phoneNumber,
+            photo: registerRequest.profileImage)
+        .toFirestore());
+    return AuthenticationEntity(
+      uid: credential.user!.uid,
+      name: registerRequest.userName,
+      email: registerRequest.email.orEmpty(),
+      phone: registerRequest.phoneNumber.orEmpty(),
+      photo: registerRequest.profileImage.orEmpty(),
+    );
+  }
+
+  @override
+  Future<void> logout() async {
+    await _firebaseAuth.signOut();
+  }
 
   @override
   Future<OtpEntity> sendOtpToNewPhoneNumber(String newPhoneNumber) async {
@@ -53,54 +104,5 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       verificationId: phoneAuthCredentialRequest.verificationId,
       smsCode: phoneAuthCredentialRequest.smsCode,
     );
-  }
-
-  @override
-  Future<AuthenticationEntity> login(LoginRequest loginRequest) async {
-    final UserCredential credential =
-        await _firebaseAuth.signInWithEmailAndPassword(
-      email: loginRequest.email,
-      password: loginRequest.password,
-    );
-    return AuthenticationEntity(
-      uid: credential.user!.uid,
-      name: credential.user!.displayName.orEmpty(),
-      email: credential.user!.email.orEmpty(),
-      phone: credential.user!.phoneNumber.orEmpty(),
-    );
-  }
-
-  @override
-  Future<AuthenticationEntity> register(RegisterRequest registerRequest) async {
-    final UserCredential credential =
-        await _firebaseAuth.createUserWithEmailAndPassword(
-      email: registerRequest.email,
-      password: registerRequest.password,
-    );
-    // Update user's profile with displayName
-    await credential.user?.updateDisplayName(registerRequest.userName);
-
-    if (registerRequest.phoneNumber != null &&
-        registerRequest.phoneNumber!.isNotEmpty) {
-      //link with credential or update phone number
-      await credential.user
-          ?.linkWithCredential(registerRequest.phoneAuthCredential!);
-      await credential.user
-          ?.updatePhoneNumber(registerRequest.phoneAuthCredential!);
-    }
-    // Optionally, reload the user to get updated info
-    await credential.user?.reload();
-    //return the AuthenticationEntity with updated data.
-    return AuthenticationEntity(
-      uid: credential.user!.uid,
-      name: registerRequest.userName,
-      email: credential.user!.email.orEmpty(),
-      phone: registerRequest.phoneNumber,
-    );
-  }
-
-  @override
-  Future<void> logout() async {
-    await _firebaseAuth.signOut();
   }
 }

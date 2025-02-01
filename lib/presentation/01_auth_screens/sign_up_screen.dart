@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../app/di.dart';
 import '../../app/functions.dart';
+import '../../app/image_service.dart';
 import '../../app/validation_service.dart';
 import '../resourses/colors_manager.dart';
 import '../resourses/language_manager.dart';
@@ -31,6 +35,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _validationService = instance<IValidationService>();
+  final _imageService = instance<ImageService>();
+  File? _image;
+  String? _imageBase64;
 
   @override
   void dispose() {
@@ -40,6 +47,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _fullNameController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  // Pick an image and update the state
+  Future<void> _pickImage() async {
+    File? pickedImage = await _imageService.pickImage(ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = pickedImage;
+      });
+      _imageBase64 = await _imageService.convertFileToBase64(_image);
+    }
   }
 
   @override
@@ -67,6 +85,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: isLightTheme(context)
                                   ? ColorsManager.darkGreen
                                   : ColorsManager.lightOrange),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // Profile Image Picker
+                      GestureDetector(
+                        onTap: _pickImage,
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: ColorsManager.oliveGreen,
+                          backgroundImage:
+                              _image == null ? null : FileImage(_image!),
+                          child: _image == null
+                              ? const Icon(Icons.camera_alt,
+                                  size: 40, color: ColorsManager.white)
+                              : null,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -119,9 +152,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Sign Up button
                       BlocConsumer<AuthBloc, AuthState>(
                         listener: (context, state) {
-                          if (state is PhoneOTPSendSuccess) {
-                            verifyPhoneOtpbottomSheet(context, state.otpEntity);
-                          }
                           if (state is RegisterSuccess) {
                             Navigator.of(context).pushReplacementNamed(
                               Routes.homeRoute,
@@ -151,22 +181,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           return ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                if (_phoneController.text.isNotEmpty) {
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(PhoneOTPRequested(
-                                        phone: _phoneController.text,
-                                      ));
-                                } else {
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(RegisterRequested(
-                                        fullName: _fullNameController.text,
-                                        email: _emailAddressController.text,
-                                        password: _passwordController.text,
-                                        phone: _phoneController.text,
-                                      ));
-                                }
+                                context.read<AuthBloc>().add(RegisterRequested(
+                                      fullName: _fullNameController.text,
+                                      email: _emailAddressController.text,
+                                      password: _passwordController.text,
+                                      phone: _phoneController.text,
+                                      photo: _imageBase64,
+                                    ));
                               }
                             },
                             child: Text(tr("signup.signUpButton")),
