@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import '../domain/entities/auth_entity.dart';
+import '../domain/entities/otp_entity.dart';
 import '../domain/entities/place_model.dart';
+import '../presentation/01_auth_screens/widgets/verify_phone_otp.dart';
 import '../presentation/02_home/blocs/theme_bloc/theme_bloc.dart';
+import '../presentation/resourses/colors_manager.dart';
 import '../presentation/resourses/constant_manager.dart';
 
 Future<void> hiveBoxes() async {
@@ -39,4 +42,17 @@ void showToast(String message, Color color) {
       backgroundColor: color,
       textColor: Colors.white,
       fontSize: 16.0);
+}
+
+Future<void> verifyPhoneOtpbottomSheet(
+    BuildContext context, OtpEntity otpEntity) async {
+  await showModalBottomSheet(
+    context: context,
+    backgroundColor: ColorsManager.goldenSand,
+    barrierColor: ColorsManager.black.withValues(alpha: 0.7),
+    isScrollControlled: true,
+    builder: (context) {
+      return VerifyPhoneOTPBottomSheet(otpEntity: otpEntity);
+    },
+  );
 }

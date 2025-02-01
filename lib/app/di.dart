@@ -7,9 +7,11 @@ import '../data/data_source/remote_data_source.dart';
 import '../data/network/network_info.dart';
 import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
+import '../domain/usecase/create_phone_auth_from_otp_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/logout_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
+import '../domain/usecase/send_phone_otp_usecase.dart';
 import 'app_prefs.dart';
 import 'validation_service.dart';
 
@@ -49,5 +51,15 @@ Future<void> initAppModule() async {
   // logout usecase
   if (!GetIt.I.isRegistered<LogoutUsecase>()) {
     instance.registerFactory<LogoutUsecase>(() => LogoutUsecase(instance()));
+  }
+  // Send Phone Otp usecase
+  if (!GetIt.I.isRegistered<SendPhoneOtpUsecase>()) {
+    instance.registerFactory<SendPhoneOtpUsecase>(
+        () => SendPhoneOtpUsecase(instance()));
+  }
+  // Create Phone Auth From Otp usecase
+  if (!GetIt.I.isRegistered<CreatePhoneAuthFromOtpUsecase>()) {
+    instance.registerFactory<CreatePhoneAuthFromOtpUsecase>(
+        () => CreatePhoneAuthFromOtpUsecase(instance()));
   }
 }

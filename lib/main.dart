@@ -41,7 +41,8 @@ void main() async {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-                create: (_) => AuthBloc(instance(), instance(), instance())),
+                create: (_) => AuthBloc(instance(), instance(), instance(),
+                    instance(), instance())),
             // BlocProvider(
             //     create: (_) => ProfileBloc(
             //         initialUserData: initialUserData,

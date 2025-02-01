@@ -10,7 +10,7 @@ class CustomTextFormField extends StatefulWidget {
   final Icon prefixIcon;
   final bool isPasswordField;
   final ValidatorFunction? validator;
-  final TextInputType inputType;
+  final TextInputType? inputType;
 
   const CustomTextFormField({
     super.key,

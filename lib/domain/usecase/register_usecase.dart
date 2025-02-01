@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../data/network/failure.dart';
 import '../../data/network/requests.dart';
 import '../entities/auth_entity.dart';
@@ -18,7 +19,9 @@ class RegisterUsecase
     //we can handle some permesions here in each usecase before execute the repo methods.
     return await _repository.register(RegisterRequest(
         input!.userName, input.email, input.password,
-        phoneNumber: input.phone, profileImage: input.photo));
+        phoneAuthCredential: input.phoneAuthCredential,
+        phoneNumber: input.phone,
+        profileImage: input.photo));
   }
 }
 
@@ -26,9 +29,10 @@ class RegisterUseCaseInput {
   String userName;
   String email;
   String password;
+  PhoneAuthCredential? phoneAuthCredential;
   String? phone;
   File? photo;
 
   RegisterUseCaseInput(this.userName, this.email, this.password,
-      {this.phone, this.photo});
+      {this.phoneAuthCredential, this.phone, this.photo});
 }

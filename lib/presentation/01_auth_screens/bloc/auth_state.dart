@@ -54,3 +54,35 @@ final class LogoutFailure extends AuthState {
     this.errMessage,
   );
 }
+
+final class PhoneOTPSendLoading extends AuthState {
+  const PhoneOTPSendLoading();
+}
+
+final class PhoneOTPSendSuccess extends AuthState {
+  final OtpEntity otpEntity;
+  const PhoneOTPSendSuccess(this.otpEntity);
+}
+
+final class PhoneOTPSendFailure extends AuthState {
+  final String errMessage;
+  const PhoneOTPSendFailure(
+    this.errMessage,
+  );
+}
+
+final class PhoneOTPVerifyLoading extends AuthState {
+  const PhoneOTPVerifyLoading();
+}
+
+final class PhoneOTPVerifySuccess extends AuthState {
+  final PhoneAuthCredential phoneAuthCredential;
+  const PhoneOTPVerifySuccess(this.phoneAuthCredential);
+}
+
+final class PhoneOTPVerifyFailure extends AuthState {
+  final String errMessage;
+  const PhoneOTPVerifyFailure(
+    this.errMessage,
+  );
+}

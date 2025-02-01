@@ -14,6 +14,7 @@ class RegisterRequested extends AuthEvent {
   final String fullName;
   final String email;
   final String password;
+  final PhoneAuthCredential? phoneAuthCredential;
   final String? phone;
   final File? photo;
 
@@ -21,8 +22,22 @@ class RegisterRequested extends AuthEvent {
       {required this.fullName,
       required this.email,
       required this.password,
+      this.phoneAuthCredential,
       this.phone,
       this.photo});
 }
 
 class LogoutRequested extends AuthEvent {}
+
+class PhoneOTPRequested extends AuthEvent {
+  final String phone;
+
+  PhoneOTPRequested({required this.phone});
+}
+
+class PhoneVerifyOTPRequested extends AuthEvent {
+  final String otp;
+  final String sms;
+
+  PhoneVerifyOTPRequested({required this.otp, required this.sms});
+}

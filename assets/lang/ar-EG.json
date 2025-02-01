@@ -139,5 +139,7 @@
   "usernameTooShort": "اسم المستخدم قصير جدًا",
   "usernameTooLong": "اسم المستخدم طويل جدًا",
   "usernameNotValid": "اسم المستخدم غير صالح",
-  "emailNotValid": "البريد الإلكتروني غير منسق بشكل جيد"
+  "emailNotValid": "البريد الإلكتروني غير منسق بشكل جيد",
+  "verify_otp": "تحقق من رمز OTP.",
+  "enter_otp_number": "أدخل رمز OTP"
 }

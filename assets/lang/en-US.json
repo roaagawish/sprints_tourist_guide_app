@@ -145,5 +145,7 @@
   "usernameTooShort": "Username too short",
   "usernameTooLong": "Username too long",
   "usernameNotValid": "Username not valid",
-  "emailNotValid": "Email not formatted well"
+  "emailNotValid": "Email not formatted well",
+  "verify_otp": "Verify OTP.",
+  "enter_otp_number": "Enter OTP number"
 }

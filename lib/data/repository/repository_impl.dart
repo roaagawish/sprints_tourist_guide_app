@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth_platform_interface/src/providers/phone_auth.dart';
 import '../../app/app_prefs.dart';
 import '../../domain/entities/auth_entity.dart';
+import '../../domain/entities/otp_entity.dart';
 import '../../domain/repository/repository.dart';
 import '../data_source/local_data_source.dart';
 import '../data_source/remote_data_source.dart';
@@ -69,6 +71,34 @@ class RepositoryImpl implements Repository {
       }
     } else {
       return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, OtpEntity>> sendOtpToNewPhoneNumber(
+      String newPhoneNumber) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final OtpEntity otpEntity =
+            await _remoteDataSource.sendOtpToNewPhoneNumber(newPhoneNumber);
+        return Right(otpEntity);
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Either<Failure, PhoneAuthCredential> createPhoneAuthCredentialWithOtp(
+      PhoneAuthCredentialRequest phoneAuthCredentialRequest) {
+    try {
+      final PhoneAuthCredential phoneAuthCredential = _remoteDataSource
+          .createPhoneAuthCredentialWithOtp(phoneAuthCredentialRequest);
+      return Right(phoneAuthCredential);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
     }
   }
 }

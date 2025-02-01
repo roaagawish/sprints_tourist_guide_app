@@ -119,6 +119,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Sign Up button
                       BlocConsumer<AuthBloc, AuthState>(
                         listener: (context, state) {
+                          if (state is PhoneOTPSendSuccess) {
+                            verifyPhoneOtpbottomSheet(context, state.otpEntity);
+                          }
                           if (state is RegisterSuccess) {
                             Navigator.of(context).pushReplacementNamed(
                               Routes.homeRoute,
@@ -148,12 +151,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           return ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                context.read<AuthBloc>().add(RegisterRequested(
-                                      fullName: _fullNameController.text,
-                                      email: _emailAddressController.text,
-                                      password: _passwordController.text,
-                                      phone: _phoneController.text,
-                                    ));
+                                if (_phoneController.text.isNotEmpty) {
+                                  context
+                                      .read<AuthBloc>()
+                                      .add(PhoneOTPRequested(
+                                        phone: _phoneController.text,
+                                      ));
+                                } else {
+                                  context
+                                      .read<AuthBloc>()
+                                      .add(RegisterRequested(
+                                        fullName: _fullNameController.text,
+                                        email: _emailAddressController.text,
+                                        password: _passwordController.text,
+                                        phone: _phoneController.text,
+                                      ));
+                                }
                               }
                             },
                             child: Text(tr("signup.signUpButton")),
