@@ -11,6 +11,7 @@ abstract class RemoteDataSource {
   Future<AuthenticationEntity> login(LoginRequest loginRequest);
   Future<AuthenticationEntity> register(RegisterRequest registerRequest);
   Future<void> logout();
+  Future<AuthenticationEntity> updateInfo(UpdateInfoRequest updateInfoRequest);
   Future<OtpEntity> sendOtpToNewPhoneNumber(String newPhoneNumber);
   PhoneAuthCredential createPhoneAuthCredentialWithOtp(
       PhoneAuthCredentialRequest phoneAuthCredentialRequest);
@@ -68,6 +69,25 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<void> logout() async {
     await _firebaseAuth.signOut();
+  }
+
+  @override
+  Future<AuthenticationEntity> updateInfo(
+      UpdateInfoRequest updateInfoRequest) async {
+    //update doc
+    await users.doc(updateInfoRequest.uid).update(UserResponse(
+            name: updateInfoRequest.userName,
+            email: updateInfoRequest.email,
+            phoneNumber: updateInfoRequest.phoneNumber,
+            photo: updateInfoRequest.profileImage)
+        .toFirestore());
+    return AuthenticationEntity(
+      uid: updateInfoRequest.uid,
+      name: updateInfoRequest.userName.orEmpty(),
+      email: updateInfoRequest.email.orEmpty(),
+      phone: updateInfoRequest.phoneNumber,
+      photo: updateInfoRequest.profileImage,
+    );
   }
 
   @override

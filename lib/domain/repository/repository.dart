@@ -11,6 +11,8 @@ abstract class Repository {
   Future<Either<Failure, AuthenticationEntity>> register(
       RegisterRequest registerRequest);
   Future<Either<Failure, bool>> logout();
+  Future<Either<Failure, AuthenticationEntity>> updateInfo(
+      UpdateInfoRequest updateInfoRequest);
   Future<Either<Failure, OtpEntity>> sendOtpToNewPhoneNumber(
       String newPhoneNumber);
   Either<Failure, PhoneAuthCredential> createPhoneAuthCredentialWithOtp(

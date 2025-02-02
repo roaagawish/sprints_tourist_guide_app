@@ -19,6 +19,17 @@ class RegisterRequest {
       {this.phoneAuthCredential, this.phoneNumber, this.profileImage});
 }
 
+class UpdateInfoRequest {
+  String uid;
+  String? userName;
+  String? email;
+  String? phoneNumber;
+  String? profileImage;
+
+  UpdateInfoRequest(this.uid,
+      {this.userName, this.email, this.phoneNumber, this.profileImage});
+}
+
 class PhoneAuthCredentialRequest {
   String verificationId;
   String smsCode;

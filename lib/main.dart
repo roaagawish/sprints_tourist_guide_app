@@ -42,7 +42,7 @@ void main() async {
           providers: [
             BlocProvider(
                 create: (_) => AuthBloc(instance(), instance(), instance(),
-                    instance(), instance())),
+                    instance(), instance(), instance())),
             // BlocProvider(
             //     create: (_) => ProfileBloc(
             //         initialUserData: initialUserData,

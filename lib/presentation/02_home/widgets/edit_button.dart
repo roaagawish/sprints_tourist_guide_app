@@ -3,9 +3,11 @@ import '../../resourses/colors_manager.dart';
 
 class EditButton extends StatelessWidget {
   final VoidCallback onTap;
+  final IconData? icon;
   const EditButton({
     super.key,
     required this.onTap,
+    this.icon,
   });
 
   @override
@@ -16,7 +18,7 @@ class EditButton extends StatelessWidget {
         backgroundColor: ColorsManager.paleYellow,
         child: IconButton(
           icon: Icon(
-            Icons.edit,
+            icon ?? Icons.edit,
             color: ColorsManager.mediumGreen,
           ),
           onPressed: onTap,

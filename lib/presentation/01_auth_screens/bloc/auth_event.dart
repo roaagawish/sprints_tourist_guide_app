@@ -29,6 +29,24 @@ class RegisterRequested extends AuthEvent {
 
 class LogoutRequested extends AuthEvent {}
 
+class UpdateInfoRequested extends AuthEvent {
+  final String? fullName;
+  final String? phone;
+  final String? photo;
+
+  UpdateInfoRequested({this.fullName, this.phone, this.photo});
+}
+
+class UpdatePhotoRequested extends AuthEvent {
+  final String? photo;
+
+  UpdatePhotoRequested({required this.photo});
+}
+
+class DeletePhotoRequested extends AuthEvent {
+  DeletePhotoRequested();
+}
+
 class PhoneOTPRequested extends AuthEvent {
   final String phone;
 

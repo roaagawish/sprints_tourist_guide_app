@@ -55,6 +55,51 @@ final class LogoutFailure extends AuthState {
   );
 }
 
+final class UpdateInfoLoading extends AuthState {
+  const UpdateInfoLoading();
+}
+
+final class UpdateInfoSuccess extends AuthState {
+  const UpdateInfoSuccess();
+}
+
+final class UpdateInfoFailure extends AuthState {
+  final String errMessage;
+  const UpdateInfoFailure(
+    this.errMessage,
+  );
+}
+
+final class UpdatePhotoLoading extends AuthState {
+  const UpdatePhotoLoading();
+}
+
+final class UpdatePhotoSuccess extends AuthState {
+  const UpdatePhotoSuccess();
+}
+
+final class UpdatePhotoFailure extends AuthState {
+  final String errMessage;
+  const UpdatePhotoFailure(
+    this.errMessage,
+  );
+}
+
+final class DeletePhotoLoading extends AuthState {
+  const DeletePhotoLoading();
+}
+
+final class DeletePhotoSuccess extends AuthState {
+  const DeletePhotoSuccess();
+}
+
+final class DeletePhotoFailure extends AuthState {
+  final String errMessage;
+  const DeletePhotoFailure(
+    this.errMessage,
+  );
+}
+
 final class PhoneOTPSendLoading extends AuthState {
   const PhoneOTPSendLoading();
 }

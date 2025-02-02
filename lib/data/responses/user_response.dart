@@ -24,8 +24,8 @@ class UserResponse {
     return {
       if (name != null) "name": name,
       if (email != null) "email": email,
-      if (phoneNumber != null) "phone": phoneNumber,
-      if (photo != null) "photo": photo,
+      "phone": phoneNumber,
+      "photo": photo,
     };
   }
 }

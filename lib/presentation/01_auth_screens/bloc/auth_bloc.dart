@@ -11,6 +11,7 @@ import '../../../domain/usecase/login_usecase.dart';
 import '../../../domain/usecase/logout_usecase.dart';
 import '../../../domain/usecase/register_usecase.dart';
 import '../../../domain/usecase/send_phone_otp_usecase.dart';
+import '../../../domain/usecase/update_info_usecase.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -19,18 +20,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase _loginUseCase;
   final RegisterUsecase _registerUseCase;
   final LogoutUsecase _logoutUseCase;
+  final UpdateInfoUsecase _updateInfoUsecase;
   final SendPhoneOtpUsecase _sendPhoneOtpUsecase;
   final CreatePhoneAuthFromOtpUsecase _createPhoneAuthFromOtpUsecase;
 
   final LocalDataSource _localDataSource = instance();
-
   AuthenticationEntity? _authObj;
   String? _errMessage;
 
   AuthenticationEntity? get authObj => _authObj;
 
-  AuthBloc(this._loginUseCase, this._registerUseCase, this._logoutUseCase,
-      this._sendPhoneOtpUsecase, this._createPhoneAuthFromOtpUsecase)
+  AuthBloc(
+      this._loginUseCase,
+      this._registerUseCase,
+      this._logoutUseCase,
+      this._sendPhoneOtpUsecase,
+      this._createPhoneAuthFromOtpUsecase,
+      this._updateInfoUsecase)
       : super(AuthInitial()) {
     // Initialize authObj in the constructor body
     //it can be actual user data or dummy data if the user data is null
@@ -38,6 +44,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
     on<LogoutRequested>(_onLogoutRequested);
+    on<UpdateInfoRequested>(_onUpdateInfoRequested);
+    on<UpdatePhotoRequested>(_onUpdatePhotoRequested);
+    on<DeletePhotoRequested>(_onDeletePhotoRequested);
     /*
       note that PhoneOTPRequested & PhoneVerifyOTPRequested events required billing setup
       on google cloud console with card contains at least $300 dollars.
@@ -90,8 +99,64 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       _errMessage = '${failure.message.toString()} ${failure.code.toString()}';
       emit(LogoutFailure(_errMessage!));
     }, (boolSuccess) {
-      _authObj = null;
       emit(LogoutSuccess());
+    });
+  }
+
+  void _onUpdateInfoRequested(
+      UpdateInfoRequested event, Emitter<AuthState> emit) async {
+    emit(UpdateInfoLoading());
+    var result = await _updateInfoUsecase.execute(UpdateInfoCaseInput(
+      _authObj!.uid,
+      event.fullName ?? _authObj!.name,
+      _authObj!.email,
+      phone: event.phone ?? _authObj!.phone,
+      photo: event.photo,
+    ));
+    result.fold((failure) {
+      _errMessage = '${failure.message.toString()} ${failure.code.toString()}';
+      emit(UpdateInfoFailure(_errMessage!));
+    }, (authenticationEntity) {
+      _authObj = authenticationEntity;
+      emit(UpdateInfoSuccess());
+    });
+  }
+
+  void _onUpdatePhotoRequested(
+      UpdatePhotoRequested event, Emitter<AuthState> emit) async {
+    emit(UpdatePhotoLoading());
+    var result = await _updateInfoUsecase.execute(UpdateInfoCaseInput(
+      _authObj!.uid,
+      _authObj!.name,
+      _authObj!.email,
+      phone: _authObj!.phone,
+      photo: event.photo,
+    ));
+    result.fold((failure) {
+      _errMessage = '${failure.message.toString()} ${failure.code.toString()}';
+      emit(UpdatePhotoFailure(_errMessage!));
+    }, (authenticationEntity) {
+      _authObj = authenticationEntity;
+      emit(UpdatePhotoSuccess());
+    });
+  }
+
+  void _onDeletePhotoRequested(
+      DeletePhotoRequested event, Emitter<AuthState> emit) async {
+    emit(DeletePhotoLoading());
+    var result = await _updateInfoUsecase.execute(UpdateInfoCaseInput(
+      _authObj!.uid,
+      _authObj!.name,
+      _authObj!.email,
+      phone: _authObj!.phone,
+      photo: null,
+    ));
+    result.fold((failure) {
+      _errMessage = '${failure.message.toString()} ${failure.code.toString()}';
+      emit(DeletePhotoFailure(_errMessage!));
+    }, (authenticationEntity) {
+      _authObj = authenticationEntity;
+      emit(DeletePhotoSuccess());
     });
   }
 

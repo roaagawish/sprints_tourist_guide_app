@@ -12,6 +12,7 @@ import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/logout_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/send_phone_otp_usecase.dart';
+import '../domain/usecase/update_info_usecase.dart';
 import 'app_prefs.dart';
 import 'image_service.dart';
 import 'validation_service.dart';
@@ -54,6 +55,11 @@ Future<void> initAppModule() async {
   // logout usecase
   if (!GetIt.I.isRegistered<LogoutUsecase>()) {
     instance.registerFactory<LogoutUsecase>(() => LogoutUsecase(instance()));
+  }
+  // Update Info Usecase usecase
+  if (!GetIt.I.isRegistered<UpdateInfoUsecase>()) {
+    instance.registerFactory<UpdateInfoUsecase>(
+        () => UpdateInfoUsecase(instance()));
   }
   // Send Phone Otp usecase
   if (!GetIt.I.isRegistered<SendPhoneOtpUsecase>()) {

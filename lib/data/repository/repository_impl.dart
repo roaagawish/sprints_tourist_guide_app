@@ -75,6 +75,23 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  Future<Either<Failure, AuthenticationEntity>> updateInfo(
+      UpdateInfoRequest updateInfoRequest) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final AuthenticationEntity authenticationEntity =
+            await _remoteDataSource.updateInfo(updateInfoRequest);
+        await _localDataSource.updateUserDataInCache(updateInfoRequest);
+        return Right(authenticationEntity);
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, OtpEntity>> sendOtpToNewPhoneNumber(
       String newPhoneNumber) async {
     if (await _networkInfo.isConnected) {
