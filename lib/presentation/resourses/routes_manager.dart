@@ -7,7 +7,7 @@ import '../01_auth_screens/login_screen.dart';
 import '../02_home/home_screen.dart';
 import '../03_governorate _details/governorate _details_screen.dart';
 import '../../app/app_prefs.dart';
-import '../04_profile_management/screens/edit_user_screen.dart';
+import '../04_profile_management/edit_user_screen.dart';
 
 class Routes {
   static const String signUpRoute = "/";

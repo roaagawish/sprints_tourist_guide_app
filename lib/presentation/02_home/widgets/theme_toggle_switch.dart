@@ -1,6 +1,6 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../resourses/colors_manager.dart';
 import '../blocs/theme_bloc/theme_bloc.dart';
 import 'dart:ui' as dui;

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'extensions.dart';
 
-// const String _usersKey = 'users';
-// const String _avatarsKey = 'avatars';
-// const String _currentUserEmailKey = 'currentUserEmail';
 const String prefsKeyIsUserLoggedIn = "PREFS_KEY_IS_USER_LOGGED_IN";
 const String prefsKeyTheme = "PREFS_KEY_THEME";
 
@@ -18,13 +15,6 @@ abstract class AppPreferences {
 }
 
 class AppPreferencesImpl implements AppPreferences {
-  // static late final SharedPreferences prefs;
-
-  // static init() async {
-  //   prefs = await SharedPreferences.getInstance();
-  // }
-
-  //TODO: THIS NEED TO REFACTORE
   final SharedPreferences _sharedPreferences;
 
   AppPreferencesImpl(this._sharedPreferences);

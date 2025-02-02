@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import '../../app/extensions.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../../domain/entities/otp_entity.dart';
@@ -96,13 +97,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     // int? fToken;
     Completer<OtpEntity> completer = Completer<OtpEntity>();
     await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: '+2$newPhoneNumber', //TODO refactor this though ui
+        phoneNumber: '+2$newPhoneNumber', //need refactor this though ui
         timeout: Duration(minutes: 2),
         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) {
           //for automatic android verification , without typing Otp ;)
         },
         verificationFailed: (FirebaseAuthException error) {
-          print('yara error here $error');
+          debugPrint('yara error here $error');
           throw error;
         },
         codeSent: (String verificationId, int? forceResendingToken) {

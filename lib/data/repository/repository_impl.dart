@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth_platform_interface/src/providers/phone_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../app/app_prefs.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../../domain/entities/otp_entity.dart';

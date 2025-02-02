@@ -27,8 +27,6 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   Bloc.observer = SimpleObserver();
-  // final initialUserData = await AppPreferencesImpl.loadUserData();
-  // final initialAvatar = await AppPreferencesImpl.loadUserAvatar();
   await initAppModule();
   runApp(
     EasyLocalization(
@@ -43,10 +41,6 @@ void main() async {
             BlocProvider(
                 create: (_) => AuthBloc(instance(), instance(), instance(),
                     instance(), instance(), instance())),
-            // BlocProvider(
-            //     create: (_) => ProfileBloc(
-            //         initialUserData: initialUserData,
-            //         initialAvatar: initialAvatar)),
             BlocProvider(
               create: (_) => ThemeBloc(instance())..add(LoadTheme()),
             )

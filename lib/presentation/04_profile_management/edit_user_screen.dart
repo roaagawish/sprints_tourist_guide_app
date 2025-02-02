@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../app/functions.dart';
-import '../../01_auth_screens/bloc/auth_bloc.dart';
-import '../../01_auth_screens/widgets/text_form_field.dart';
-import '../../resourses/colors_manager.dart';
-import '../../resourses/styles_manager.dart';
+import '../../app/functions.dart';
+import '../01_auth_screens/bloc/auth_bloc.dart';
+import '../01_auth_screens/widgets/text_form_field.dart';
+import '../resourses/colors_manager.dart';
+import '../resourses/styles_manager.dart';
 
 class EditUserScreen extends StatefulWidget {
   const EditUserScreen({super.key});
