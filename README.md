@@ -39,51 +39,60 @@ This project is a mobile application designed for tourists visiting Egypt. The a
 4. Profile Page
 
    Displays user information:
-    - Full Name.
-    - Email.
-    - Password (hashed for security).
-    - Avatar.
 
-   Enable the user to edit his information (Full Name - Phone)  and set avatar.
+   - Full Name.
+   - Email.
+   - Password (hashed for security).
+   - Avatar.
+
+   Enable the user to edit his information (Full Name - Phone) and set avatar.
    Enable the user to toggle between Arabic and English.
    Enable the user to toggle between light and dark mode.
 
-6. Favorites Page
+5. Favorites Page
 
    Displays static cards similar to the "Popular Places" section from the Home Page.
 
-7. Navigation
+6. Navigation
 
    Bottom Navigation Bar visible on all main pages:
    Includes icons for Home, Governments, Favorites, and Profile.
 
-8. Page Navigation Animations
+7. Page Navigation Animations
 
    Smooth animations when transitioning between pages.
 
 ## Dependencies
 
-1. fluttertoast: ^8.2.10
-2. easy_localization: ^3.0.7
-3. country_flags: ^3.2.0
-4. provider: ^6.1.2
-5. lottie: ^3.3.0
-6. shared_preferences: ^2.3.5
-7. cupertino_icons: ^1.0.8
-8. animated_toggle_switch: ^0.8.4
-9. flutter_bloc: ^9.0.0
-10. bloc: ^9.0.0
-11. meta: ^1.15.0
-12. skeletonizer: ^1.4.3
-13. cached_network_image: ^3.4.1
-14. internet_connection_checker: ^3.0.1
-15. shimmer: ^3.0.0
-16. dio: ^5.7.0
-17. image_picker: ^1.1.2
+1. [cupertino_icons](https://api.flutter.dev/flutter/cupertino/cupertino-library.html)
+2. [flutter toast](https://pub.dev/packages/fluttertoast)
+3. [easy_localization](https://pub.dev/packages/easy_localization)
+4. [country_flags](https://pub.dev/packages/country_flags)
+5. [lottie](https://pub.dev/packages/lottie)
+6. [shared_preferences](https://pub.dev/packages/shared_preferences)
+7. [animated_toggle_switch](https://pub.dev/packages/animated_toggle_switch)
+8. [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+9. [bloc](https://pub.dev/packages/bloc)
+10. [meta](https://pub.dev/packages/meta)
+11. [cached_network_image](https://pub.dev/packages/cached_network_image)
+12. [internet_connection_checker](https://pub.dev/packages/internet_connection_checker)
+13. [dio](https://pub.dev/packages/dio)
+14. [image_picker](https://pub.dev/packages/image_picker)
+15. [firebase_core](https://pub.dev/packages/firebase_core)
+16. [firebase_auth](https://pub.dev/packages/firebase_auth)
+17. [cloud_firestore](https://pub.dev/packages/cloud_firestore)
+18. [dartz](https://pub.dev/packages/dartz)
+19. [hive](https://pub.dev/packages/hive)
+20. [hive_flutter](https://pub.dev/packages/hive_flutter)
+21. [get_it](https://pub.dev/packages/get_it)
+22. [path_provider](https://pub.dev/packages/path_provider)
 
-## 📸 Screens
- 
- App 0.0.1
+## Dev Dependencies
+
+1. [hive_generator](https://pub.dev/packages/hive_generator)
+2. [build_runner](https://pub.dev/packages/build_runner)
+
+## 📸 Screens 0.0.1
 
  <div style="display: flex; gap: 10px;">
     <img src="readme/vol1/login_1.jpg" alt="splash Screen" width="200">
@@ -106,52 +115,31 @@ This project is a mobile application designed for tourists visiting Egypt. The a
     <img src="readme/vol1/home_10.jpg" alt="home" width="200">
  </div>
 
+## 📸 Screens 0.0.2
 
- 
- App 0.0.2
+ <div style="display: flex; gap: 10px;">
+    <img src="readme/version2/login_1.jpg" alt="login" width="200">
+    <img src="readme/version2/login_2.jpg"alt="login" width="200">
+    <img src="readme/version2/login_3.jpg" alt="login" width="200">
+    <img src="readme/version2/login_4.jpg" alt="login" width="200">
+ </div>
 
-    
-   <div style="display: flex; gap: 10px;">
-     <img src="readme/vol2/Login1.jpg" alt="login" width="150">
-     <img src="readme/vol2/Login2.jpg" alt="login" width="150">
-     <img src="readme/vol2/Login3.jpg" alt="login" width="150">
-     <img src="readme/vol2/Signup1.jpg" alt="signup" width="150">
-     <img src="readme/vol2/Signup2.jpg" alt="signup" width="150">
-     <img src="readme/vol2/Signup3.jpg" alt="signup" width="150">
-   </div>
-   light mode
-   <div style="display: flex; gap: 10px;">
-     <img src="readme/vol2/HomeLight1.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeLight2.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeLight3.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeLight4.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeLight5.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeLight6.jpg" alt="home" width="150">
-   </div>
-   dark mode
-   <div style="display: flex; gap: 10px;">
-     <img src="readme/vol2/HomeDark1.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeDark2.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeDark3.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeDark4.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeDark5.jpg" alt="home" width="150">
-     <img src="readme/vol2/HomeDark6.jpg" alt="home" width="150">
-   </div>
-   edit user info
-   <div style="display: flex; gap: 10px;">
-     <img src="readme/vol2/edit1.jpg" alt="edit" width="150">
-     <img src="readme/vol2/edit2.jpg" alt="edit" width="150">
-     <img src="readme/vol2/edit3.jpg" alt="edit" width="150">
-     <img src="readme/vol2/edit4.jpg" alt="edit" width="150">
-     <img src="readme/vol2/edit5.jpg" alt="edit" width="150">
-     <img src="readme/vol2/edit6.jpg" alt="edit" width="150">
-   </div>
-   auth messages / loading
-   <div style="display: flex; gap: 10px;">
-     <img src="readme/vol2/loginload.jpg" alt="edit" width="150">
-     <img src="readme/vol2/loginerr.jpg" alt="edit" width="150">
-     <img src="readme/vol2/loginerr2.jpg" alt="edit" width="150">
-     <img src="readme/vol2/signupload.jpg" alt="edit" width="150">
-     <img src="readme/vol2/logoutload.jpg" alt="edit" width="150">
-     <img src="readme/vol2/logout.jpg" alt="edit" width="150">
-   </div>
+ <div style="display: flex; gap: 10px;">
+    <img src="readme/version2/home_1.jpg" alt="home" width="200">
+    <img src="readme/version2/home_2.jpg" alt="home" width="200">
+    <img src="readme/version2/home_3.jpg" alt="home" width="200">
+    <img src="readme/version2/home_4.jpg" alt="home" width="200">
+ </div>
+
+ <div style="display: flex; gap: 10px;">
+    <img src="readme/version2/home_5.jpg" alt="home" width="200">
+    <img src="readme/version2/home_6.jpg" alt="home" width="200">
+    <img src="readme/version2/home_7.jpg" alt="home" width="200">
+    <img src="readme/version2/home_8.jpg" alt="home" width="200">
+ </div>
+
+ <div style="display: flex; gap: 10px;">
+    <img src="readme/version2/home_9.jpg" alt="home" width="200">
+    <img src="readme/version2/home_10.jpg" alt="home" width="200">
+    <img src="readme/version2/home_11.jpg" alt="home" width="200">
+ </div>
