@@ -8,10 +8,14 @@ import '../data/network/network_info.dart';
 import '../data/repository/repository_impl.dart';
 import '../domain/repository/repository.dart';
 import '../domain/usecase/create_phone_auth_from_otp_usecase.dart';
+import '../domain/usecase/favourite_places_usecase.dart';
 import '../domain/usecase/login_usecase.dart';
 import '../domain/usecase/logout_usecase.dart';
+import '../domain/usecase/popular_places_usecase.dart';
 import '../domain/usecase/register_usecase.dart';
 import '../domain/usecase/send_phone_otp_usecase.dart';
+import '../domain/usecase/suggested_places_usecase.dart';
+import '../domain/usecase/toggle_favourite_usecase.dart';
 import '../domain/usecase/update_info_usecase.dart';
 import 'app_prefs.dart';
 import 'image_service.dart';
@@ -60,6 +64,26 @@ Future<void> initAppModule() async {
   if (!GetIt.I.isRegistered<UpdateInfoUsecase>()) {
     instance.registerFactory<UpdateInfoUsecase>(
         () => UpdateInfoUsecase(instance()));
+  }
+  // Suggested Places Usecase usecase
+  if (!GetIt.I.isRegistered<SuggestedPlacesUsecase>()) {
+    instance.registerFactory<SuggestedPlacesUsecase>(
+        () => SuggestedPlacesUsecase(instance()));
+  }
+  // Popular Places Usecase usecase
+  if (!GetIt.I.isRegistered<PopularPlacesUsecase>()) {
+    instance.registerFactory<PopularPlacesUsecase>(
+        () => PopularPlacesUsecase(instance()));
+  }
+  // favourite Places Usecase usecase
+  if (!GetIt.I.isRegistered<FavouritePlacesUsecase>()) {
+    instance.registerFactory<FavouritePlacesUsecase>(
+        () => FavouritePlacesUsecase(instance()));
+  }
+  // update favourite Usecase usecase
+  if (!GetIt.I.isRegistered<ToggleFavouriteUsecase>()) {
+    instance.registerFactory<ToggleFavouriteUsecase>(
+        () => ToggleFavouriteUsecase(instance()));
   }
   // Send Phone Otp usecase
   if (!GetIt.I.isRegistered<SendPhoneOtpUsecase>()) {

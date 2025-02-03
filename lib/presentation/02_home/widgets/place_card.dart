@@ -1,17 +1,45 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../domain/entities/place_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entities/place_entity.dart';
+import '../../01_auth_screens/bloc/auth_bloc.dart';
 import '../../resourses/assets_manager.dart';
 import '../../resourses/styles_manager.dart';
+import '../blocs/like_unlike_cubit/like_unlike_cubit.dart';
 
-class PlaceCard extends StatelessWidget {
-  final Place place;
+class PlaceCard extends StatefulWidget {
+  final PlaceEntity place;
 
   const PlaceCard({
     super.key,
     required this.place,
   });
+
+  @override
+  State<PlaceCard> createState() => _PlaceCardState();
+}
+
+class _PlaceCardState extends State<PlaceCard> {
+  late bool liked;
+  @override
+  void initState() {
+    super.initState();
+    liked = widget.place.likes.contains(context.read<AuthBloc>().authObj!.uid);
+  }
+
+  @override
+  void didUpdateWidget(covariant PlaceCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Check if the place has changed
+    if (oldWidget.place != widget.place) {
+      // Update the liked state based on the new place data
+      setState(() {
+        liked =
+            widget.place.likes.contains(context.read<AuthBloc>().authObj!.uid);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +51,9 @@ class PlaceCard extends StatelessWidget {
             flex: 2,
             child: Stack(
               children: [
-                place.image.isNotEmpty
+                widget.place.image.isNotEmpty
                     ? CachedNetworkImage(
-                        imageUrl: place.image,
+                        imageUrl: widget.place.image,
                         height: double.infinity,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -55,13 +83,17 @@ class PlaceCard extends StatelessWidget {
                   right: 8,
                   child: IconButton(
                     icon: Icon(
-                      place.isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: place.isFavorite ? Colors.red : Colors.white,
+                      (liked) ? Icons.favorite : Icons.favorite_border,
+                      color: (liked) ? Colors.red : Colors.white,
                     ),
                     onPressed: () {
-                      //we deleted this provider,
-                      //TODO: in the next firebase submit(add event in favoritePlacesBloc to like place)
-                      //placeProvider.toggleFavorite(place);
+                      // for immediate effect.
+                      setState(() {
+                        liked = !liked;
+                      });
+                      // for acutual effect in database
+                      BlocProvider.of<LikeUnlikeCubit>(context)
+                          .toggle(place: widget.place);
                     },
                   ),
                 ),
@@ -75,12 +107,13 @@ class PlaceCard extends StatelessWidget {
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
-                  child: Text(place.name, style: Styles.style14Medium()),
+                  child: Text(widget.place.name, style: Styles.style14Medium()),
                 ),
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
-                  child: Text(place.governorate, style: Styles.style12Medium()),
+                  child: Text(widget.place.governorate,
+                      style: Styles.style12Medium()),
                 ),
               ],
             ),

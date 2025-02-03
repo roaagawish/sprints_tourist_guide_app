@@ -8,6 +8,7 @@ import '../../app/di.dart';
 import '../../app/functions.dart';
 import '../../app/image_service.dart';
 import '../../app/validation_service.dart';
+import '../02_home/widgets/edit_button.dart';
 import '../resourses/colors_manager.dart';
 import '../resourses/language_manager.dart';
 import '../resourses/routes_manager.dart';
@@ -60,6 +61,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  Future<void> _deleteImage() async {
+    setState(() {
+      _image = null;
+    });
+    _imageBase64 = null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -89,18 +97,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const SizedBox(height: 20),
                       // Profile Image Picker
-                      GestureDetector(
-                        onTap: _pickImage,
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundColor: ColorsManager.oliveGreen,
-                          backgroundImage:
-                              _image == null ? null : FileImage(_image!),
-                          child: _image == null
-                              ? const Icon(Icons.camera_alt,
-                                  size: 40, color: ColorsManager.white)
-                              : null,
-                        ),
+                      Stack(
+                        children: [
+                          GestureDetector(
+                            onTap: _pickImage,
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: ColorsManager.oliveGreen,
+                              backgroundImage:
+                                  _image == null ? null : FileImage(_image!),
+                              child: _image == null
+                                  ? const Icon(Icons.camera_alt,
+                                      size: 40, color: ColorsManager.white)
+                                  : null,
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: EditButton(
+                              icon: Icons.delete_forever,
+                              onTap: () {
+                                if (_image != null) {
+                                  _deleteImage();
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 20),
                       // Full name field
@@ -145,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         inputType: TextInputType.visiblePassword,
                         validator: (value) {
                           return _validationService.validateConfirmPassword(
-                              value, _confirmPasswordController.text);
+                              value, _passwordController.text);
                         },
                       ),
                       SizedBox(height: 30),

@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../resourses/language_manager.dart';
 import '../../resourses/styles_manager.dart';
-import '../widgets/bloc_builders/popular_places_bloc_builder.dart';
-import '../widgets/bloc_builders/suggested_places_bloc_builder.dart';
+import '../widgets/stream_builders/popular_places_stream_builder.dart';
+import '../widgets/stream_builders/suggested_places_stream_builder.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -23,7 +23,7 @@ class HomeTab extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: PopularPlacesBlocBuilder(),
+            child: PopularPlacesStreamBuilder(),
           ),
           Text(
             context.tr("taps.homeSuggestedPlaces"),
@@ -35,7 +35,7 @@ class HomeTab extends StatelessWidget {
               padding: LocalizationUtils.isCurrentLocalAr(context)
                   ? const EdgeInsets.only(left: 16.0)
                   : const EdgeInsets.only(right: 16.0),
-              child: SuggestedPlacesBlocBuilder(),
+              child: SuggestedPlacesStreamBuilder(),
             ),
           ),
         ],

@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import '../domain/entities/auth_entity.dart';
 import '../domain/entities/otp_entity.dart';
-import '../domain/entities/place_model.dart';
 import '../presentation/01_auth_screens/widgets/verify_phone_otp.dart';
 import '../presentation/02_home/blocs/theme_bloc/theme_bloc.dart';
 import '../presentation/resourses/colors_manager.dart';
@@ -20,17 +19,6 @@ void hiveAdapters() {
 
 bool isLightTheme(BuildContext context) {
   return context.read<ThemeBloc>().state.themeMode == ThemeMode.light;
-}
-
-List<Place> generateDummyPlacesList() {
-  return List.generate(20, (index) {
-    return Place(
-      name: 'dummy dummy',
-      governorate: 'dummy',
-      image: '',
-      // 'https://th.bing.com/th/id/R.19d85673609bd44f947692ea02c94775?rik=Pkz20f6behuSdA&pid=ImgRaw&r=0',
-    );
-  });
 }
 
 void showToast(String message, Color color) {

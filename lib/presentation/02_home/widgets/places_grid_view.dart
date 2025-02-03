@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../domain/entities/place_model.dart';
+import '../../../domain/entities/place_entity.dart';
 import 'place_card.dart';
 
 class PlacesGridView extends StatelessWidget {
-  final List<Place> places;
+  final List<PlaceEntity> places;
   const PlacesGridView({super.key, required this.places});
 
   @override

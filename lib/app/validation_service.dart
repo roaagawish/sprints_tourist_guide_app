@@ -16,9 +16,9 @@ class ValidationServiceImpl implements IValidationService {
       return 'emptyMsg'.tr();
     } else if (value.length < 3) {
       return 'usernameTooShort'.tr();
-    } else if (value.length > 20) {
+    } else if (value.length > 30) {
       return 'usernameTooLong'.tr();
-    } else if (!RegExp(r'^[\p{L}0-9_]+$', unicode: true).hasMatch(value)) {
+    } else if (!RegExp(r'^[\p{L}0-9_\s]+$', unicode: true).hasMatch(value)) {
       return 'usernameNotValid'.tr();
     }
     return null;

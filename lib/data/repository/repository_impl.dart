@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../app/app_prefs.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../../domain/entities/otp_entity.dart';
+import '../../domain/entities/place_entity.dart';
 import '../../domain/repository/repository.dart';
 import '../data_source/local_data_source.dart';
 import '../data_source/remote_data_source.dart';
+import '../mappers/mappers.dart';
 import '../network/error_handler.dart';
 import '../network/failure.dart';
 import '../network/network_info.dart';
@@ -92,6 +94,51 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  Stream<List<PlaceEntity>> getSuggestedPlaces() {
+    return _remoteDataSource.getSuggestedPlaces().map((placeResponses) {
+      // Map each PlaceResponse to PlaceEntity
+      return placeResponses
+          .map((placeResponse) => placeResponse.toDomain())
+          .toList();
+    });
+  }
+
+  @override
+  Stream<List<PlaceEntity>> getPopularPlaces() {
+    return _remoteDataSource.getPopularPlaces().map((placeResponses) {
+      // Map each PlaceResponse to PlaceEntity
+      return placeResponses
+          .map((placeResponse) => placeResponse.toDomain())
+          .toList();
+    });
+  }
+
+  @override
+  Stream<List<PlaceEntity>> getFavouritePlaces() {
+    return _remoteDataSource.getFavouritePlaces().map((placeResponses) {
+      // Map each PlaceResponse to PlaceEntity
+      return placeResponses
+          .map((placeResponse) => placeResponse.toDomain())
+          .toList();
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> toggleFavourite(PlaceEntity place) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        await _remoteDataSource.toggleFavourite(place);
+        return const Right(true);
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  //this function is not used due to billing setup on firebase :(
+  @override
   Future<Either<Failure, OtpEntity>> sendOtpToNewPhoneNumber(
       String newPhoneNumber) async {
     if (await _networkInfo.isConnected) {
@@ -107,6 +154,7 @@ class RepositoryImpl implements Repository {
     }
   }
 
+  //this function is not used due to billing setup on firebase :(
   @override
   Either<Failure, PhoneAuthCredential> createPhoneAuthCredentialWithOtp(
       PhoneAuthCredentialRequest phoneAuthCredentialRequest) {

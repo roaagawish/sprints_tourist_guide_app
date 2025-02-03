@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import '../../app/extensions.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../../domain/entities/otp_entity.dart';
+import '../../domain/entities/place_entity.dart';
 import '../network/requests.dart';
+import '../responses/place_response.dart';
 import '../responses/user_response.dart';
 
 abstract class RemoteDataSource {
@@ -13,6 +15,11 @@ abstract class RemoteDataSource {
   Future<AuthenticationEntity> register(RegisterRequest registerRequest);
   Future<void> logout();
   Future<AuthenticationEntity> updateInfo(UpdateInfoRequest updateInfoRequest);
+  Stream<List<PlaceResponse>> getSuggestedPlaces();
+  Stream<List<PlaceResponse>> getPopularPlaces();
+  Stream<List<PlaceResponse>> getFavouritePlaces();
+  Future<void> toggleFavourite(PlaceEntity place);
+  //these two functions are not used due to billing setup on firebase :(
   Future<OtpEntity> sendOtpToNewPhoneNumber(String newPhoneNumber);
   PhoneAuthCredential createPhoneAuthCredentialWithOtp(
       PhoneAuthCredentialRequest phoneAuthCredentialRequest);
@@ -21,6 +28,8 @@ abstract class RemoteDataSource {
 class RemoteDataSourceImpl implements RemoteDataSource {
   final FirebaseAuth _firebaseAuth;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference suggestedPlaces =
+      FirebaseFirestore.instance.collection('suggestedPlaces');
   RemoteDataSourceImpl(this._firebaseAuth);
 
   @override
@@ -92,6 +101,65 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
+  Stream<List<PlaceResponse>> getSuggestedPlaces() {
+    return suggestedPlaces
+        .snapshots() // Listen to the collection as a stream
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((doc) => PlaceResponse.fromFirestore(
+              doc as DocumentSnapshot<Map<String, dynamic>>))
+          .toList();
+    });
+  }
+
+  @override
+  Stream<List<PlaceResponse>> getPopularPlaces() {
+    return suggestedPlaces
+        .orderBy('name', descending: true)
+        .snapshots() // Listen to the collection as a stream
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((doc) => PlaceResponse.fromFirestore(
+              doc as DocumentSnapshot<Map<String, dynamic>>))
+          .where((place) => place.popular == true) // Filter popular places only
+          .toList();
+    });
+  }
+
+  @override
+  Stream<List<PlaceResponse>> getFavouritePlaces() {
+    String currentUserId = _firebaseAuth.currentUser?.uid ?? "";
+    return suggestedPlaces
+        .snapshots() // Listen to the collection as a stream
+        .map((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((doc) => PlaceResponse.fromFirestore(
+              doc as DocumentSnapshot<Map<String, dynamic>>))
+          // Filter user likes
+          .where((place) => place.likes!.contains(currentUserId))
+          .toList();
+    });
+  }
+
+  @override
+  Future<void> toggleFavourite(PlaceEntity place) async {
+    String currentUserId = _firebaseAuth.currentUser?.uid ?? "";
+
+    place.likes.contains(currentUserId)
+        ? place.likes.remove(currentUserId)
+        : place.likes.add(currentUserId);
+    //update doc
+    await suggestedPlaces.doc(place.id).update(PlaceResponse(
+            name: place.name,
+            gov: place.governorate,
+            image: place.image,
+            likes: place.likes,
+            popular: place.popular)
+        .toFirestore());
+  }
+
+  //this function is not used due to billing setup on firebase :(
+  @override
   Future<OtpEntity> sendOtpToNewPhoneNumber(String newPhoneNumber) async {
     // String vId = '';
     // int? fToken;
@@ -118,6 +186,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     return await completer.future; // Wait until `codeSent` completes
   }
 
+  //this function is not used due to billing setup on firebase :(
   @override
   PhoneAuthCredential createPhoneAuthCredentialWithOtp(
       PhoneAuthCredentialRequest phoneAuthCredentialRequest) {

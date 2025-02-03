@@ -51,6 +51,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       note that PhoneOTPRequested & PhoneVerifyOTPRequested events required billing setup
       on google cloud console with card contains at least $300 dollars.
       i found out that after i wrote the code ...
+      so we are not using it.
     */
     on<PhoneOTPRequested>(_onPhoneOTPRequested);
     on<PhoneVerifyOTPRequested>(_onPhoneVerifyOTPRequested);

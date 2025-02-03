@@ -147,5 +147,7 @@
   "usernameNotValid": "Username not valid",
   "emailNotValid": "Email not formatted well",
   "verify_otp": "Verify OTP.",
-  "enter_otp_number": "Enter OTP number"
+  "enter_otp_number": "Enter OTP number",
+  "noSuggestedPlaces": "No suggested places found.",
+  "noPopularPlaces": "No popular places found."
 }

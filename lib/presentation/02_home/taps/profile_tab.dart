@@ -104,17 +104,30 @@ class _ProfileTabState extends State<ProfileTab> {
                       });
                     }
                   }, builder: (context, state) {
-                    return CircleAvatar(
-                      radius: 70,
-                      backgroundColor: ColorsManager.oliveGreen,
-                      backgroundImage: _currentImage == null
-                          ? null
-                          : FileImage(_currentImage!),
-                      child: _currentImage == null
-                          ? const Icon(Icons.camera_alt,
-                              size: 40, color: ColorsManager.white)
-                          : null,
-                    );
+                    if (state is UpdatePhotoLoading ||
+                        state is DeletePhotoLoading) {
+                      return CircleAvatar(
+                        radius: 70,
+                        backgroundColor: ColorsManager.oliveGreen,
+                        child: CircularProgressIndicator(
+                          color: ColorsManager.white,
+                          strokeAlign:
+                              CircularProgressIndicator.strokeAlignInside,
+                        ),
+                      );
+                    } else {
+                      return CircleAvatar(
+                        radius: 70,
+                        backgroundColor: ColorsManager.oliveGreen,
+                        backgroundImage: _currentImage == null
+                            ? null
+                            : FileImage(_currentImage!),
+                        child: _currentImage == null
+                            ? const Icon(Icons.camera_alt,
+                                size: 40, color: ColorsManager.white)
+                            : null,
+                      );
+                    }
                   }),
                 ),
                 Positioned.fill(
