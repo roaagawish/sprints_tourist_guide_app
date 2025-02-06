@@ -86,6 +86,7 @@ This project is a mobile application designed for tourists visiting Egypt. The a
 20. [hive_flutter](https://pub.dev/packages/hive_flutter)
 21. [get_it](https://pub.dev/packages/get_it)
 22. [path_provider](https://pub.dev/packages/path_provider)
+23. [google_maps_flutter](https://pub.dev/packages/google_maps_flutter)
 
 ## Dev Dependencies
 
@@ -119,27 +120,29 @@ This project is a mobile application designed for tourists visiting Egypt. The a
 
  <div style="display: flex; gap: 10px;">
     <img src="readme/version2/login_1.jpg" alt="login" width="200">
+    <img src="readme/version2/image_picker_1.jpg" alt="login" width="200">
     <img src="readme/version2/login_2.jpg"alt="login" width="200">
     <img src="readme/version2/login_3.jpg" alt="login" width="200">
-    <img src="readme/version2/login_4.jpg" alt="login" width="200">
+    
  </div>
 
  <div style="display: flex; gap: 10px;">
-    <img src="readme/version2/home_1.jpg" alt="home" width="200">
-    <img src="readme/version2/home_2.jpg" alt="home" width="200">
-    <img src="readme/version2/home_3.jpg" alt="home" width="200">
-    <img src="readme/version2/home_4.jpg" alt="home" width="200">
+   <img src="readme/version2/login_4.jpg" alt="login" width="200">
+   <img src="readme/version2/home_1.jpg" alt="home" width="200">
+   <img src="readme/version2/home_2.jpg" alt="home" width="200">
+   <img src="readme/version2/home_3.jpg" alt="home" width="200">
  </div>
 
  <div style="display: flex; gap: 10px;">
-    <img src="readme/version2/home_5.jpg" alt="home" width="200">
-    <img src="readme/version2/home_6.jpg" alt="home" width="200">
-    <img src="readme/version2/home_7.jpg" alt="home" width="200">
-    <img src="readme/version2/home_8.jpg" alt="home" width="200">
+   <img src="readme/version2/home_4.jpg" alt="home" width="200">
+   <img src="readme/version2/maps_1.jpg" alt="home" width="200">
+   <img src="readme/version2/home_5.jpg" alt="home" width="200">
+   <img src="readme/version2/maps_4.jpg" alt="home" width="200">
  </div>
 
  <div style="display: flex; gap: 10px;">
-    <img src="readme/version2/home_9.jpg" alt="home" width="200">
-    <img src="readme/version2/home_10.jpg" alt="home" width="200">
-    <img src="readme/version2/home_11.jpg" alt="home" width="200">
+   <img src="readme/version2/permission_1.jpg" alt="home" width="200">
+   <img src="readme/version2/home_7.jpg" alt="home" width="200">
+   <img src="readme/version2/home_8.jpg" alt="home" width="200">
+   <img src="readme/version2/home_9.jpg" alt="home" width="200">
  </div>
