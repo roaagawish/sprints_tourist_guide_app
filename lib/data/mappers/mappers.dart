@@ -8,8 +8,11 @@ extension PlaceResponseMapper on PlaceResponse? {
       id: this!.id.orEmpty(),
       name: this!.name.orEmpty(),
       governorate: this!.gov.orEmpty(),
+      description: this!.description.orEmpty(),
       image: this!.image.orEmpty(),
       likes: this!.likes ?? [],
+      lat: this!.lat.orEmpty(),
+      lng: this!.lng.orEmpty(),
       popular: this!.popular ?? false,
     );
   }

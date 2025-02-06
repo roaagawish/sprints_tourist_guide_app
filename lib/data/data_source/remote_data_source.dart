@@ -152,8 +152,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     await suggestedPlaces.doc(place.id).update(PlaceResponse(
             name: place.name,
             gov: place.governorate,
+            description: place.description,
             image: place.image,
             likes: place.likes,
+            lat: place.lat,
+            lng: place.lng,
             popular: place.popular)
         .toFirestore());
   }
