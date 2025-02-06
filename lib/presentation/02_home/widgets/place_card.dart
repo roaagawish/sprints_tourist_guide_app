@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/place_entity.dart';
 import '../../01_auth_screens/bloc/auth_bloc.dart';
 import '../../resourses/assets_manager.dart';
+import '../../resourses/routes_manager.dart';
 import '../../resourses/styles_manager.dart';
 import '../blocs/like_unlike_cubit/like_unlike_cubit.dart';
 
@@ -101,21 +102,30 @@ class _PlaceCardState extends State<PlaceCard> {
             ),
           ),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
-                  child: Text(widget.place.name, style: Styles.style14Medium()),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
-                  child: Text(widget.place.governorate,
-                      style: Styles.style12Medium()),
-                ),
-              ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  Routes.placeDetailsRoute,
+                  arguments: widget.place,
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
+                    child:
+                        Text(widget.place.name, style: Styles.style14Medium()),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0),
+                    child: Text(widget.place.governorate,
+                        style: Styles.style12Medium()),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
