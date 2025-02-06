@@ -35,8 +35,8 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   // Pick an image and update the state
-  Future<void> _pickImage() async {
-    File? pickedImage = await _imageService.pickImage(ImageSource.gallery);
+  Future<void> _pickImage(ImageSource source) async {
+    File? pickedImage = await _imageService.pickImage(source);
     if (pickedImage != null) {
       setState(() {
         _newImage = pickedImage;
@@ -80,11 +80,17 @@ class _ProfileTabState extends State<ProfileTab> {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    await _pickImage();
-                    if (context.mounted && _imageBase64 != null) {
-                      context
-                          .read<AuthBloc>()
-                          .add(UpdatePhotoRequested(photo: _imageBase64));
+                    // Show the bottom sheet and get the selected source
+                    final ImageSource? selectedSource =
+                        await showImageSourceBottomSheet(context);
+                    // If a source was selected, proceed to pick the image
+                    if (selectedSource != null) {
+                      await _pickImage(selectedSource);
+                      if (context.mounted && _imageBase64 != null) {
+                        context
+                            .read<AuthBloc>()
+                            .add(UpdatePhotoRequested(photo: _imageBase64));
+                      }
                     }
                   },
                   child: BlocConsumer<AuthBloc, AuthState>(

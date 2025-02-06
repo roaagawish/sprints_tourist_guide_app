@@ -40,6 +40,7 @@ ThemeData getlightTheme() {
       style: ElevatedButton.styleFrom(
         //side: const BorderSide(color: ColorsManager.blue, width: 2),
         elevation: 0,
+        iconColor: ColorsManager.white,
         foregroundColor: ColorsManager.white,
         backgroundColor: ColorsManager.mediumGreen,
         textStyle: Styles.style20Bold(),
@@ -134,6 +135,7 @@ ThemeData getDarkTheme() {
       style: ElevatedButton.styleFrom(
         //side: const BorderSide(color: ColorsManager.blue, width: 2),
         elevation: 0,
+        iconColor: ColorsManager.white,
         foregroundColor: ColorsManager.white,
         backgroundColor: ColorsManager.mediumGreen,
         textStyle: Styles.style20Bold(),

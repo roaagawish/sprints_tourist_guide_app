@@ -51,8 +51,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   // Pick an image and update the state
-  Future<void> _pickImage() async {
-    File? pickedImage = await _imageService.pickImage(ImageSource.gallery);
+  Future<void> _pickImage(ImageSource source) async {
+    File? pickedImage = await _imageService.pickImage(source);
     if (pickedImage != null) {
       setState(() {
         _image = pickedImage;
@@ -100,7 +100,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Stack(
                         children: [
                           GestureDetector(
-                            onTap: _pickImage,
+                            onTap: () async {
+                              // Show the bottom sheet and get the selected source
+                              final ImageSource? selectedSource =
+                                  await showImageSourceBottomSheet(context);
+                              // If a source was selected, proceed to pick the image
+                              if (selectedSource != null) {
+                                await _pickImage(selectedSource);
+                              }
+                            },
                             child: CircleAvatar(
                               radius: 50,
                               backgroundColor: ColorsManager.oliveGreen,

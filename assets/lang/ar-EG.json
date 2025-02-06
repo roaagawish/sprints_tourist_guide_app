@@ -62,7 +62,10 @@
     "profileLogoutMsg": " تم تسجيل الخروج بنجاح",
     "profileLogouterrMsg": "فشل تسجيل الخروج",
     "unexpectedError": "حدث خطأ غير متوقع!",
-    "dataUpdatedSuccessfully": "تم تحديث البيانات بنجاح!"
+    "dataUpdatedSuccessfully": "تم تحديث البيانات بنجاح!",
+    "profileCamera": "الكاميرا",
+    "profileGallery": "المعرض",
+    "pick_camera_gallery": "إختر المناسب لك:"
   },
   "editUser": {
     "title": "شاشة تعديل بيانات المستخدم",

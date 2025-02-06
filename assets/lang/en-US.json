@@ -63,7 +63,10 @@
     "profileLogoutMsg": "Logged out Successfully",
     "profileLogouterrMsg": "Logout failed",
     "unexpectedError": "An unexpected error occurred!",
-    "dataUpdatedSuccessfully": "Data updated successfully!"
+    "dataUpdatedSuccessfully": "Data updated successfully!",
+    "profileCamera": "Camera",
+    "profileGallery": "Gallery",
+    "pick_camera_gallery": "Choose your favourite option:"
   },
 
   "editUser": {

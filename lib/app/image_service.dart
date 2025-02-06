@@ -14,7 +14,13 @@ class ImageServiceImpl implements ImageService {
 
   @override
   Future<File?> pickImage(ImageSource imageSource) async {
-    final pickedFile = await _picker.pickImage(source: imageSource);
+    final pickedFile = await _picker.pickImage(
+      source: imageSource,
+      // Reduce quality if from camera
+      maxWidth: imageSource == ImageSource.camera ? 800 : null,
+      maxHeight: imageSource == ImageSource.camera ? 800 : null,
+      imageQuality: imageSource == ImageSource.camera ? 75 : 100,
+    );
     if (pickedFile != null) {
       return File(pickedFile.path);
     }
