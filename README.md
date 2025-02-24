@@ -1,97 +1,56 @@
 # sprints_tourist_guide_app
 
-A new Flutter project.
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Dart](https://img.shields.io/badge/Dart-100%25-brightgreen)
+![Flutter](https://img.shields.io/badge/Flutter-Cross%20Platform-blue)
 
-## Overview
+A new Flutter project for learning purposes.
+
+## 👀 Overview
 
 This project is a mobile application designed for tourists visiting Egypt. The app helps users explore landmarks, museums, and attractions across various Egyptian governorates, providing a user-friendly interface and engaging features. Different states of the app are managed using Bloc State Management.
 
-## Features
+## ✨ Features:
 
-1. Authentication
+- **Firebase Auth:** login | register via user name and password, forgot password.
+- **Edit** user profile.
+- **FireStore database:** store and retrieving users data using express queries.
+- **Client-Side Validation** on login, register, forgot password pages.
+- Animations (Transition Animation, Lottie, etc.).
+- Custom Light/Dark Mode.
+- Modern UI with New Material Widgets.
+- Support both **Arabic and English** locales.
+- **Navigation & Routing** using google maps (mobile & tablet only)
+- Like | Unlike Places.
+- **And much more...**
 
-   - Signup Page:
+## 📑 Screens Description
 
-     Input fields: Full Name, Email, Password, Phone Number (optional).  
-      A "Signup" button navigates to the Login Page.
+### 1. Authentication
 
-   - Login Page:
+- **Signup:** Users enter Full Name, Email, Password, and optional Phone Number.
+- **Login:** Users enter Email and Password to access the app.
 
-     Input fields: Email and Password.
-     Validatesccessful login.
+### 2. Home Page
 
-2. Home Page
+- **Suggested Places:** Grid view of recommended places.
+- **Popular Places:** Scrollable cards with an image, name, governorate, and a favorite button.
 
-   Suggested Places to Visit:
-   Displays a grid view of recommended places.
-   Popular Places Section:
-   Horizontally scrollable cards with:
-   Image of the place.
-   Name of the place.
-   Governorate name.
-   A toggleable favorite icon.
+### 3. Governments Page
 
-3. Governments Page
+- List of three Egyptian governorates.
+- Selecting one shows details of two landmarks in that area.
+- **Google Maps Integration:** Users can view the location of landmarks and navigate to them.
 
-   A list of three Egyptian governorates.
-   Selecting a governorate navigates to a details page showing two landmarks specific to that governorate.
+### 4. Profile Page
 
-4. Profile Page
+- Shows user details (Full Name, Email, Avatar).
+- Users can edit their name, phone, and avatar.
+- Language (Arabic/English) and theme (Light/Dark) toggle.
 
-   Displays user information:
+### 5. Favorites Page
 
-   - Full Name.
-   - Email.
-   - Password (hashed for security).
-   - Avatar.
-
-   Enable the user to edit his information (Full Name - Phone) and set avatar.
-   Enable the user to toggle between Arabic and English.
-   Enable the user to toggle between light and dark mode.
-
-5. Favorites Page
-
-   Displays static cards similar to the "Popular Places" section from the Home Page.
-
-6. Navigation
-
-   Bottom Navigation Bar visible on all main pages:
-   Includes icons for Home, Governments, Favorites, and Profile.
-
-7. Page Navigation Animations
-
-   Smooth animations when transitioning between pages.
-
-## Dependencies
-
-1. [cupertino_icons](https://api.flutter.dev/flutter/cupertino/cupertino-library.html)
-2. [flutter toast](https://pub.dev/packages/fluttertoast)
-3. [easy_localization](https://pub.dev/packages/easy_localization)
-4. [country_flags](https://pub.dev/packages/country_flags)
-5. [lottie](https://pub.dev/packages/lottie)
-6. [shared_preferences](https://pub.dev/packages/shared_preferences)
-7. [animated_toggle_switch](https://pub.dev/packages/animated_toggle_switch)
-8. [flutter_bloc](https://pub.dev/packages/flutter_bloc)
-9. [bloc](https://pub.dev/packages/bloc)
-10. [meta](https://pub.dev/packages/meta)
-11. [cached_network_image](https://pub.dev/packages/cached_network_image)
-12. [internet_connection_checker](https://pub.dev/packages/internet_connection_checker)
-13. [dio](https://pub.dev/packages/dio)
-14. [image_picker](https://pub.dev/packages/image_picker)
-15. [firebase_core](https://pub.dev/packages/firebase_core)
-16. [firebase_auth](https://pub.dev/packages/firebase_auth)
-17. [cloud_firestore](https://pub.dev/packages/cloud_firestore)
-18. [dartz](https://pub.dev/packages/dartz)
-19. [hive](https://pub.dev/packages/hive)
-20. [hive_flutter](https://pub.dev/packages/hive_flutter)
-21. [get_it](https://pub.dev/packages/get_it)
-22. [path_provider](https://pub.dev/packages/path_provider)
-23. [google_maps_flutter](https://pub.dev/packages/google_maps_flutter)
-
-## Dev Dependencies
-
-1. [hive_generator](https://pub.dev/packages/hive_generator)
-2. [build_runner](https://pub.dev/packages/build_runner)
+- Displays saved places like the "Popular Places" section.
 
 ## 📸 Screens 0.0.1
 
@@ -147,7 +106,9 @@ This project is a mobile application designed for tourists visiting Egypt. The a
    <img src="readme/version2/home_9.jpg" alt="home" width="200">
  </div>
 
-# Unit Testing for LikeUnlikeCubit in Flutter
+---
+
+# 🧪 Unit Testing for LikeUnlikeCubit
 
 Unit testing ensures that the `LikeUnlikeCubit` correctly handles the toggling of favorite places. The tests validate:
 
@@ -231,7 +192,7 @@ flutter pub run build_runner build --delete-conflicting-output
   );
 ```
 
-## Issues Faced
+## 💣 Issues Faced
 
 1. **Undefined Name 'main' Error**
 
@@ -248,6 +209,185 @@ flutter pub run build_runner build --delete-conflicting-output
    }
    ```
 
-## Final Result
+## ✔ Final Result
 
 <img src="readme/test_outputs/output_1.png" alt="test" >
+
+# 🧪 Widget Testing for CustomTextFormField widget
+
+Widget testing ensures that the `CustomTextFormField` correctly renders, handles password visibility toggling, and validates email input. The tests validate:
+
+- The correct rendering of UI elements.
+- The toggling of password visibility.
+- The interaction with the `IValidationService` for validation.
+
+## Implementation of Widget Tests
+
+### Test Dependencies
+
+The following dependencies were used:
+
+```yaml
+flutter_test:
+  sdk: flutter
+mockito: ^5.4.0
+get_it: ^7.2.0
+```
+
+### Test Setup
+
+A mock version of `IValidationService` was created using Mockito:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:get_it/get_it.dart';
+import 'package:sprints_tourist_guide_app/app/validation_service.dart';
+import 'package:sprints_tourist_guide_app/presentation/01_auth_screens/widgets/text_form_field.dart';
+
+class MockValidationService extends Mock implements IValidationService {}
+
+void main() {
+  late MockValidationService mockValidationService;
+  final getIt = GetIt.instance;
+
+  setUp(() {
+    mockValidationService = MockValidationService();
+    getIt.registerSingleton<IValidationService>(mockValidationService);
+  });
+
+  tearDown(() {
+    getIt.unregister<IValidationService>();
+  });
+```
+
+### Test Cases
+
+#### 1. Widget Renders Correctly
+
+```dart
+testWidgets('CustomTextFormField renders correctly', (WidgetTester tester) async {
+  // Arrange
+  final controller = TextEditingController();
+  const labelText = 'Email';
+  const prefixIcon = Icon(Icons.email);
+
+  // Act
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: CustomTextFormField(
+          controller: controller,
+          labelText: labelText,
+          prefixIcon: prefixIcon,
+          inputType: TextInputType.emailAddress,
+        ),
+      ),
+    ),
+  );
+
+  // Assert
+  expect(find.text(labelText), findsOneWidget);
+  expect(find.byIcon(Icons.email), findsOneWidget);
+});
+```
+
+#### 2. Toggles Password Visibility
+
+```dart
+testWidgets('CustomTextFormField toggles password visibility', (WidgetTester tester) async {
+  // Arrange
+  final controller = TextEditingController();
+  const labelText = 'Password';
+  const prefixIcon = Icon(Icons.lock);
+
+  // Act
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: CustomTextFormField(
+          controller: controller,
+          labelText: labelText,
+          prefixIcon: prefixIcon,
+          isPasswordField: true,
+          inputType: TextInputType.visiblePassword,
+        ),
+      ),
+    ),
+  );
+
+  // Initially, the password should be obscured
+  expect(find.byIcon(Icons.visibility_off), findsOneWidget);
+  expect(find.byIcon(Icons.visibility), findsNothing);
+
+  // Tap the visibility toggle button
+  await tester.tap(find.byIcon(Icons.visibility_off));
+  await tester.pump();
+
+  // After tapping, the password should be visible
+  expect(find.byIcon(Icons.visibility_off), findsNothing);
+  expect(find.byIcon(Icons.visibility), findsOneWidget);
+});
+```
+
+#### 3. Validates Email Input
+
+```dart
+testWidgets('CustomTextFormField validates email input', (WidgetTester tester) async {
+  // Arrange
+  final controller = TextEditingController();
+  const labelText = 'Email';
+  const prefixIcon = Icon(Icons.email);
+  final formKey = GlobalKey<FormState>();
+
+  // Mock the validation service to return an error message
+  when(mockValidationService.validateEmail(any))
+      .thenAnswer((_) => 'Invalid email');
+
+  // Act
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Scaffold(
+        body: Form(
+          key: formKey,
+          child: CustomTextFormField(
+            controller: controller,
+            labelText: labelText,
+            prefixIcon: prefixIcon,
+            inputType: TextInputType.emailAddress,
+            validator: mockValidationService.validateEmail,
+          ),
+        ),
+      ),
+    ),
+  );
+
+  // Enter invalid email
+  await tester.enterText(find.byType(TextFormField), 'invalid-email');
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+
+  // Manually trigger validation
+  formKey.currentState?.validate();
+  await tester.pumpAndSettle();
+
+  // Assert
+  expect(find.textContaining('Invalid email'), findsOneWidget);
+});
+```
+
+## 💣 Issues Faced
+
+1. **Mocking Dependency Injection Conflict**
+
+   - Cause: `GetIt` instance was not cleared between tests.
+   - Solution: Used `tearDown()` to unregister dependencies after each test.
+
+2. **Visibility Toggle Not Updating Immediately**
+   - Cause: The widget tree did not rebuild after state change.
+   - Solution: Called `pump()` after tapping the visibility icon to trigger a rebuild.
+
+## ✔ Final Result
+
+<img src="readme/test_outputs/output_2.png" alt="test" >

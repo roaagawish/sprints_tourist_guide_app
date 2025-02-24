@@ -1,0 +1,2 @@
+E:/sprints/sprints_tourist_guide_app/android/app/.cxx/Debug/3y22436f/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/sprints/sprints_tourist_guide_app/android/app/.cxx/Debug/3y22436f/arm64-v8a/CMakeFiles/rebuild_cache.dir
