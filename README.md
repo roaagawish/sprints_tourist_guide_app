@@ -8,7 +8,7 @@ A new Flutter project for learning purposes.
 
 ## 👀 Overview
 
-This project is a mobile application designed for tourists visiting Egypt. The app helps users explore landmarks, museums, and attractions across various Egyptian governorates, providing a user-friendly interface and engaging features. Different states of the app are managed using Bloc State Management.
+This project is a mobile application designed for tourists visiting Egypt. The app helps users explore landmarks, museums, and attractions across various Egyptian governorates, providing a user-friendly interface and engaging features. Different states of the app are managed using Bloc State Management.The architecture pattern used is Clean Architecture with MVVM.
 
 ## ✨ Features:
 
