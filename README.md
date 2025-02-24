@@ -391,3 +391,74 @@ testWidgets('CustomTextFormField validates email input', (WidgetTester tester) a
 ## ✔ Final Result
 
 <img src="readme/test_outputs/output_2.png" alt="test" >
+
+---
+
+# GitHub Actions: Automated Flutter Testing
+
+This repository uses **GitHub Actions** to automate Flutter test cases above, ensuring code quality and functionality with every change.
+
+## 📌 Workflow Overview
+
+The workflow is triggered on:
+
+- **Push** events to the `main` branch.
+- **Pull Requests** targeting the `main` branch.
+
+## ⚙️ Workflow File
+
+The GitHub Actions workflow file is located at:
+
+```
+.github/workflows/flutter_test.yml
+```
+
+## 🚀 Workflow Steps
+
+Each workflow execution follows these steps:
+
+### 1️⃣ Checkout Repository
+
+```yaml
+- name: Checkout Repository
+  uses: actions/checkout@v3
+```
+
+- This step pulls the latest version of the repository from GitHub to the workflow's virtual machine.
+
+### 2️⃣ Setup Flutter Environment
+
+```yaml
+- name: Setup Flutter
+  uses: subosito/flutter-action@v2
+```
+
+- The **Flutter SDK** is downloaded and added to the system's PATH.
+
+### 3️⃣ Install Dependencies
+
+```yaml
+- name: Install Dependencies
+  run: flutter pub get
+```
+
+- Runs `flutter pub get` to install the required dependencies from `pubspec.yaml`.
+
+### 4️⃣ Run Unit Tests
+
+```yaml
+- name: Run Tests
+  run: flutter test
+```
+
+- Executes all **unit tests** inside the `test/` directory.
+- If any test fails, the workflow stops, and GitHub marks the job as **failed**.
+
+## ✅ Workflow Triggers
+
+This workflow runs automatically when:
+
+- A new commit is pushed to the `main` branch.
+- A pull request is created targeting `main`.
+
+---
