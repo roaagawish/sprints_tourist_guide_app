@@ -146,3 +146,108 @@ This project is a mobile application designed for tourists visiting Egypt. The a
    <img src="readme/version2/home_8.jpg" alt="home" width="200">
    <img src="readme/version2/home_9.jpg" alt="home" width="200">
  </div>
+
+# Unit Testing for LikeUnlikeCubit in Flutter
+
+Unit testing ensures that the `LikeUnlikeCubit` correctly handles the toggling of favorite places. The tests validate:
+
+- The correct state transitions (`Loading`, `Success`, `Failure`).
+- The interaction with the `ToggleFavouriteUsecase`.
+
+## Implementation of Unit Tests
+
+### Test Dependencies
+
+The following dependencies were used:
+
+```yaml
+flutter_test:
+  sdk: flutter
+build_runner: ^2.4.14
+bloc_test: ^9.1.0
+mockito: ^5.4.0
+```
+
+### Test Setup
+
+A mock version of `ToggleFavouriteUsecase` was created using Mockito:
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:dartz/dartz.dart';
+import 'package:sprints_tourist_guide_app/domain/entities/place_entity.dart';
+import 'package:sprints_tourist_guide_app/domain/usecase/toggle_favourite_usecase.dart';
+import 'package:sprints_tourist_guide_app/presentation/cubit/like_unlike/like_unlike_cubit.dart';
+import 'like_unlike_cubit_test.mocks.dart';
+
+@GenerateMocks([ToggleFavouriteUsecase])
+void main() {
+  late LikeUnlikeCubit cubit;
+  late MockToggleFavouriteUsecase mockUsecase;
+  late PlaceEntity testPlace;
+
+  setUp(() {
+    mockUsecase = MockToggleFavouriteUsecase();
+    cubit = LikeUnlikeCubit(mockUsecase);
+    testPlace = PlaceEntity(id: '1', name: 'Test Place', likes: []);
+  });
+```
+
+then rung this command in the terminal to generate the mock using build runner:
+
+```sh
+flutter pub run build_runner build --delete-conflicting-output
+```
+
+### Test Cases
+
+#### 1. Successful Toggle
+
+```dart
+  blocTest<LikeUnlikeCubit, LikeUnlikeState>(
+    'emits [LikeUnlikeLoading, LikeUnlikeSuccess] when toggle is successful',
+    build: () {
+      when(mockUsecase.execute(testPlace)).thenAnswer((_) async => Right(true));
+      return cubit;
+    },
+    act: (cubit) => cubit.toggle(place: testPlace),
+    expect: () => [LikeUnlikeLoading(), LikeUnlikeSuccess()],
+  );
+```
+
+#### 2. Failure Case
+
+```dart
+  blocTest<LikeUnlikeCubit, LikeUnlikeState>(
+    'emits [LikeUnlikeLoading, LikeUnlikeFailure] when toggle fails',
+    build: () {
+      when(mockUsecase.execute(testPlace)).thenAnswer((_) async => Left(Failure('Error', 500)));
+      return cubit;
+    },
+    act: (cubit) => cubit.toggle(place: testPlace),
+    expect: () => [LikeUnlikeLoading(), LikeUnlikeFailure('Error 500')],
+  );
+```
+
+## Issues Faced
+
+1. **Undefined Name 'main' Error**
+
+   - Cause: Test files were missing a `main()` function.
+   - Solution: We deleted the default widet test instead of comment all the content of the file.
+
+2. **State Comparison Issue**
+   - Cause: Expected and actual states were not being recognized as identical.
+   - Solution: Implemented `Equatable` in state classes for proper comparison:
+   ```dart
+   class LikeUnlikeState extends Equatable {
+     @override
+     List<Object> get props => [];
+   }
+   ```
+
+## Final Result
+
+<img src="readme/test_outputs/output_1.png" alt="test" >

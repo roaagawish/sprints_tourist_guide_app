@@ -1,7 +1,10 @@
 part of 'like_unlike_cubit.dart';
 
 @immutable
-sealed class LikeUnlikeState {}
+sealed class LikeUnlikeState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 final class LikeUnlikeInitial extends LikeUnlikeState {}
 
@@ -13,4 +16,7 @@ final class LikeUnlikeFailure extends LikeUnlikeState {
   final String errMessage;
 
   LikeUnlikeFailure(this.errMessage);
+
+  @override
+  List<Object?> get props => [errMessage];
 }
