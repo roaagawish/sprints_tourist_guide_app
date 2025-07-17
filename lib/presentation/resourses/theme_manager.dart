@@ -49,7 +49,7 @@ ThemeData getlightTheme() {
     ),
 
     // card theme
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 4,
       clipBehavior: Clip.hardEdge,
       color: ColorsManager.creamyBeige,
@@ -144,7 +144,7 @@ ThemeData getDarkTheme() {
     ),
 
     // card theme
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 4,
       clipBehavior: Clip.hardEdge,
       color: ColorsManager.mediumBrown,
